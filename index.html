@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Código de Verdade</title>
+<meta name="description" content="Apostila-trilha de HTML para praticar no vscode.dev, com Emmet explicado. Projeto Sementes do Futuro.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=JetBrains+Mono:wght@400;600&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============ Tokens ============ */
+:root{
+  --ground:#EEF3F8; --surface:#FFFFFF; --ink:#17293A; --ink-soft:#56697C;
+  --primary:#1C6EA4; --primary-strong:#14547E; --accent:#E58A2E;
+  --success:#2E9E6B; --success-soft:#E1F4EB; --line:#D6E0EB; --ring:#3B92C9;
+  --on-primary:#FFFFFF; --accent-soft:#FDF0E1; --primary-soft:#E3EFF8; --bar:#E4ECF4;
+  --shadow:0 1px 2px rgba(23,41,58,.06),0 10px 30px rgba(23,41,58,.08);
+  --code-bg:#17233B; --code-ink:#E6EDF7; --code-tag:#8FA3BF; --code-txt:#FFCF8B; --code-attr:#9ED0F0;
+  --font-display:"Baloo 2",system-ui,sans-serif;
+  --font-body:"Nunito",system-ui,sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#0F1822; --surface:#182634; --ink:#EAF1F8; --ink-soft:#A0B2C3;
+    --primary:#56A6DA; --primary-strong:#7FC0E8; --accent:#F2A24E;
+    --success:#45C08A; --success-soft:#14342A; --line:#2A3948; --ring:#6FB6E4;
+    --on-primary:#0F1822; --accent-soft:#3A2A17; --primary-soft:#1B3347; --bar:#223244;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0F1822; --surface:#182634; --ink:#EAF1F8; --ink-soft:#A0B2C3;
+  --primary:#56A6DA; --primary-strong:#7FC0E8; --accent:#F2A24E;
+  --success:#45C08A; --success-soft:#14342A; --line:#2A3948; --ring:#6FB6E4;
+  --on-primary:#0F1822; --accent-soft:#3A2A17; --primary-soft:#1B3347; --bar:#223244;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+  color-scheme:dark;
+}
+
+/* ============ Base ============ */
+*,*::before,*::after{box-sizing:border-box}
+html{font-size:118.75%; -webkit-text-size-adjust:100%; scroll-behavior:smooth}
+body{margin:0; background:var(--ground); color:var(--ink); font-family:var(--font-body); line-height:1.6; overflow-x:hidden}
+button{font:inherit; color:inherit}
+a{color:var(--primary)}
+:focus-visible{outline:4px solid var(--ring); outline-offset:3px; border-radius:10px}
+svg.ico{width:1.2em; height:1.2em; flex:none; fill:none; stroke:currentColor; stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round}
+b,strong{font-weight:800}
+code.i{font-family:var(--font-mono); font-size:.9em; background:var(--primary-soft); color:var(--primary-strong); padding:.05em .35em; border-radius:6px; overflow-wrap:anywhere}
+kbd{
+  display:inline-block; min-width:1.9em; padding:.1em .55em; border-radius:8px; text-align:center;
+  font-family:var(--font-mono); font-size:.85em; font-weight:600; line-height:1.5;
+  background:var(--surface); color:var(--ink); border:2px solid var(--line); box-shadow:0 3px 0 var(--line);
+}
+
+/* ============ Topo ============ */
+.top{max-width:1100px; margin:0 auto; padding:16px 20px 6px; display:flex; align-items:center; gap:16px; flex-wrap:wrap}
+.brand{flex:1 1 260px; min-width:0}
+.brand small{display:block; color:var(--ink-soft); font-weight:700; font-size:.85rem}
+.brand h1{margin:0; font-family:var(--font-display); font-weight:800; font-size:clamp(1.6rem,1.1rem + 1.8vw,2.3rem); line-height:1.1; color:var(--primary-strong)}
+.brand h1 span{color:var(--accent)}
+.theme-btn{display:inline-flex; align-items:center; gap:8px; min-height:52px; padding:0 18px; border-radius:999px; border:2px solid var(--line); background:var(--surface); cursor:pointer; font-weight:700}
+.theme-btn:hover{border-color:var(--primary)}
+
+/* ============ Menu de lições ============ */
+.lessons{max-width:1100px; margin:0 auto; padding:10px 20px 14px}
+.lessons ol{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:10px}
+.lesson-btn{
+  width:100%; min-height:60px; display:flex; align-items:center; gap:10px; padding:8px 12px;
+  border-radius:14px; border:2px solid var(--line); background:var(--surface); cursor:pointer; text-align:left;
+  font-weight:800; font-size:.95rem; line-height:1.2;
+}
+.lesson-btn:hover{border-color:var(--primary)}
+.lesson-btn .num{
+  flex:none; width:36px; height:36px; border-radius:50%; display:grid; place-items:center;
+  background:var(--ground); font-family:var(--font-display); font-size:1.15rem; color:var(--ink-soft);
+}
+.lesson-btn[aria-current="page"]{border-color:var(--primary); background:var(--primary-soft)}
+.lesson-btn[aria-current="page"] .num{background:var(--primary); color:var(--on-primary)}
+.lesson-btn.is-done .num{background:var(--success); color:#fff}
+.lesson-btn.is-locked{border-style:dashed; color:var(--ink-soft)}
+
+/* ============ Lição ============ */
+main{max-width:1100px; margin:0 auto; padding:6px 20px 60px}
+@media (max-width:480px){ main,.top,.lessons{padding-left:16px; padding-right:16px} }
+.lesson{display:none}
+.lesson.is-active{display:block}
+.sheet{background:var(--surface); border:2px solid var(--line); border-radius:22px; padding:clamp(20px,3.4vw,40px); box-shadow:var(--shadow)}
+.kicker{margin:0 0 2px; color:var(--accent); font-weight:800; font-size:.95rem; text-transform:uppercase; letter-spacing:.06em}
+.lesson h2{margin:0 0 10px; font-family:var(--font-display); font-weight:800; font-size:clamp(2rem,1.4rem + 2.4vw,3rem); line-height:1.1}
+.lesson h2:focus{outline:none}
+.lesson h3{margin:40px 0 10px; font-family:var(--font-display); font-weight:800; font-size:clamp(1.45rem,1.2rem + 1vw,1.9rem); line-height:1.2; display:flex; align-items:center; gap:12px}
+.lesson h3 .badge{flex:none; width:40px; height:40px; border-radius:12px; display:grid; place-items:center; background:var(--primary-soft); color:var(--primary-strong); font-size:1.2rem}
+.lead{font-size:clamp(1.15rem,1.05rem + .5vw,1.35rem); margin:0 0 8px}
+.lesson p, .lesson li{max-width:70ch}
+.lesson .emmet-head,.lesson .challenge-head,.lesson .type-head,.lesson .result-cap,.lesson .copied{max-width:none}
+.lesson ul.plain, .lesson ol.plain{padding-left:1.3em}
+.lesson ul.plain li, .lesson ol.plain li{margin:.35em 0}
+
+/* passos numerados grandes */
+.howto{list-style:none; counter-reset:h; margin:16px 0; padding:0; display:flex; flex-direction:column; gap:14px}
+.howto > li{counter-increment:h; position:relative; padding:16px 18px 16px 70px; border:2px solid var(--line); border-radius:16px; max-width:none}
+.howto > li::before{
+  content:counter(h); position:absolute; left:16px; top:14px; width:40px; height:40px; border-radius:50%;
+  display:grid; place-items:center; background:var(--primary); color:var(--on-primary); font-family:var(--font-display); font-weight:800; font-size:1.2rem;
+}
+.howto > li strong:first-child{display:block; font-size:1.1rem}
+.howto p{margin:.4em 0 0}
+
+/* ============ Caixas ============ */
+.callout{display:flex; gap:14px; margin:20px 0; padding:16px 20px; border-radius:16px; border-left:6px solid; max-width:none}
+.callout > svg{margin-top:4px; width:1.4em; height:1.4em}
+.callout p{margin:.2em 0}
+.callout .t{font-weight:800}
+.callout.tip{background:var(--primary-soft); border-color:var(--primary)}
+.callout.tip > svg{color:var(--primary)}
+.callout.warn{background:var(--accent-soft); border-color:var(--accent)}
+.callout.warn > svg{color:var(--accent)}
+
+.type{margin:20px 0}
+.type-head{display:flex; align-items:center; gap:10px; margin:0 0 8px; font-weight:800; font-size:1.1rem}
+.type-head svg{color:var(--primary)}
+
+/* Emmet */
+.emmet{margin:22px 0; border:2px solid var(--primary); border-radius:20px; overflow:hidden}
+.emmet-head{margin:0; padding:10px 20px; background:var(--primary); color:var(--on-primary); font-weight:800; display:flex; align-items:center; gap:10px; font-size:1.05rem}
+.emmet-body{padding:18px 20px 20px}
+.emmet-row{display:flex; align-items:center; flex-wrap:wrap; gap:12px; font-weight:800; font-size:1.1rem}
+.emmet-row .lbl{color:var(--ink-soft); font-size:.95rem}
+.abbr{font-family:var(--font-mono); font-weight:600; font-size:1.35rem; padding:6px 14px; border-radius:12px; background:var(--code-bg); color:var(--code-txt)}
+.emmet-row kbd{font-size:1.15rem; padding:.2em .8em}
+.emmet-row .arrow{color:var(--primary); font-size:1.6rem; line-height:1}
+.emmet .code{margin-top:14px}
+.why-title{margin:18px 0 8px; font-weight:800}
+.breakdown{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px}
+.breakdown li{display:flex; gap:14px; align-items:baseline; max-width:none}
+.breakdown code{flex:none; min-width:3.4em; text-align:center; font-family:var(--font-mono); font-weight:600; padding:2px 10px; border-radius:8px; background:var(--code-bg); color:var(--code-txt)}
+
+/* Código */
+.code{
+  margin:0; background:var(--code-bg); color:var(--code-ink); border-radius:14px; padding:16px 20px;
+  font-family:var(--font-mono); font-size:.95rem; line-height:1.7; overflow-x:auto; white-space:pre; tab-size:4;
+}
+.code .tg{color:var(--code-tag)}
+.code .tx{color:var(--code-txt)}
+.code .an{color:var(--code-attr)}
+.code .av{color:var(--code-txt)}
+.code .cm{color:#7F92AD; font-style:italic}
+.code .cursor{display:inline-block; width:2px; height:1.2em; vertical-align:-.2em; background:#FFCF8B; animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* Resultado (janelinha) */
+.result{margin:18px 0; border:2px solid var(--line); border-radius:16px; overflow:hidden; background:var(--surface)}
+.result-bar{display:flex; align-items:center; gap:12px; padding:9px 14px; background:var(--bar); border-bottom:2px solid var(--line); font-weight:700; font-size:.9rem; color:var(--ink-soft)}
+.lights{display:flex; gap:6px}
+.lights span{width:11px; height:11px; border-radius:50%}
+.lights span:nth-child(1){background:#FF5F57}.lights span:nth-child(2){background:#FEBC2E}.lights span:nth-child(3){background:#28C840}
+.result-bar .addr{flex:1; min-width:0; background:var(--surface); border-radius:999px; padding:3px 14px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.result-page{background:#FFFFFF; color:#000000; font-family:"Times New Roman",Times,serif; font-size:16px; line-height:normal; padding:8px 20px; overflow-x:auto}
+.result .result-page *{all:revert} /* volta ao visual padrão do navegador (sem CSS) */
+.result-cap{margin:0; padding:8px 14px; font-size:.9rem; color:var(--ink-soft); border-top:2px solid var(--line)}
+
+/* Esqueleto (caixas aninhadas) */
+.nest{border:3px solid var(--ink-soft); border-radius:16px; padding:40px 16px 16px; position:relative; margin:18px 0; display:flex; flex-direction:column; gap:14px}
+.nest > .lbl, .nest .box > .lbl{position:absolute; top:0; left:14px; font-family:var(--font-mono); font-weight:600; font-size:.85rem; padding:3px 12px; border-radius:0 0 10px 10px; background:var(--ink-soft); color:var(--surface)}
+.nest .box{position:relative; border:3px dashed; border-radius:12px; padding:38px 16px 14px}
+.nest .box p{margin:0}
+.nest .box.head{border-color:var(--ink-soft)}
+.nest .box.body{border-color:var(--primary); border-style:solid; background:var(--primary-soft)}
+.nest .box.body > .lbl{background:var(--primary); color:var(--on-primary)}
+
+/* Anatomia do atributo */
+.anatomy{margin:18px 0; display:grid; gap:10px}
+.anatomy .code{font-size:1.15rem}
+.legend{list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:10px 22px}
+.legend li{display:flex; align-items:center; gap:8px; font-weight:700}
+.legend i{width:16px; height:16px; border-radius:4px; flex:none}
+
+/* Tabela de partes */
+.parts{margin:14px 0; display:flex; flex-direction:column; gap:10px}
+.parts > div{display:grid; grid-template-columns:minmax(0,15em) minmax(0,1fr); gap:6px 18px; padding:12px 16px; border:2px solid var(--line); border-radius:14px}
+.parts dt{margin:0}
+.parts dt code{font-family:var(--font-mono); font-weight:600; font-size:.9rem; color:var(--primary-strong); overflow-wrap:anywhere}
+.parts dd{margin:0}
+.parts > div.key{border-color:var(--primary); background:var(--primary-soft)}
+@media (max-width:640px){ .parts > div{grid-template-columns:minmax(0,1fr)} }
+
+/* Galeria de imagens */
+.gallery{display:grid; grid-template-columns:repeat(auto-fill,minmax(170px,1fr)); gap:14px; margin:16px 0}
+.fig{border:2px solid var(--line); border-radius:16px; padding:14px; display:flex; flex-direction:column; align-items:center; gap:8px; text-align:center}
+.fig img{width:96px; height:96px}
+.fig .nm{font-weight:800}
+.fig .alt{font-size:.85rem; color:var(--ink-soft)}
+.copied{min-height:1.6em; margin:8px 0 0; font-weight:800; color:var(--success)}
+.fallback{width:100%; min-height:90px; font-family:var(--font-mono); font-size:.8rem; border-radius:10px; border:2px solid var(--line); background:var(--surface); color:var(--ink); padding:8px}
+
+/* Desafio */
+.challenge{margin:32px 0 10px; border:3px solid var(--accent); border-radius:20px; padding:0 0 18px; overflow:hidden}
+.challenge-head{margin:0 0 12px; padding:12px 20px; background:var(--accent); color:#17293A; font-family:var(--font-display); font-weight:800; font-size:1.4rem; display:flex; gap:10px; align-items:center}
+.challenge > p{margin:0 20px 10px}
+.todo{list-style:none; margin:0; padding:0 20px; display:flex; flex-direction:column; gap:10px}
+.todo li{max-width:none}
+.todo label{display:flex; gap:14px; align-items:flex-start; padding:10px 12px; border-radius:12px; border:2px solid var(--line); cursor:pointer; min-height:56px}
+.todo input{appearance:none; -webkit-appearance:none; flex:none; width:30px; height:30px; margin:2px 0 0; border-radius:8px; border:3px solid var(--ink-soft); background:var(--surface); display:grid; place-items:center; cursor:pointer}
+.todo input::after{content:""; width:10px; height:17px; border:solid #fff; border-width:0 4px 4px 0; transform:rotate(45deg) translate(-1px,-2px); opacity:0}
+.todo input:checked{background:var(--success); border-color:var(--success)}
+.todo input:checked::after{opacity:1}
+.todo input:focus-visible{outline:4px solid var(--ring); outline-offset:3px}
+.todo label:has(input:checked){background:var(--success-soft); border-color:var(--success)}
+
+/* Tabela de resumo */
+.summary{width:100%; border-collapse:collapse; margin:14px 0; font-size:1rem}
+.summary th,.summary td{text-align:left; padding:10px 12px; border-bottom:2px solid var(--line); vertical-align:top}
+.summary th{font-weight:800; color:var(--ink-soft)}
+.summary td:first-child{white-space:nowrap}
+.table-wrap{overflow-x:auto}
+
+/* Bloqueada */
+.locked{text-align:center; padding:30px 10px}
+.locked .lock{width:88px; height:88px; margin:0 auto 12px; border-radius:50%; background:var(--accent-soft); color:var(--accent); display:grid; place-items:center}
+.locked .lock svg{width:46px; height:46px}
+.locked p{margin-left:auto; margin-right:auto}
+
+/* Rodapé da lição */
+.foot{display:flex; gap:14px; flex-wrap:wrap; align-items:center; margin-top:26px}
+.btn{text-decoration:none; display:inline-flex; align-items:center; justify-content:center; gap:10px; min-height:62px; padding:10px 24px; border-radius:16px; border:3px solid transparent; font-weight:800; font-size:1.15rem; cursor:pointer; line-height:1.25; text-align:center}
+.btn-primary{background:var(--primary); color:var(--on-primary)}
+.btn-primary:hover{background:var(--primary-strong)}
+.btn-ghost{background:var(--surface); border-color:var(--line)}
+.btn-ghost:hover{border-color:var(--primary)}
+.btn-done{background:var(--surface); border-color:var(--success); color:var(--success)}
+.btn-done[aria-pressed="true"]{background:var(--success); color:#fff}
+.btn-sm{min-height:52px; font-size:1rem; padding:8px 16px}
+.foot .next{margin-left:auto}
+@media (max-width:620px){ .foot .btn{flex:1 1 100%} .foot .next{margin-left:0} }
+
+footer.note{max-width:1100px; margin:0 auto; padding:0 20px 40px; color:var(--ink-soft); font-size:.9rem; text-align:center}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important; transition:none!important; scroll-behavior:auto!important}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="brand">
+    <small>Projeto Sementes do Futuro · Instituto Vida Videira</small>
+    <h1>Código de <span>Verdade</span></h1>
+  </div>
+  <button class="theme-btn" id="themeBtn" type="button" aria-label="Trocar entre tema claro e escuro">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    <span id="themeLabel">Tema escuro</span>
+  </button>
+</header>
+
+<nav class="lessons" aria-label="Lições"><ol id="menu"></ol></nav>
+
+<main id="main">
+
+<!-- =================================================================== -->
+<article class="lesson" id="licao-0" data-short="Começar">
+<div class="sheet">
+  <p class="kicker">Antes de começar</p>
+  <h2 tabindex="-1">Preparar o vscode.dev</h2>
+  <p class="lead">Aqui você vai escrever <b>código de verdade</b>, como os programadores fazem. Leia cada lição nesta tela e faça no <b>vscode.dev</b>, em outra aba.</p>
+
+  <div class="callout tip">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg>
+    <div><p class="t">Dica: uma janela de cada lado</p>
+    <p>Abra o vscode.dev em uma <b>janela nova</b> (<kbd>Ctrl</kbd> + <kbd>N</kbd>). No Chromebook, <kbd>Alt</kbd> + <kbd>[</kbd> encosta a janela à esquerda e <kbd>Alt</kbd> + <kbd>]</kbd> encosta à direita. Assim você lê e digita ao mesmo tempo.</p></div>
+  </div>
+
+  <h3><span class="badge">1</span>Abrir e preparar</h3>
+  <ol class="howto">
+    <li><strong>Abra o vscode.dev</strong>
+      <p>Abra uma aba nova (<kbd>Ctrl</kbd> + <kbd>T</kbd>), escreva <code class="i">vscode.dev</code> e aperte <kbd>Enter</kbd>. Não precisa instalar nada.</p></li>
+    <li><strong>Abra uma pasta para o seu site</strong>
+      <p>Clique no menu <b>☰</b> (três risquinhos, no canto de cima, à esquerda) → <b>File</b> → <b>Open Folder…</b> (quer dizer <i>Arquivo → Abrir pasta</i>).</p>
+      <p>Na janela que abrir: entre em <b>Meus arquivos</b>, clique em <b>Nova pasta</b>, dê o nome <code class="i">meu-site</code> e clique em <b>Abrir</b>.</p>
+      <p>O navegador vai pedir permissão. Clique no botão que <b>permite editar os arquivos</b> (por exemplo, <i>Editar arquivos</i> / <i>Edit files</i>). Se aparecer <i>“Do you trust the authors…?”</i>, clique em <b>Yes, I trust the authors</b>.</p></li>
+    <li><strong>Crie o arquivo <code class="i">index.html</code></strong>
+      <p>Na coluna da esquerda aparece o nome da pasta, <b>MEU-SITE</b>. Passe o mouse em cima dele: aparecem ícones pequenos. Clique no primeiro (<i>New File…</i> = Novo arquivo), escreva <code class="i">index.html</code> e aperte <kbd>Enter</kbd>.</p></li>
+    <li><strong>Salve sempre</strong>
+      <p>Aperte <kbd>Ctrl</kbd> + <kbd>S</kbd> depois de cada mudança. Se a aba do arquivo mostra uma <b>bolinha</b> ● ao lado do nome, é porque ainda <b>não salvou</b>.</p></li>
+    <li><strong>Veja a sua página</strong>
+      <p>Abra o app <b>Arquivos</b> do Chromebook → <b>Meus arquivos</b> → <b>meu-site</b> → dê <b>dois cliques</b> em <code class="i">index.html</code>. A página abre no Chrome.</p>
+      <p>Mudou o código? Faça assim: <kbd>Ctrl</kbd> + <kbd>S</kbd> no vscode.dev → volte na aba da página → <kbd>Ctrl</kbd> + <kbd>R</kbd> para recarregar.</p></li>
+  </ol>
+
+  <div class="callout warn">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+    <div><p class="t">O nome precisa terminar em <code class="i">.html</code></p>
+    <p>Só assim o vscode.dev sabe que o arquivo é HTML. Confira no canto de baixo, à direita: tem que estar escrito <b>HTML</b>. Sem isso, o Emmet não funciona.</p></div>
+  </div>
+
+  <h3><span class="badge">2</span>O que é o Emmet?</h3>
+  <p>O <b>Emmet</b> é um ajudante que já vem dentro do vscode.dev. Você escreve uma <b>abreviação curta</b>, aperta <kbd>Tab</kbd>, e ele escreve o código completo para você.</p>
+  <div class="emmet">
+    <p class="emmet-head">Exemplo de Emmet</p>
+    <div class="emmet-body">
+      <div class="emmet-row"><span class="lbl">Digite</span><span class="abbr">p</span><span class="arrow">+</span><kbd>Tab</kbd><span class="arrow">→</span><span class="lbl">vira:</span></div>
+      <script type="text/x-code" data-cursor="3">
+<p></p>
+      </script>
+      <p class="why-title">Por que vira isso?</p>
+      <ul class="breakdown">
+        <li><code>p</code><span>é o nome da tag. O Emmet escreve a tag que <b>abre</b> (<code class="i">&lt;p&gt;</code>) e a que <b>fecha</b> (<code class="i">&lt;/p&gt;</code>).</span></li>
+        <li><code>|</code><span>O cursor fica <b>no meio</b>, pronto para você escrever o texto.</span></li>
+      </ul>
+    </div>
+  </div>
+  <p>O Emmet economiza tempo, mas o importante é você <b>entender o que ele escreveu</b>. Por isso, em cada lição, mostramos a abreviação, o <kbd>Tab</kbd> e <b>o que ela vira</b>, com a explicação.</p>
+
+  <div class="callout tip">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg>
+    <div><p class="t">O Tab não funcionou?</p>
+    <p>Às vezes aparece uma listinha de sugestões embaixo do que você digitou. Aperte <kbd>Tab</kbd> ou <kbd>Enter</kbd> para escolher. Se nada aparecer, confira se o arquivo foi salvo com o nome terminando em <code class="i">.html</code>.</p></div>
+  </div>
+</div>
+</article>
+
+<!-- =================================================================== -->
+<article class="lesson" id="licao-1" data-short="Estrutura">
+<div class="sheet">
+  <p class="kicker">Lição 1</p>
+  <h2 tabindex="-1">A estrutura da página</h2>
+  <p class="lead">Toda página HTML tem um <b>esqueleto</b>: <code class="i">html</code>, <code class="i">head</code> e <code class="i">body</code>. São caixas, uma dentro da outra.</p>
+
+  <div class="nest" aria-label="Desenho: a caixa html tem dentro a caixa head e a caixa body">
+    <span class="lbl">html — a página inteira</span>
+    <div class="box head"><span class="lbl">head — a cabeça</span><p>Informações <b>sobre</b> a página: o nome da aba, os acentos… Quase nada daqui aparece na tela.</p></div>
+    <div class="box body"><span class="lbl">body — o corpo</span><p><b>Tudo o que aparece na tela fica aqui dentro:</b> títulos, textos, imagens, listas, links.</p></div>
+  </div>
+
+  <h3><span class="badge">1</span>O Emmet escreve o esqueleto</h3>
+  <p>Com o arquivo <code class="i">index.html</code> aberto e <b>vazio</b>:</p>
+  <div class="emmet">
+    <p class="emmet-head">Atalho Emmet</p>
+    <div class="emmet-body">
+      <div class="emmet-row"><span class="lbl">Digite</span><span class="abbr">!</span><span class="arrow">+</span><kbd>Tab</kbd><span class="arrow">→</span><span class="lbl">vira:</span></div>
+      <script type="text/x-code">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+</body>
+</html>
+      </script>
+      <p class="why-title">Por que vira isso?</p>
+      <ul class="breakdown">
+        <li><code>!</code><span>é o atalho para “página completa”. Em vez de uma tag só, o Emmet escreve o <b>esqueleto inteiro</b> de uma página HTML.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <h3><span class="badge">2</span>Entendendo cada parte</h3>
+  <dl class="parts">
+    <div><dt><code>&lt;!DOCTYPE html&gt;</code></dt><dd>Avisa ao navegador: “isto é uma página HTML”. Fica sempre na <b>primeira linha</b>.</dd></div>
+    <div><dt><code>&lt;html lang="en"&gt;</code></dt><dd>Abre a página inteira. O <code class="i">lang</code> diz o idioma. <b>Troque <code class="i">en</code> (inglês) por <code class="i">pt-BR</code></b> (português do Brasil).</dd></div>
+    <div><dt><code>&lt;head&gt;</code></dt><dd>A cabeça: guarda informações <b>sobre</b> a página.</dd></div>
+    <div><dt><code>&lt;meta charset="UTF-8"&gt;</code></dt><dd>Faz os <b>acentos</b> e o <b>ç</b> aparecerem certinho.</dd></div>
+    <div><dt><code>&lt;meta name="viewport" …&gt;</code></dt><dd>Faz a página funcionar bem na tela do <b>celular</b>.</dd></div>
+    <div><dt><code>&lt;title&gt;Document&lt;/title&gt;</code></dt><dd>O nome que aparece na <b>aba</b> do navegador. <b>Troque <code class="i">Document</code></b> pelo nome da sua página.</dd></div>
+    <div class="key"><dt><code>&lt;body&gt; … &lt;/body&gt;</code></dt><dd>O corpo. <b>Todo o conteúdo que aparece na tela vai aqui dentro.</b> É aqui que você vai trabalhar em todas as lições.</dd></div>
+    <div><dt><code>&lt;/html&gt;</code></dt><dd>Fecha a página. Fim.</dd></div>
+  </dl>
+
+  <div class="callout tip">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg>
+    <div><p class="t">Abrir e fechar</p>
+    <p><code class="i">&lt;body&gt;</code> <b>abre</b> a caixa. <code class="i">&lt;/body&gt;</code> <b>fecha</b> — repare na barra <code class="i">/</code>. Tudo o que está entre as duas fica <b>dentro</b>.</p>
+    <p>Os espaços no começo das linhas (o recuo) mostram o que está dentro do quê. Eles não mudam a página, mas deixam o código fácil de ler.</p></div>
+  </div>
+
+  <h3><span class="badge">3</span>Digite no vscode.dev</h3>
+  <p>Faça as duas trocas (<code class="i">pt-BR</code> e o título) e escreva um título e um texto <b>dentro do body</b>:</p>
+  <div class="type">
+    <p class="type-head"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/></svg>Como deve ficar:</p>
+    <script type="text/x-code">
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha página</title>
+</head>
+<body>
+    <h1>Olá, mundo!</h1>
+    <p>Esta é a minha primeira página de verdade.</p>
+</body>
+</html>
+    </script>
+  </div>
+  <div class="result">
+    <div class="result-bar"><div class="lights" aria-hidden="true"><span></span><span></span><span></span></div><span class="addr">Minha página</span></div>
+    <div class="result-page">
+      <h1>Olá, mundo!</h1>
+      <p>Esta é a minha primeira página de verdade.</p>
+    </div>
+    <p class="result-cap">Resultado. Sem cores e com letra simples, porque ainda não usamos CSS. Isso é normal!</p>
+  </div>
+
+  <div class="callout warn">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+    <div><p class="t">Curiosidade</p>
+    <p>Se você escrever algo fora do body, o navegador às vezes tenta “consertar” sozinho. Mas não conte com isso: o certo é <b>sempre</b> colocar o conteúdo <b>dentro</b> do body.</p></div>
+  </div>
+
+  <section class="challenge" aria-labelledby="d1">
+    <p class="challenge-head" id="d1">Desafio</p>
+    <ul class="todo" data-id="l1">
+      <li><label><input type="checkbox"><span>Troque o <code class="i">title</code> pelo <b>seu nome</b>. Salve, recarregue e veja o nome na <b>aba</b>.</span></label></li>
+      <li><label><input type="checkbox"><span>Troque o texto do <code class="i">h1</code> por uma saudação sua.</span></label></li>
+      <li><label><input type="checkbox"><span>Escreva mais um <code class="i">p</code> dentro do body, embaixo do primeiro.</span></label></li>
+    </ul>
+  </section>
+</div>
+</article>
+
+<!-- =================================================================== -->
+<article class="lesson" id="licao-2" data-short="Títulos e texto">
+<div class="sheet">
+  <p class="kicker">Lição 2</p>
+  <h2 tabindex="-1">Títulos e texto</h2>
+  <p class="lead">O HTML tem <b>seis</b> tamanhos de título: de <code class="i">h1</code> (o mais importante) até <code class="i">h6</code> (o menos importante). E o <code class="i">p</code> é o texto normal.</p>
+
+  <div class="result">
+    <div class="result-bar"><div class="lights" aria-hidden="true"><span></span><span></span><span></span></div><span class="addr">Os seis títulos</span></div>
+    <div class="result-page">
+      <h1>h1 — Título da página</h1>
+      <h2>h2 — Capítulo</h2>
+      <h3>h3 — Parte do capítulo</h3>
+      <h4>h4 — Parte menor</h4>
+      <h5>h5 — Ainda menor</h5>
+      <h6>h6 — O menor de todos</h6>
+      <p>p — Um parágrafo de texto normal.</p>
+    </div>
+  </div>
+
+  <h3><span class="badge">1</span>Pense como um livro</h3>
+  <ul class="plain">
+    <li><code class="i">h1</code> é o <b>nome do livro</b>. Use <b>só um</b> por página.</li>
+    <li><code class="i">h2</code> são os <b>capítulos</b>.</li>
+    <li><code class="i">h3</code> são as <b>partes</b> de cada capítulo… e assim por diante.</li>
+  </ul>
+  <div class="callout warn">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+    <div><p class="t">Escolha pela importância, não pelo tamanho</p>
+    <p>Não use <code class="i">h4</code> só porque quer uma letra menor. O tamanho da letra se muda depois, com CSS. No HTML, você escolhe o título pela <b>importância</b>.</p></div>
+  </div>
+
+  <h3><span class="badge">2</span>Emmet para títulos e textos</h3>
+  <div class="emmet">
+    <p class="emmet-head">Atalho Emmet</p>
+    <div class="emmet-body">
+      <div class="emmet-row"><span class="lbl">Digite</span><span class="abbr">h1</span><span class="arrow">+</span><kbd>Tab</kbd><span class="arrow">→</span><span class="lbl">vira:</span></div>
+      <script type="text/x-code" data-cursor="4">
+<h1></h1>
+      </script>
+      <p class="why-title">Por que vira isso?</p>
+      <ul class="breakdown">
+        <li><code>h1</code><span>é o nome da tag. O Emmet escreve a abertura <code class="i">&lt;h1&gt;</code>, o fechamento <code class="i">&lt;/h1&gt;</code> e deixa o cursor no meio. Funciona igual com <code class="i">h2</code>, <code class="i">h3</code>… e <code class="i">p</code>.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="emmet">
+    <p class="emmet-head">Atalho Emmet: um depois do outro</p>
+    <div class="emmet-body">
+      <div class="emmet-row"><span class="lbl">Digite</span><span class="abbr">h2+p</span><span class="arrow">+</span><kbd>Tab</kbd><span class="arrow">→</span><span class="lbl">vira:</span></div>
+      <script type="text/x-code">
+<h2></h2>
+<p></p>
+      </script>
+      <p class="why-title">Por que vira isso?</p>
+      <ul class="breakdown">
+        <li><code>h2</code><span>cria um título de capítulo.</span></li>
+        <li><code>+</code><span>quer dizer “<b>e depois</b>”: coloca a próxima tag <b>logo embaixo</b>, no mesmo nível.</span></li>
+        <li><code>p</code><span>cria um parágrafo.</span></li>
+      </ul>
+      <p>Depois de apertar <kbd>Tab</kbd>, o cursor fica dentro do <code class="i">h2</code>. Escreva o título e aperte <kbd>Tab</kbd> de novo: o cursor <b>pula</b> para dentro do <code class="i">p</code>.</p>
+    </div>
+  </div>
+
+  <div class="callout tip">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg>
+    <div><p class="t">Extra: texto de enchimento</p>
+    <p>Digite <span class="abbr" style="font-size:1rem;padding:2px 8px">lorem</span> + <kbd>Tab</kbd> dentro de um <code class="i">p</code>: o Emmet escreve um texto falso em latim (“Lorem ipsum…”). Serve para testar a página antes de ter o texto de verdade. <code class="i">lorem10</code> escreve só 10 palavras.</p></div>
+  </div>
+
+  <h3><span class="badge">3</span>Extra: destacar palavras</h3>
+  <p>Dentro de um <code class="i">p</code>, você pode destacar pedaços do texto:</p>
+  <div class="type">
+    <script type="text/x-code">
+<p>Eu gosto de <strong>forró</strong> e de <em>praia</em>.</p>
+    </script>
+  </div>
+  <div class="result">
+    <div class="result-bar"><div class="lights" aria-hidden="true"><span></span><span></span><span></span></div><span class="addr">Resultado</span></div>
+    <div class="result-page"><p>Eu gosto de <strong>forró</strong> e de <em>praia</em>.</p></div>
+  </div>
+  <ul class="plain">
+    <li><code class="i">strong</code> = <b>muito importante</b> (aparece em negrito).</li>
+    <li><code class="i">em</code> = <b>ênfase</b>, como quando a gente fala mais forte (aparece inclinado).</li>
+  </ul>
+
+  <section class="challenge" aria-labelledby="d2">
+    <p class="challenge-head" id="d2">Desafio</p>
+    <p>No body do seu <code class="i">index.html</code>, monte:</p>
+    <ul class="todo" data-id="l2">
+      <li><label><input type="checkbox"><span>Um <code class="i">h1</code> com o seu nome.</span></label></li>
+      <li><label><input type="checkbox"><span>Um <code class="i">h2</code> “Sobre mim” e, embaixo, um <code class="i">p</code> contando de você (use <code class="i">h2+p</code>).</span></label></li>
+      <li><label><input type="checkbox"><span>Outro <code class="i">h2</code> “O que eu gosto” com um <code class="i">p</code> embaixo.</span></label></li>
+      <li><label><input type="checkbox"><span>Destaque uma palavra com <code class="i">strong</code>.</span></label></li>
+    </ul>
+  </section>
+</div>
+</article>
+
+<!-- =================================================================== -->
+<article class="lesson" id="licao-3" data-short="Listas">
+<div class="sheet">
+  <p class="kicker">Lição 3</p>
+  <h2 tabindex="-1">Listas</h2>
+  <p class="lead">Existem dois tipos de lista: com <b>bolinhas</b> e com <b>números</b>. Cada item da lista é um <code class="i">li</code>.</p>
+
+  <dl class="parts">
+    <div><dt><code>ul</code></dt><dd>Lista <b>não ordenada</b>: com bolinhas. A ordem não importa (ex.: lista de compras).</dd></div>
+    <div><dt><code>ol</code></dt><dd>Lista <b>ordenada</b>: com números. A ordem importa (ex.: passo a passo de uma receita).</dd></div>
+    <div class="key"><dt><code>li</code></dt><dd>Um <b>item</b> da lista. Fica sempre <b>dentro</b> de um <code class="i">ul</code> ou de um <code class="i">ol</code>.</dd></div>
+  </dl>
+
+  <h3><span class="badge">1</span>Lista com bolinhas</h3>
+  <div class="emmet">
+    <p class="emmet-head">Atalho Emmet</p>
+    <div class="emmet-body">
+      <div class="emmet-row"><span class="lbl">Digite</span><span class="abbr">ul&gt;li*3</span><span class="arrow">+</span><kbd>Tab</kbd><span class="arrow">→</span><span class="lbl">vira:</span></div>
+      <script type="text/x-code">
+<ul>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+      </script>
+      <p class="why-title">Por que vira isso? Leia da esquerda para a direita:</p>
+      <ul class="breakdown">
+        <li><code>ul</code><span>cria a lista com bolinhas.</span></li>
+        <li><code>&gt;</code><span>quer dizer “<b>dentro de</b>”: o que vem depois fica dentro do <code class="i">ul</code>. Por isso os <code class="i">li</code> aparecem com recuo.</span></li>
+        <li><code>li</code><span>cria um item.</span></li>
+        <li><code>*3</code><span>quer dizer “<b>repita 3 vezes</b>”. Por isso aparecem três <code class="i">li</code>. Quer cinco itens? Use <code class="i">*5</code>.</span></li>
+      </ul>
+      <p>O cursor começa dentro do primeiro <code class="i">li</code>. Escreva o item e aperte <kbd>Tab</kbd> para pular para o próximo.</p>
+    </div>
+  </div>
+  <div class="type">
+    <p class="type-head"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/></svg>Depois de preencher:</p>
+    <script type="text/x-code">
+<h2>Lista de compras</h2>
+<ul>
+    <li>Arroz</li>
+    <li>Feijão</li>
+    <li>Café</li>
+</ul>
+    </script>
+  </div>
+  <div class="result">
+    <div class="result-bar"><div class="lights" aria-hidden="true"><span></span><span></span><span></span></div><span class="addr">Resultado</span></div>
+    <div class="result-page"><h2>Lista de compras</h2><ul><li>Arroz</li><li>Feijão</li><li>Café</li></ul></div>
+  </div>
+
+  <h3><span class="badge">2</span>Lista com números</h3>
+  <div class="emmet">
+    <p class="emmet-head">Atalho Emmet</p>
+    <div class="emmet-body">
+      <div class="emmet-row"><span class="lbl">Digite</span><span class="abbr">ol&gt;li*3</span><span class="arrow">+</span><kbd>Tab</kbd><span class="arrow">→</span><span class="lbl">vira:</span></div>
+      <script type="text/x-code">
+<ol>
+    <li></li>
+    <li></li>
+    <li></li>
+</ol>
+      </script>
+      <p class="why-title">Por que vira isso?</p>
+      <ul class="breakdown">
+        <li><code>ol</code><span>cria a lista numerada. O resto é igual: <code class="i">&gt;</code> coloca dentro, <code class="i">li</code> é o item, <code class="i">*3</code> repete três vezes.</span></li>
+      </ul>
+      <p>Você <b>não escreve os números</b>. O navegador numera sozinho: 1, 2, 3…</p>
+    </div>
+  </div>
+  <div class="type">
+    <script type="text/x-code">
+<h2>Como fazer café</h2>
+<ol>
+    <li>Ferva a água.</li>
+    <li>Coloque o pó no filtro.</li>
+    <li>Despeje a água devagar.</li>
+</ol>
+    </script>
+  </div>
+  <div class="result">
+    <div class="result-bar"><div class="lights" aria-hidden="true"><span></span><span></span><span></span></div><span class="addr">Resultado</span></div>
+    <div class="result-page"><h2>Como fazer café</h2><ol><li>Ferva a água.</li><li>Coloque o pó no filtro.</li><li>Despeje a água devagar.</li></ol></div>
+  </div>
+
+  <div class="callout tip">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg>
+    <div><p class="t">Extra: já com o texto</p>
+    <p>No Emmet, o que fica entre chaves <code class="i">{ }</code> vira o texto. <code class="i">ul&gt;li{Item}*3</code> cria três itens já escritos “Item”.</p></div>
+  </div>
+
+  <section class="challenge" aria-labelledby="d3">
+    <p class="challenge-head" id="d3">Desafio</p>
+    <ul class="todo" data-id="l3">
+      <li><label><input type="checkbox"><span>Faça uma lista com bolinhas (<code class="i">ul</code>) com <b>4</b> coisas que você gosta. Use <code class="i">ul&gt;li*4</code>.</span></label></li>
+      <li><label><input type="checkbox"><span>Faça uma lista numerada (<code class="i">ol</code>) com o passo a passo de algo que você sabe fazer.</span></label></li>
+      <li><label><input type="checkbox"><span>Coloque um <code class="i">h2</code> em cima de cada lista.</span></label></li>
+    </ul>
+  </section>
+</div>
+</article>
+
+<!-- =================================================================== -->
+<article class="lesson" id="licao-4" data-short="Imagens">
+<div class="sheet">
+  <p class="kicker">Lição 4</p>
+  <h2 tabindex="-1">Imagens e atributos</h2>
+  <p class="lead">A tag <code class="i">img</code> coloca uma imagem na página. Mas ela precisa de uma informação a mais: <b>qual</b> imagem mostrar. Para isso servem os <b>atributos</b>.</p>
+
+  <h3><span class="badge">1</span>O que é um atributo?</h3>
+  <p>Atributo é uma <b>informação extra</b> que vai <b>dentro da tag de abertura</b>. Sempre no formato <code class="i">nome="valor"</code>, com o valor entre aspas.</p>
+  <div class="anatomy">
+    <div class="code" aria-label='Exemplo: img com src igual a flor.png e alt igual a Uma flor'><span class="tg">&lt;img</span> <span class="an">src</span><span class="tg">=</span><span class="av">"flor.png"</span> <span class="an">alt</span><span class="tg">=</span><span class="av">"Uma flor"</span><span class="tg">&gt;</span></div>
+    <ul class="legend">
+      <li><i style="background:#8FA3BF"></i>a tag</li>
+      <li><i style="background:#9ED0F0"></i>nome do atributo</li>
+      <li><i style="background:#FFCF8B"></i>valor (entre aspas)</li>
+    </ul>
+  </div>
+  <dl class="parts">
+    <div class="key"><dt><code>src</code></dt><dd>Vem de <i>source</i>, “fonte”: <b>de onde vem</b> a imagem. É o endereço da imagem.</dd></div>
+    <div><dt><code>alt</code></dt><dd>Texto <b>alternativo</b>: descreve a imagem. Aparece se a imagem não carregar, e é lido em voz alta por programas que ajudam pessoas cegas.</dd></div>
+  </dl>
+  <div class="callout tip">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg>
+    <div><p class="t">O img não fecha</p>
+    <p>Repare: não existe <code class="i">&lt;/img&gt;</code>. A imagem não tem nada “dentro” dela, então a tag não precisa fechar.</p></div>
+  </div>
+
+  <h3><span class="badge">2</span>Emmet para imagem</h3>
+  <div class="emmet">
+    <p class="emmet-head">Atalho Emmet</p>
+    <div class="emmet-body">
+      <div class="emmet-row"><span class="lbl">Digite</span><span class="abbr">img</span><span class="arrow">+</span><kbd>Tab</kbd><span class="arrow">→</span><span class="lbl">vira:</span></div>
+      <script type="text/x-code" data-cursor="10">
+<img src="" alt="">
+      </script>
+      <p class="why-title">Por que vira isso?</p>
+      <ul class="breakdown">
+        <li><code>img</code><span>o Emmet sabe que imagem <b>sempre</b> precisa de <code class="i">src</code> e <code class="i">alt</code>, então já escreve os dois atributos, com as aspas vazias.</span></li>
+        <li><code>|</code><span>O cursor fica entre as aspas do <code class="i">src</code>. Cole o endereço, aperte <kbd>Tab</kbd> e o cursor <b>pula</b> para o <code class="i">alt</code>.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <h3><span class="badge">3</span>Pegue uma imagem</h3>
+  <p>Escolha uma figura e toque em <b>Copiar endereço</b>. Depois, no vscode.dev, clique <b>entre as aspas</b> do <code class="i">src=""</code> e aperte <kbd>Ctrl</kbd> + <kbd>V</kbd> para colar.</p>
+  <div class="gallery" id="gallery"></div>
+  <p class="copied" id="copied" role="status" aria-live="polite"></p>
+
+  <div class="callout warn">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+    <div><p class="t">Por que o endereço é tão comprido?</p>
+    <p>Estes endereços começam com <code class="i">data:image/svg+xml,</code> porque a <b>própria imagem</b> está escrita dentro do endereço. Assim ela funciona sem internet e sem baixar nada.</p>
+    <p>Normalmente, o <code class="i">src</code> é curto: o nome de um arquivo na sua pasta (<code class="i">src="foto.jpg"</code>) ou um endereço da internet (<code class="i">src="https://…/foto.jpg"</code>).</p></div>
+  </div>
+
+  <div class="type">
+    <p class="type-head"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/></svg>Vai ficar assim (o endereço foi encurtado aqui):</p>
+    <script type="text/x-code">
+<h2>Minha flor preferida</h2>
+<img src="data:image/svg+xml,%3Csvg ... %3C/svg%3E" alt="Uma flor rosa">
+    </script>
+  </div>
+  <div class="result">
+    <div class="result-bar"><div class="lights" aria-hidden="true"><span></span><span></span><span></span></div><span class="addr">Resultado</span></div>
+    <div class="result-page"><h2>Minha flor preferida</h2><img data-fig="flor" alt="Uma flor rosa"></div>
+  </div>
+
+  <h3><span class="badge">4</span>Extra: mudar o tamanho</h3>
+  <p>O atributo <code class="i">width</code> (largura) diz quantos pontinhos (pixels) de largura a imagem vai ter:</p>
+  <div class="type">
+    <script type="text/x-code">
+<img src="..." alt="Uma flor rosa" width="100">
+    </script>
+  </div>
+
+  <section class="challenge" aria-labelledby="d4">
+    <p class="challenge-head" id="d4">Desafio</p>
+    <ul class="todo" data-id="l4">
+      <li><label><input type="checkbox"><span>Coloque <b>uma imagem</b> na sua página, com <code class="i">src</code> e <code class="i">alt</code>.</span></label></li>
+      <li><label><input type="checkbox"><span>Escreva um <code class="i">alt</code> que descreva bem a imagem (ex.: “Um sol amarelo”).</span></label></li>
+      <li><label><input type="checkbox"><span>Coloque uma <b>segunda</b> imagem e mude o tamanho dela com <code class="i">width</code>.</span></label></li>
+      <li><label><input type="checkbox"><span>Teste: apague uma letra do <code class="i">src</code>, salve e recarregue. O que aparece no lugar? (Depois, conserte!)</span></label></li>
+    </ul>
+  </section>
+</div>
+</article>
+
+<!-- =================================================================== -->
+<article class="lesson" id="licao-5" data-short="Links">
+<div class="sheet">
+  <p class="kicker">Lição 5</p>
+  <h2 tabindex="-1">Links</h2>
+  <p class="lead">Um <b>link</b> é um texto (ou imagem) que você clica para ir a outra página. É o que faz a internet ser uma “rede”: as páginas ligadas umas às outras.</p>
+
+  <div class="anatomy">
+    <div class="code"><span class="tg">&lt;a</span> <span class="an">href</span><span class="tg">=</span><span class="av">"https://pt.wikipedia.org/wiki/Fortaleza"</span><span class="tg">&gt;</span><span class="tx">Conheça Fortaleza</span><span class="tg">&lt;/a&gt;</span></div>
+  </div>
+  <dl class="parts">
+    <div><dt><code>a</code></dt><dd>A tag do link. Vem de <i>anchor</i>, “âncora”.</dd></div>
+    <div class="key"><dt><code>href</code></dt><dd>O atributo com o <b>endereço</b> para onde o link leva. Precisa começar com <code class="i">https://</code>.</dd></div>
+    <div><dt><code>Conheça Fortaleza</code></dt><dd>O texto entre a abertura e o fechamento é o que aparece na tela para <b>clicar</b>.</dd></div>
+  </dl>
+  <div class="result">
+    <div class="result-bar"><div class="lights" aria-hidden="true"><span></span><span></span><span></span></div><span class="addr">Resultado</span></div>
+    <div class="result-page"><p><a href="https://pt.wikipedia.org/wiki/Fortaleza" target="_blank" rel="noopener noreferrer">Conheça Fortaleza</a></p></div>
+    <p class="result-cap">O navegador deixa o link azul e sublinhado sozinho.</p>
+  </div>
+
+  <h3><span class="badge">1</span>Emmet para link</h3>
+  <div class="emmet">
+    <p class="emmet-head">Atalho Emmet</p>
+    <div class="emmet-body">
+      <div class="emmet-row"><span class="lbl">Digite</span><span class="abbr">a</span><span class="arrow">+</span><kbd>Tab</kbd><span class="arrow">→</span><span class="lbl">vira:</span></div>
+      <script type="text/x-code" data-cursor="9">
+<a href=""></a>
+      </script>
+      <p class="why-title">Por que vira isso?</p>
+      <ul class="breakdown">
+        <li><code>a</code><span>o Emmet sabe que todo link precisa de <code class="i">href</code>, então já escreve o atributo vazio.</span></li>
+        <li><code>|</code><span>O cursor fica nas aspas do <code class="i">href</code>. Escreva o endereço, aperte <kbd>Tab</kbd> e o cursor <b>pula</b> para o meio, onde vai o texto do link.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <h3><span class="badge">2</span>Abrir em uma aba nova</h3>
+  <p>Normalmente, o link abre <b>na mesma aba</b> e a sua página some. Para abrir em uma <b>aba nova</b>, use o atributo <code class="i">target="_blank"</code>:</p>
+  <div class="type">
+    <script type="text/x-code">
+<a href="https://pt.wikipedia.org/wiki/Fortaleza" target="_blank">Conheça Fortaleza</a>
+    </script>
+  </div>
+  <div class="emmet">
+    <p class="emmet-head">Atalho Emmet</p>
+    <div class="emmet-body">
+      <div class="emmet-row"><span class="lbl">Digite</span><span class="abbr">a:blank</span><span class="arrow">+</span><kbd>Tab</kbd><span class="arrow">→</span><span class="lbl">vira:</span></div>
+      <script type="text/x-code">
+<a href="http://" target="_blank" rel="noopener noreferrer"></a>
+      </script>
+      <p class="why-title">Por que vira isso?</p>
+      <ul class="breakdown">
+        <li><code>a</code><span>cria o link.</span></li>
+        <li><code>:blank</code><span>é uma variação: já coloca o <code class="i">target="_blank"</code> (abrir em aba nova).</span></li>
+        <li><code>http://</code><span>o Emmet começa o endereço para você. Troque por <code class="i">https://</code> e o resto do endereço.</span></li>
+        <li><code>rel</code><span><code class="i">rel="noopener noreferrer"</code> é uma <b>proteção</b>: impede que a outra página mexa na sua aba. Pode deixar como está.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout tip">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg>
+    <div><p class="t">Como pegar um endereço</p>
+    <p>Abra o site que você quer, clique <b>uma vez</b> na barra de endereço lá em cima (o endereço fica todo marcado), aperte <kbd>Ctrl</kbd> + <kbd>C</kbd>. Volte no vscode.dev, clique entre as aspas do <code class="i">href</code> e aperte <kbd>Ctrl</kbd> + <kbd>V</kbd>.</p></div>
+  </div>
+
+  <h3><span class="badge">3</span>Extra: imagem que é link</h3>
+  <p>Coloque um <code class="i">img</code> <b>dentro</b> do <code class="i">a</code>. Aí, clicar na imagem abre o link:</p>
+  <div class="type">
+    <script type="text/x-code">
+<a href="https://pt.wikipedia.org/wiki/Sol" target="_blank">
+    <img src="..." alt="Um sol">
+</a>
+    </script>
+  </div>
+
+  <section class="challenge" aria-labelledby="d5">
+    <p class="challenge-head" id="d5">Desafio</p>
+    <ul class="todo" data-id="l5">
+      <li><label><input type="checkbox"><span>Coloque um link para um site que você gosta.</span></label></li>
+      <li><label><input type="checkbox"><span>Faça esse link abrir em <b>aba nova</b> com <code class="i">target="_blank"</code>.</span></label></li>
+      <li><label><input type="checkbox"><span>Crie um segundo link usando <code class="i">a:blank</code> + <kbd>Tab</kbd>.</span></label></li>
+      <li><label><input type="checkbox"><span>Salve, recarregue e <b>clique</b> nos links para testar.</span></label></li>
+    </ul>
+  </section>
+</div>
+</article>
+
+<!-- =================================================================== -->
+<article class="lesson" id="licao-6" data-short="Juntar tudo">
+<div class="sheet">
+  <p class="kicker">Lição 6</p>
+  <h2 tabindex="-1">Juntar tudo: a página sobre mim</h2>
+  <p class="lead">Agora você sabe o bastante para fazer uma página completa, <b>só com HTML</b>. Monte a sua “página sobre mim” no <code class="i">index.html</code>.</p>
+
+  <section class="challenge" aria-labelledby="d6">
+    <p class="challenge-head" id="d6">A sua página precisa ter</p>
+    <ul class="todo" data-id="l6">
+      <li><label><input type="checkbox"><span>O esqueleto (<code class="i">!</code> + <kbd>Tab</kbd>) com <code class="i">lang="pt-BR"</code> e um <code class="i">title</code> com o seu nome.</span></label></li>
+      <li><label><input type="checkbox"><span>Um <code class="i">h1</code> com o seu nome.</span></label></li>
+      <li><label><input type="checkbox"><span>Uma <b>imagem</b> com <code class="i">src</code> e <code class="i">alt</code>.</span></label></li>
+      <li><label><input type="checkbox"><span>Um ou dois <b>parágrafos</b> (<code class="i">p</code>) sobre você.</span></label></li>
+      <li><label><input type="checkbox"><span>Um <code class="i">h2</code> “Meus hobbies” e uma <b>lista</b> (<code class="i">ul</code>).</span></label></li>
+      <li><label><input type="checkbox"><span>Um <b>link</b> que abre em aba nova.</span></label></li>
+      <li><label><input type="checkbox"><span>Tudo o que aparece está <b>dentro do body</b>, com o recuo organizado.</span></label></li>
+    </ul>
+  </section>
+
+  <h3><span class="badge">1</span>Um exemplo para se guiar</h3>
+  <p>Não copie igual: escreva do <b>seu</b> jeito, com as <b>suas</b> informações.</p>
+  <div class="type">
+    <script type="text/x-code">
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página da Ana</title>
+</head>
+<body>
+    <h1>Ana Souza</h1>
+    <img src="(cole aqui o endereço da imagem)" alt="Um sol amarelo" width="120">
+    <p>Eu moro em Fortaleza e estou aprendendo a fazer sites.</p>
+    <p>Meu sonho é trabalhar com tecnologia.</p>
+
+    <h2>Meus hobbies</h2>
+    <ul>
+        <li>Ouvir forró</li>
+        <li>Cozinhar</li>
+        <li>Ir à praia</li>
+    </ul>
+
+    <h2>Um lugar que eu gosto</h2>
+    <p><a href="https://pt.wikipedia.org/wiki/Fortaleza" target="_blank">Conheça Fortaleza</a></p>
+</body>
+</html>
+    </script>
+  </div>
+  <div class="result">
+    <div class="result-bar"><div class="lights" aria-hidden="true"><span></span><span></span><span></span></div><span class="addr">Página da Ana</span></div>
+    <div class="result-page">
+      <h1>Ana Souza</h1>
+      <img data-fig="sol" alt="Um sol amarelo" width="120">
+      <p>Eu moro em Fortaleza e estou aprendendo a fazer sites.</p>
+      <p>Meu sonho é trabalhar com tecnologia.</p>
+      <h2>Meus hobbies</h2>
+      <ul><li>Ouvir forró</li><li>Cozinhar</li><li>Ir à praia</li></ul>
+      <h2>Um lugar que eu gosto</h2>
+      <p><a href="https://pt.wikipedia.org/wiki/Fortaleza" target="_blank" rel="noopener noreferrer">Conheça Fortaleza</a></p>
+    </div>
+  </div>
+
+  <h3><span class="badge">2</span>Resumo do que você já sabe</h3>
+  <div class="table-wrap">
+    <table class="summary">
+      <thead><tr><th scope="col">Tag</th><th scope="col">Para que serve</th><th scope="col">Emmet</th></tr></thead>
+      <tbody>
+        <tr><td><code class="i">html</code> <code class="i">head</code> <code class="i">body</code></td><td>O esqueleto. O conteúdo visível vai no <b>body</b>.</td><td><code class="i">!</code></td></tr>
+        <tr><td><code class="i">h1</code> … <code class="i">h6</code></td><td>Títulos, do mais importante ao menos importante.</td><td><code class="i">h1</code> <code class="i">h2+p</code></td></tr>
+        <tr><td><code class="i">p</code></td><td>Parágrafo de texto.</td><td><code class="i">p</code> <code class="i">lorem</code></td></tr>
+        <tr><td><code class="i">strong</code> <code class="i">em</code></td><td>Destacar palavras.</td><td><code class="i">strong</code> <code class="i">em</code></td></tr>
+        <tr><td><code class="i">ul</code> <code class="i">ol</code> <code class="i">li</code></td><td>Listas com bolinhas / com números, e seus itens.</td><td><code class="i">ul&gt;li*3</code></td></tr>
+        <tr><td><code class="i">img</code></td><td>Imagem. Atributos <code class="i">src</code> e <code class="i">alt</code>.</td><td><code class="i">img</code></td></tr>
+        <tr><td><code class="i">a</code></td><td>Link. Atributo <code class="i">href</code>.</td><td><code class="i">a</code> <code class="i">a:blank</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3><span class="badge">3</span>Publicar e mostrar para a turma</h3>
+  <p>Para a sua página ter um <b>endereço na internet</b> e qualquer pessoa abrir, dá para publicar de graça no <b>GitHub Pages</b>. Tudo pelo navegador, sem instalar nada. <b>Faça com o professor</b> na primeira vez.</p>
+  <ol class="howto">
+    <li><strong>Entre no GitHub</strong><p>Abra <code class="i">github.com</code> e entre na sua conta. Não tem conta? Peça ajuda ao professor para criar.</p></li>
+    <li><strong>Crie um repositório</strong><p>Clique no <b>+</b> (canto de cima, à direita) → <b>New repository</b>. Nome: <code class="i">minha-pagina</code>. Deixe marcado <b>Public</b>. Clique em <b>Create repository</b>.</p></li>
+    <li><strong>Crie o arquivo</strong><p>Clique em <b>creating a new file</b> (ou <b>Add file → Create new file</b>). No nome do arquivo, escreva <code class="i">index.html</code>.</p></li>
+    <li><strong>Copie o seu código</strong><p>No vscode.dev, clique no código e aperte <kbd>Ctrl</kbd> + <kbd>A</kbd> (seleciona tudo) e <kbd>Ctrl</kbd> + <kbd>C</kbd> (copia). No GitHub, clique na área grande de texto e aperte <kbd>Ctrl</kbd> + <kbd>V</kbd>.</p></li>
+    <li><strong>Salve no GitHub</strong><p>Clique em <b>Commit changes…</b> e, na janelinha, em <b>Commit changes</b> de novo.</p></li>
+    <li><strong>Ligue o GitHub Pages</strong><p>Clique em <b>Settings</b> → <b>Pages</b> (na coluna da esquerda). Em <b>Branch</b>, escolha <b>main</b> e clique em <b>Save</b>.</p></li>
+    <li><strong>Pegue o seu endereço</strong><p>Espere 1 ou 2 minutos e recarregue. Vai aparecer o endereço, parecido com <code class="i">https://seu-usuario.github.io/minha-pagina/</code>. Mostre para a turma!</p></li>
+  </ol>
+  <div class="callout tip">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg>
+    <div><p class="t">As imagens funcionam?</p>
+    <p>Sim. As imagens da Lição 4 estão escritas dentro do próprio endereço, então vão junto com o código. Não precisa enviar mais nada.</p></div>
+  </div>
+</div>
+</article>
+
+<!-- =================================================================== -->
+<!-- LIÇÃO 7 — CSS. Fica BLOQUEADA até o professor liberar.
+     Para liberar: no <script> lá embaixo, troque  HABILITAR_CSS = false  por  true. -->
+<article class="lesson" id="licao-7" data-short="Próximo: CSS" data-locked="css">
+<div class="sheet">
+  <div class="locked-view locked" hidden>
+    <div class="lock"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+    <p class="kicker">Próximo passo</p>
+    <h2 tabindex="-1">Primeiro CSS</h2>
+    <p class="lead">Esta lição abre quando o professor liberar.</p>
+    <p>Até lá, continue caprichando no <b>HTML</b>: melhore a sua página sobre mim, coloque mais uma lista, mais um link, mais uma imagem. Uma página bem organizada em HTML fica muito mais fácil de enfeitar depois.</p>
+    <p><a class="btn btn-ghost" href="#licao-6">Voltar para a Lição 6</a></p>
+  </div>
+
+  <div class="open-view">
+  <p class="kicker">Lição 7</p>
+  <h2 tabindex="-1">Primeiro CSS</h2>
+  <p class="lead">O HTML é a <b>estrutura</b> da página: o que existe nela. O <b>CSS</b> é a <b>aparência</b>: cor, tamanho, letra. Pense assim: o HTML é o corpo, o CSS é a roupa.</p>
+
+  <h3><span class="badge">1</span>Onde escrever o CSS</h3>
+  <p>Para começar, o CSS vai dentro de uma tag <code class="i">&lt;style&gt;</code>, <b>no head</b> (ele não aparece na tela, só muda a aparência):</p>
+  <div class="type">
+    <script type="text/x-code">
+<head>
+    <meta charset="UTF-8">
+    <title>Minha página</title>
+    <style>
+        body {
+            background-color: #FFF4E0;
+        }
+        h1 {
+            color: #1C6EA4;
+        }
+    </style>
+</head>
+    </script>
+  </div>
+  <dl class="parts">
+    <div><dt><code>body</code> / <code>h1</code></dt><dd>O <b>seletor</b>: diz <b>qual</b> parte da página vai mudar.</dd></div>
+    <div><dt><code>{ }</code></dt><dd>As chaves guardam as regras dessa parte.</dd></div>
+    <div class="key"><dt><code>color: #1C6EA4;</code></dt><dd><b>Propriedade</b> (o que muda) <code class="i">:</code> <b>valor</b> (como fica) e termina com <code class="i">;</code>.</dd></div>
+  </dl>
+  <div class="callout tip">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg>
+    <div><p class="t">Repare</p>
+    <p>A cor de fundo é do <b>CSS</b>. O <code class="i">body</code> continua sendo o corpo da página (HTML). Aqui o CSS só está dizendo: “pinte o fundo do body”.</p></div>
+  </div>
+
+  <h3><span class="badge">2</span>Emmet também funciona no CSS</h3>
+  <div class="emmet">
+    <p class="emmet-head">Atalho Emmet (dentro das chaves)</p>
+    <div class="emmet-body">
+      <div class="emmet-row"><span class="lbl">Digite</span><span class="abbr">bgc</span><span class="arrow">+</span><kbd>Tab</kbd><span class="arrow">→</span><span class="lbl">vira:</span></div>
+      <script type="text/x-code">
+background-color: #fff;
+      </script>
+      <ul class="breakdown" style="margin-top:14px">
+        <li><code>bgc</code><span><b>b</b>ack<b>g</b>round-<b>c</b>olor: cor de fundo. <code class="i">#fff</code> é branco. Troque pelo código da cor que quiser.</span></li>
+        <li><code>c</code><span><code class="i">c</code> + <kbd>Tab</kbd> vira <code class="i">color: #000;</code> — a cor da letra (<code class="i">#000</code> é preto).</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <section class="challenge" aria-labelledby="d7">
+    <p class="challenge-head" id="d7">Desafio</p>
+    <ul class="todo" data-id="l7">
+      <li><label><input type="checkbox"><span>Coloque uma tag <code class="i">style</code> no head da sua página.</span></label></li>
+      <li><label><input type="checkbox"><span>Mude a cor de fundo do body com <code class="i">bgc</code>.</span></label></li>
+      <li><label><input type="checkbox"><span>Mude a cor do <code class="i">h1</code> com <code class="i">c</code>.</span></label></li>
+    </ul>
+  </section>
+  </div>
+</div>
+</article>
+
+</main>
+
+<footer class="note">Projeto Sementes do Futuro · Instituto Vida Videira · Fortaleza-CE</footer>
+
+<script>
+/* =====================================================================
+   LIÇÃO 7 (CSS) — deixe "false" até o professor começar CSS com a turma.
+   Para liberar: troque para  true  e salve o arquivo.
+   ===================================================================== */
+const HABILITAR_CSS = false;
+
+/* ---------- Figuras (SVG embutidas; viram endereço data:) ---------- */
+const FIGURAS = {
+  sol:{nome:'Sol', alt:'Um sol amarelo',
+    svg:"<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120' width='200' height='200'><rect width='120' height='120' rx='22' fill='#FFF3D6'/><path d='M60 14v12M60 94v12M14 60h12M94 60h12M28 28l8 8M84 84l8 8M28 92l8-8M84 36l8-8' stroke='#F2A516' stroke-width='7' stroke-linecap='round'/><circle cx='60' cy='60' r='22' fill='#F7B928'/></svg>"},
+  flor:{nome:'Flor', alt:'Uma flor rosa',
+    svg:"<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120' width='200' height='200'><rect width='120' height='120' rx='22' fill='#E9F6EC'/><path d='M60 64v42' stroke='#3A9A5B' stroke-width='6' stroke-linecap='round'/><path d='M60 94c-14-2-22-10-24-20 12 0 20 6 24 20z' fill='#4CB06E'/><g fill='#F28DB2'><circle cx='60' cy='32' r='14'/><circle cx='79' cy='46' r='14'/><circle cx='72' cy='68' r='14'/><circle cx='48' cy='68' r='14'/><circle cx='41' cy='46' r='14'/></g><circle cx='60' cy='52' r='11' fill='#F7C02B'/></svg>"},
+  coracao:{nome:'Coração', alt:'Um coração vermelho',
+    svg:"<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120' width='200' height='200'><rect width='120' height='120' rx='22' fill='#FDE8EC'/><path d='M60 96C20 70 14 48 26 34c12-14 28-8 34 6 6-14 22-20 34-6 12 14 6 36-34 62z' fill='#E0475F'/></svg>"},
+  casa:{nome:'Casa', alt:'Uma casa',
+    svg:"<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120' width='200' height='200'><rect width='120' height='120' rx='22' fill='#E6F0FA'/><path d='M32 58 60 34l28 24v42H32z' fill='#F4D6A0'/><path d='M20 60 60 26l40 34' fill='none' stroke='#C8553D' stroke-width='8' stroke-linecap='round' stroke-linejoin='round'/><rect x='52' y='74' width='16' height='26' rx='3' fill='#1C6EA4'/><rect x='38' y='62' width='12' height='12' rx='2' fill='#FFFFFF'/><rect x='70' y='62' width='12' height='12' rx='2' fill='#FFFFFF'/></svg>"},
+  bola:{nome:'Bola', alt:'Uma bola de futebol',
+    svg:"<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120' width='200' height='200'><rect width='120' height='120' rx='22' fill='#E8F5E4'/><circle cx='60' cy='60' r='38' fill='#FFFFFF' stroke='#17293A' stroke-width='5'/><path d='M60 46l13 10-5 16H52l-5-16z' fill='#17293A'/><path d='M60 46V24M73 56l20-6M68 72l12 17M52 72 40 89M47 56l-20-6' stroke='#17293A' stroke-width='4' stroke-linecap='round'/></svg>"},
+  livro:{nome:'Livro', alt:'Um livro aberto',
+    svg:"<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120' width='200' height='200'><rect width='120' height='120' rx='22' fill='#EEF0FB'/><path d='M60 36c-10-7-24-9-38-7v58c14-2 28 0 38 7 10-7 24-9 38-7V29c-14-2-28 0-38 7z' fill='#FFFFFF' stroke='#1C6EA4' stroke-width='5' stroke-linejoin='round'/><path d='M60 36v58M32 44c6 0 12 1 18 3M32 56c6 0 12 1 18 3M70 47c6-2 12-3 18-3M70 59c6-2 12-3 18-3' stroke='#1C6EA4' stroke-width='4' stroke-linecap='round'/></svg>"}
+};
+const dataURI = k => 'data:image/svg+xml,' + FIGURAS[k].svg.replace(/%/g,'%25').replace(/#/g,'%23').replace(/</g,'%3C').replace(/>/g,'%3E');
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const guardar = (k, v) => { try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} };
+const ler = (k, padrao) => { try{ const v = JSON.parse(localStorage.getItem(k)); return v == null ? padrao : v; }catch(e){ return padrao; } };
+
+/* ---------- Colorir código ---------- */
+function colorirTag(tag){
+  if(tag.startsWith('<!--')) return `<span class="cm">${esc(tag)}</span>`;
+  const m = tag.match(/^<(\/?)([^\s>\/]+)([\s\S]*?)(\/?)>$/);
+  if(!m) return `<span class="tg">${esc(tag)}</span>`;
+  const attrs = m[3].replace(/([^\s=]+)(\s*=\s*)?("[^"]*"|'[^']*'|[^\s"'>]+)?|(\s+)/g, (all, nome, igual, valor, espaco) => {
+    if(espaco) return espaco;
+    let s = `<span class="an">${esc(nome)}</span>`;
+    if(igual) s += `<span class="tg">${esc(igual)}</span>`;
+    if(valor) s += `<span class="av">${esc(valor)}</span>`;
+    return s;
+  });
+  return `<span class="tg">&lt;${m[1]}${esc(m[2])}</span>${attrs}<span class="tg">${m[4]}&gt;</span>`;
+}
+function colorir(src){
+  const re = /<!--[\s\S]*?-->|<\/?[a-zA-Z!][^>]*>/g;
+  let out = '', ultimo = 0, m;
+  while((m = re.exec(src))){
+    if(m.index > ultimo) out += `<span class="tx">${esc(src.slice(ultimo, m.index))}</span>`;
+    out += colorirTag(m[0]);
+    ultimo = re.lastIndex;
+  }
+  if(ultimo < src.length) out += `<span class="tx">${esc(src.slice(ultimo))}</span>`;
+  return out;
+}
+function tirarRecuo(txt){
+  const linhas = txt.replace(/^\s*\n/, '').replace(/\n\s*$/, '').split('\n');
+  const min = Math.min(...linhas.filter(l => l.trim()).map(l => l.match(/^ */)[0].length));
+  return linhas.map(l => l.slice(min)).join('\n');
+}
+document.querySelectorAll('script[type="text/x-code"]').forEach(s => {
+  const src = tirarRecuo(s.textContent);
+  const pre = document.createElement('pre');
+  pre.className = 'code';
+  const cursor = s.dataset.cursor;
+  if(cursor != null){
+    // mostra onde o cursor fica depois do Tab
+    const i = +cursor, MARCA = '';
+    pre.innerHTML = colorir(src.slice(0, i) + MARCA + src.slice(i)).replace(MARCA, '<span class="cursor" aria-hidden="true"></span>');
+    pre.setAttribute('aria-label', src + ' (o cursor fica na posição marcada)');
+  } else {
+    pre.innerHTML = colorir(src);
+  }
+  s.replaceWith(pre);
+});
+
+/* ---------- Figuras nos resultados ---------- */
+document.querySelectorAll('img[data-fig]').forEach(img => { img.src = dataURI(img.dataset.fig); });
+
+/* ---------- Galeria com "Copiar endereço" ---------- */
+(function(){
+  const g = $('gallery'); if(!g) return;
+  g.innerHTML = Object.keys(FIGURAS).map(k => `
+    <div class="fig">
+      <img src="${dataURI(k)}" alt="${esc(FIGURAS[k].alt)}">
+      <span class="nm">${FIGURAS[k].nome}</span>
+      <span class="alt">alt sugerido: “${esc(FIGURAS[k].alt)}”</span>
+      <button class="btn btn-primary btn-sm" type="button" data-k="${k}">Copiar endereço</button>
+    </div>`).join('');
+  const aviso = $('copied');
+  function copiarReserva(txt, botao){
+    // plano B: mostra o endereço selecionado para Ctrl+C
+    let ta = botao.parentNode.querySelector('textarea');
+    if(!ta){ ta = document.createElement('textarea'); ta.className = 'fallback'; ta.readOnly = true; botao.parentNode.appendChild(ta); }
+    ta.value = txt; ta.focus(); ta.select();
+    let ok = false;
+    try{ ok = document.execCommand('copy'); }catch(e){}
+    return ok;
+  }
+  g.addEventListener('click', async e => {
+    const b = e.target.closest('button[data-k]'); if(!b) return;
+    const k = b.dataset.k, txt = dataURI(k);
+    let ok = false;
+    try{ await navigator.clipboard.writeText(txt); ok = true; }catch(err){ ok = copiarReserva(txt, b); }
+    g.querySelectorAll('button[data-k]').forEach(x => x.textContent = 'Copiar endereço');
+    if(ok){
+      b.textContent = 'Copiado!';
+      aviso.textContent = `Endereço da figura “${FIGURAS[k].nome}” copiado! No vscode.dev, clique entre as aspas do src="" e aperte Ctrl + V.`;
+    } else {
+      aviso.textContent = 'O endereço está marcado na caixinha embaixo da figura. Aperte Ctrl + C para copiar.';
+    }
+  });
+})();
+
+/* ---------- Listas de desafio (ficam salvas neste computador) ---------- */
+document.querySelectorAll('.todo[data-id]').forEach(ul => {
+  const id = 'sementes-av-todo-' + ul.dataset.id;
+  const marcados = ler(id, []);
+  const caixas = [...ul.querySelectorAll('input[type=checkbox]')];
+  caixas.forEach((c, i) => {
+    c.checked = !!marcados[i];
+    c.addEventListener('change', () => guardar(id, caixas.map(x => x.checked)));
+  });
+});
+
+/* ---------- Lições e navegação ---------- */
+const licoes = [...document.querySelectorAll('.lesson')];
+const bloqueada = el => el.dataset.locked === 'css' && !HABILITAR_CSS;
+let feitas = ler('sementes-av-feitas', {});
+
+licoes.forEach(el => {
+  const trava = bloqueada(el);
+  el.querySelector('.locked-view') && (el.querySelector('.locked-view').hidden = !trava);
+  el.querySelector('.open-view') && (el.querySelector('.open-view').hidden = trava);
+  if(trava) return;
+  // rodapé de cada lição
+  const i = licoes.indexOf(el);
+  const foot = document.createElement('div');
+  foot.className = 'foot';
+  const ant = licoes[i - 1], prox = licoes[i + 1];
+  foot.innerHTML = `
+    ${ant ? `<a class="btn btn-ghost" href="#${ant.id}"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>Anterior</a>` : ''}
+    <button class="btn btn-done" type="button" data-done="${el.id}" aria-pressed="false"></button>
+    ${prox ? `<a class="btn btn-primary next" href="#${prox.id}">${bloqueada(prox) ? 'Próximo passo' : 'Próxima lição'}<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></a>` : ''}`;
+  el.querySelector('.sheet').appendChild(foot);
+});
+
+function pintarFeita(){
+  document.querySelectorAll('[data-done]').forEach(b => {
+    const f = !!feitas[b.dataset.done];
+    b.setAttribute('aria-pressed', String(f));
+    b.innerHTML = f
+      ? '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Lição concluída'
+      : 'Marcar como concluída';
+  });
+  montarMenu();
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-done]'); if(!b) return;
+  feitas[b.dataset.done] = !feitas[b.dataset.done];
+  guardar('sementes-av-feitas', feitas); pintarFeita();
+});
+
+function montarMenu(){
+  const atual = document.querySelector('.lesson.is-active');
+  $('menu').innerHTML = licoes.map((el, i) => {
+    const trava = bloqueada(el);
+    const cls = [trava ? 'is-locked' : '', feitas[el.id] ? 'is-done' : ''].join(' ');
+    const num = trava
+      ? '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>'
+      : (feitas[el.id] ? '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>' : i);
+    return `<li><button class="lesson-btn ${cls}" type="button" data-go="${el.id}" ${el === atual ? 'aria-current="page"' : ''}
+      aria-label="${i === 0 ? 'Começar' : 'Lição ' + i}: ${esc(el.dataset.short)}${trava ? ' (bloqueada)' : ''}${feitas[el.id] ? ' (concluída)' : ''}">
+      <span class="num">${num}</span><span>${esc(el.dataset.short)}</span></button></li>`;
+  }).join('');
+}
+$('menu').addEventListener('click', e => {
+  const b = e.target.closest('[data-go]'); if(!b) return;
+  location.hash = b.dataset.go;
+});
+
+function mostrar(id, focar){
+  const alvo = licoes.find(l => l.id === id) || licoes[0];
+  licoes.forEach(l => l.classList.toggle('is-active', l === alvo));
+  guardar('sementes-av-ultima', alvo.id);
+  montarMenu();
+  if(focar){
+    window.scrollTo({top:0});
+    const h = [...alvo.querySelectorAll('h2')].find(x => !x.closest('[hidden]'));
+    if(h) h.focus({preventScroll:true});
+  }
+}
+window.addEventListener('hashchange', () => mostrar(location.hash.slice(1), true));
+pintarFeita();
+mostrar(location.hash.slice(1) || ler('sementes-av-ultima', 'licao-0'), false);
+
+/* ---------- Tema claro / escuro ---------- */
+(function(){
+  const root = document.documentElement;
+  const escuroSistema = () => window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const efetivo = () => root.dataset.theme || (escuroSistema() ? 'dark' : 'light');
+  try{ const t = localStorage.getItem('sementes-tema'); if(t) root.dataset.theme = t; }catch(e){}
+  const rotulo = () => { $('themeLabel').textContent = efetivo() === 'dark' ? 'Tema claro' : 'Tema escuro'; };
+  $('themeBtn').addEventListener('click', () => {
+    root.dataset.theme = efetivo() === 'dark' ? 'light' : 'dark';
+    try{ localStorage.setItem('sementes-tema', root.dataset.theme); }catch(e){}
+    rotulo();
+  });
+  rotulo();
+})();
+</script>
+</body>
+</html>
