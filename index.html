@@ -240,6 +240,53 @@ main{max-width:1100px; margin:0 auto; padding:6px 20px 60px}
 
 footer.note{max-width:1100px; margin:0 auto; padding:0 20px 40px; color:var(--ink-soft); font-size:.9rem; text-align:center}
 
+
+/* ============ Abas das aulas ============ */
+.aula-tabs{max-width:1100px; margin:0 auto; padding:6px 20px 0; display:flex; gap:10px; flex-wrap:wrap}
+@media (max-width:480px){ .aula-tabs{padding-left:16px; padding-right:16px} }
+.aula-tab{
+  flex:1 1 200px; min-height:60px; display:flex; align-items:center; justify-content:center; gap:10px;
+  border-radius:16px; border:3px solid var(--line); background:var(--surface); cursor:pointer;
+  font-family:var(--font-display); font-weight:800; font-size:1.25rem;
+}
+.aula-tab:hover{border-color:var(--primary)}
+.aula-tab[aria-pressed="true"]{background:var(--primary); border-color:var(--primary); color:var(--on-primary)}
+.aula-tab small{font-family:var(--font-body); font-weight:700; font-size:.95rem; opacity:.85}
+
+/* ============ CSS: cores do código ============ */
+.code .se{color:#9ED0F0}
+.code .pr{color:#A5E3C0}
+.code .pu{color:#8FA3BF}
+.anatomy .se{color:#9ED0F0}.anatomy .pr{color:#A5E3C0}.anatomy .pu{color:#8FA3BF}
+
+/* Resultado ao vivo */
+iframe.live{display:block; width:100%; min-height:60px; border:0; background:#FFFFFF}
+
+/* Amostras de cor */
+.swatches{display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:10px; margin:14px 0}
+.sw{display:flex; align-items:center; gap:10px; padding:8px 10px; border:2px solid var(--line); border-radius:12px}
+.sw code.i{flex:none; overflow-wrap:normal}
+.sw span:last-child{min-width:0; font-size:.95rem; color:var(--ink-soft)}
+.sw-cor{width:34px; height:34px; border-radius:8px; flex:none; border:2px solid var(--line)}
+.palette{display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:10px; margin:14px 0 0}
+.pal{display:flex; align-items:center; gap:12px; padding:10px 12px; border:2px solid var(--line); border-radius:14px; flex-wrap:wrap}
+.pal .sw-cor{width:44px; height:44px; border-radius:10px}
+.pal-txt{flex:1; min-width:0; display:flex; flex-direction:column; line-height:1.3}
+.pal-txt span{font-size:.9rem; color:var(--ink-soft)}
+.fonts{display:grid; gap:10px; margin:14px 0}
+.fonts > div{display:flex; align-items:baseline; gap:16px; flex-wrap:wrap; padding:10px 14px; border:2px solid var(--line); border-radius:12px}
+.fonts > div code{min-width:7.5em}
+.fonts > div span{font-size:1.4rem}
+
+/* Caixa: margin, border, padding */
+.boxmodel{margin:18px 0}
+.bm{position:relative; border-radius:14px; padding:40px 16px 16px}
+.bm-l{position:absolute; top:10px; left:14px; font-family:var(--font-mono); font-weight:600; font-size:.85rem}
+.bm-margin{border:3px dashed var(--accent); background:var(--accent-soft)}
+.bm-border{border:5px solid var(--ink); background:var(--surface)}
+.bm-padding{background:var(--success-soft)}
+.bm-content{padding:14px; border-radius:10px; background:var(--surface); border:2px solid var(--line); text-align:center; font-weight:800}
+
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important; transition:none!important; scroll-behavior:auto!important}
 }
@@ -258,14 +305,18 @@ footer.note{max-width:1100px; margin:0 auto; padding:0 20px 40px; color:var(--in
   </button>
 </header>
 
-<nav class="lessons" aria-label="Lições"><ol id="menu"></ol></nav>
+<div class="aula-tabs" role="group" aria-label="Escolha a aula">
+  <button class="aula-tab" type="button" data-tab="1" aria-pressed="true">Aula 1 <small>HTML</small></button>
+  <button class="aula-tab" type="button" data-tab="2" aria-pressed="false">Aula 2 <small>CSS</small></button>
+</div>
+<nav class="lessons" aria-label="Lições da aula"><ol id="menu"></ol></nav>
 
 <main id="main">
 
 <!-- =================================================================== -->
-<article class="lesson" id="licao-0" data-short="Começar">
+<article class="lesson" data-aula="1" id="licao-0" data-short="Começar">
 <div class="sheet">
-  <p class="kicker">Antes de começar</p>
+  <p class="kicker">Aula 1 · Antes de começar</p>
   <h2 tabindex="-1">Preparar o vscode.dev</h2>
   <p class="lead">Aqui você vai escrever <b>código de verdade</b>, como os programadores fazem. Leia cada lição nesta tela e faça no <b>vscode.dev</b>, em outra aba.</p>
 
@@ -325,9 +376,9 @@ footer.note{max-width:1100px; margin:0 auto; padding:0 20px 40px; color:var(--in
 </article>
 
 <!-- =================================================================== -->
-<article class="lesson" id="licao-1" data-short="Estrutura">
+<article class="lesson" data-aula="1" id="licao-1" data-short="Estrutura">
 <div class="sheet">
-  <p class="kicker">Lição 1</p>
+  <p class="kicker">Aula 1 · Lição 1</p>
   <h2 tabindex="-1">A estrutura da página</h2>
   <p class="lead">Toda página HTML tem um <b>esqueleto</b>: <code class="i">html</code>, <code class="i">head</code> e <code class="i">body</code>. São caixas, uma dentro da outra.</p>
 
@@ -428,9 +479,9 @@ footer.note{max-width:1100px; margin:0 auto; padding:0 20px 40px; color:var(--in
 </article>
 
 <!-- =================================================================== -->
-<article class="lesson" id="licao-2" data-short="Títulos e texto">
+<article class="lesson" data-aula="1" id="licao-2" data-short="Títulos e texto">
 <div class="sheet">
-  <p class="kicker">Lição 2</p>
+  <p class="kicker">Aula 1 · Lição 2</p>
   <h2 tabindex="-1">Títulos e texto</h2>
   <p class="lead">O HTML tem <b>seis</b> tamanhos de título: de <code class="i">h1</code> (o mais importante) até <code class="i">h6</code> (o menos importante). E o <code class="i">p</code> é o texto normal.</p>
 
@@ -528,9 +579,9 @@ footer.note{max-width:1100px; margin:0 auto; padding:0 20px 40px; color:var(--in
 </article>
 
 <!-- =================================================================== -->
-<article class="lesson" id="licao-3" data-short="Listas">
+<article class="lesson" data-aula="1" id="licao-3" data-short="Listas">
 <div class="sheet">
-  <p class="kicker">Lição 3</p>
+  <p class="kicker">Aula 1 · Lição 3</p>
   <h2 tabindex="-1">Listas</h2>
   <p class="lead">Existem dois tipos de lista: com <b>bolinhas</b> e com <b>números</b>. Cada item da lista é um <code class="i">li</code>.</p>
 
@@ -630,9 +681,9 @@ footer.note{max-width:1100px; margin:0 auto; padding:0 20px 40px; color:var(--in
 </article>
 
 <!-- =================================================================== -->
-<article class="lesson" id="licao-4" data-short="Imagens">
+<article class="lesson" data-aula="1" id="licao-4" data-short="Imagens">
 <div class="sheet">
-  <p class="kicker">Lição 4</p>
+  <p class="kicker">Aula 1 · Lição 4</p>
   <h2 tabindex="-1">Imagens e atributos</h2>
   <p class="lead">A tag <code class="i">img</code> coloca uma imagem na página. Mas ela precisa de uma informação a mais: <b>qual</b> imagem mostrar. Para isso servem os <b>atributos</b>.</p>
 
@@ -717,9 +768,9 @@ footer.note{max-width:1100px; margin:0 auto; padding:0 20px 40px; color:var(--in
 </article>
 
 <!-- =================================================================== -->
-<article class="lesson" id="licao-5" data-short="Links">
+<article class="lesson" data-aula="1" id="licao-5" data-short="Links">
 <div class="sheet">
-  <p class="kicker">Lição 5</p>
+  <p class="kicker">Aula 1 · Lição 5</p>
   <h2 tabindex="-1">Links</h2>
   <p class="lead">Um <b>link</b> é um texto (ou imagem) que você clica para ir a outra página. É o que faz a internet ser uma “rede”: as páginas ligadas umas às outras.</p>
 
@@ -806,9 +857,9 @@ footer.note{max-width:1100px; margin:0 auto; padding:0 20px 40px; color:var(--in
 </article>
 
 <!-- =================================================================== -->
-<article class="lesson" id="licao-6" data-short="Juntar tudo">
+<article class="lesson" data-aula="1" id="licao-6" data-short="Juntar tudo">
 <div class="sheet">
-  <p class="kicker">Lição 6</p>
+  <p class="kicker">Aula 1 · Lição 6</p>
   <h2 tabindex="-1">Juntar tudo: a página sobre mim</h2>
   <p class="lead">Agora você sabe o bastante para fazer uma página completa, <b>só com HTML</b>. Monte a sua “página sobre mim” no <code class="i">index.html</code>.</p>
 
@@ -905,77 +956,560 @@ footer.note{max-width:1100px; margin:0 auto; padding:0 20px 40px; color:var(--in
 </article>
 
 <!-- =================================================================== -->
-<!-- LIÇÃO 7 — CSS. Fica BLOQUEADA até o professor liberar.
-     Para liberar: no <script> lá embaixo, troque  HABILITAR_CSS = false  por  true. -->
-<article class="lesson" id="licao-7" data-short="Próximo: CSS" data-locked="css">
+<!-- AULA 2 — CSS. Para esconder até o dia da aula: no script lá embaixo,
+     troque  AULA_2_LIBERADA = true  por  false. -->
+<article class="lesson" id="aula-2-bloqueada" data-aula="2" data-short="Em breve" data-lockpage>
 <div class="sheet">
-  <div class="locked-view locked" hidden>
+  <div class="locked">
     <div class="lock"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
-    <p class="kicker">Próximo passo</p>
-    <h2 tabindex="-1">Primeiro CSS</h2>
-    <p class="lead">Esta lição abre quando o professor liberar.</p>
-    <p>Até lá, continue caprichando no <b>HTML</b>: melhore a sua página sobre mim, coloque mais uma lista, mais um link, mais uma imagem. Uma página bem organizada em HTML fica muito mais fácil de enfeitar depois.</p>
-    <p><a class="btn btn-ghost" href="#licao-6">Voltar para a Lição 6</a></p>
+    <p class="kicker">Aula 2</p>
+    <h2 tabindex="-1">CSS: a aparência da página</h2>
+    <p class="lead">Esta aula abre quando o professor liberar.</p>
+    <p>Até lá, continue caprichando no <b>HTML</b>: melhore a sua página sobre mim, coloque mais uma lista, mais um link, mais uma imagem.</p>
+    <p><a class="btn btn-ghost" href="#licao-6">Voltar para a Aula 1</a></p>
   </div>
+</div>
+</article>
 
-  <div class="open-view">
-  <p class="kicker">Lição 7</p>
-  <h2 tabindex="-1">Primeiro CSS</h2>
-  <p class="lead">O HTML é a <b>estrutura</b> da página: o que existe nela. O <b>CSS</b> é a <b>aparência</b>: cor, tamanho, letra. Pense assim: o HTML é o corpo, o CSS é a roupa.</p>
-
-  <h3><span class="badge">1</span>Onde escrever o CSS</h3>
-  <p>Para começar, o CSS vai dentro de uma tag <code class="i">&lt;style&gt;</code>, <b>no head</b> (ele não aparece na tela, só muda a aparência):</p>
-  <div class="type">
-    <script type="text/x-code">
-<head>
-    <meta charset="UTF-8">
-    <title>Minha página</title>
-    <style>
-        body {
-            background-color: #FFF4E0;
-        }
-        h1 {
-            color: #1C6EA4;
-        }
-    </style>
-</head>
-    </script>
-  </div>
+<!-- =================================================================== -->
+<article class="lesson" id="css-1" data-aula="2" data-short="O que é CSS">
+<div class="sheet">
+  <p class="kicker">Aula 2 · Lição 1</p>
+  <h2 tabindex="-1">O que é CSS</h2>
+  <p class="lead">Na aula 1, você fez a <b>estrutura</b> da página com HTML: o que existe nela. Agora vem o <b>CSS</b>: a <b>aparência</b>. Cor, tamanho da letra, espaços, bordas.</p>
   <dl class="parts">
-    <div><dt><code>body</code> / <code>h1</code></dt><dd>O <b>seletor</b>: diz <b>qual</b> parte da página vai mudar.</dd></div>
-    <div><dt><code>{ }</code></dt><dd>As chaves guardam as regras dessa parte.</dd></div>
-    <div class="key"><dt><code>color: #1C6EA4;</code></dt><dd><b>Propriedade</b> (o que muda) <code class="i">:</code> <b>valor</b> (como fica) e termina com <code class="i">;</code>.</dd></div>
+    <div><dt><code>HTML</code></dt><dd>O <b>corpo</b> da página: títulos, textos, listas, imagens. Diz <b>o que</b> tem.</dd></div>
+    <div class="key"><dt><code>CSS</code></dt><dd>A <b>roupa</b> da página: cores, letras, espaços. Diz <b>como fica</b>.</dd></div>
   </dl>
-  <div class="callout tip">
-    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg>
-    <div><p class="t">Repare</p>
-    <p>A cor de fundo é do <b>CSS</b>. O <code class="i">body</code> continua sendo o corpo da página (HTML). Aqui o CSS só está dizendo: “pinte o fundo do body”.</p></div>
-  </div>
 
-  <h3><span class="badge">2</span>Emmet também funciona no CSS</h3>
+  <h3><span class="badge">1</span>Abra o seu site de novo</h3>
+  <ol class="howto">
+    <li><strong>Abra o vscode.dev</strong><p>Menu <b>☰</b> → <b>File</b> → <b>Open Recent</b> (Abrir recente) → <b>meu-site</b>. Se não aparecer, use <b>File → Open Folder…</b> e escolha a pasta <b>meu-site</b> de novo.</p></li>
+    <li><strong>Permita de novo</strong><p>O navegador pode pedir permissão outra vez. Clique no botão que <b>permite editar os arquivos</b>.</p></li>
+    <li><strong>Abra o <code class="i">index.html</code></strong><p>Clique nele na coluna da esquerda. Abra também a página no Chrome, como na aula 1 (app Arquivos → dois cliques).</p></li>
+  </ol>
+
+  <h3><span class="badge">2</span>Onde escrever o CSS</h3>
+  <p>Para começar, o CSS vai dentro de uma tag <code class="i">&lt;style&gt;</code>, que fica <b>no head</b>. O head guarda informações <b>sobre</b> a página, e o CSS é isso: uma informação de como a página deve ficar. Ele não aparece na tela.</p>
   <div class="emmet">
-    <p class="emmet-head">Atalho Emmet (dentro das chaves)</p>
+    <p class="emmet-head">Atalho Emmet (no head, embaixo do title)</p>
     <div class="emmet-body">
-      <div class="emmet-row"><span class="lbl">Digite</span><span class="abbr">bgc</span><span class="arrow">+</span><kbd>Tab</kbd><span class="arrow">→</span><span class="lbl">vira:</span></div>
-      <script type="text/x-code">
-background-color: #fff;
+      <div class="emmet-row"><span class="lbl">Digite</span><span class="abbr">style</span><span class="arrow">+</span><kbd>Tab</kbd><span class="arrow">→</span><span class="lbl">vira:</span></div>
+      <script type="text/x-code" data-cursor="7">
+<style></style>
       </script>
-      <ul class="breakdown" style="margin-top:14px">
-        <li><code>bgc</code><span><b>b</b>ack<b>g</b>round-<b>c</b>olor: cor de fundo. <code class="i">#fff</code> é branco. Troque pelo código da cor que quiser.</span></li>
-        <li><code>c</code><span><code class="i">c</code> + <kbd>Tab</kbd> vira <code class="i">color: #000;</code> — a cor da letra (<code class="i">#000</code> é preto).</span></li>
+      <p class="why-title">Por que vira isso?</p>
+      <ul class="breakdown">
+        <li><code>style</code><span>é o nome da tag, igual a <code class="i">p</code> ou <code class="i">h1</code>: o Emmet abre, fecha e deixa o cursor no meio. Aperte <kbd>Enter</kbd> para abrir espaço e escrever o CSS dentro.</span></li>
       </ul>
     </div>
   </div>
 
-  <section class="challenge" aria-labelledby="d7">
-    <p class="challenge-head" id="d7">Desafio</p>
-    <ul class="todo" data-id="l7">
-      <li><label><input type="checkbox"><span>Coloque uma tag <code class="i">style</code> no head da sua página.</span></label></li>
-      <li><label><input type="checkbox"><span>Mude a cor de fundo do body com <code class="i">bgc</code>.</span></label></li>
-      <li><label><input type="checkbox"><span>Mude a cor do <code class="i">h1</code> com <code class="i">c</code>.</span></label></li>
+  <h3><span class="badge">3</span>Uma regra de CSS</h3>
+  <p>O CSS é feito de <b>regras</b>. Cada regra diz: “<b>esta parte</b> da página fica <b>assim</b>”.</p>
+  <div class="anatomy">
+    <div class="code" aria-label="Exemplo: h1, abre chaves, color dois pontos blue ponto e vírgula, fecha chaves"><span class="se">h1</span> <span class="pu">{</span> <span class="pr">color</span><span class="pu">:</span> <span class="av">blue</span><span class="pu">;</span> <span class="pu">}</span></div>
+    <ul class="legend">
+      <li><i style="background:#9ED0F0"></i>seletor: <b>qual parte</b> muda</li>
+      <li><i style="background:#A5E3C0"></i>propriedade: <b>o que</b> muda</li>
+      <li><i style="background:#FFCF8B"></i>valor: <b>como</b> fica</li>
+    </ul>
+  </div>
+  <dl class="parts">
+    <div><dt><code>h1</code></dt><dd>O <b>seletor</b>: é o nome da tag do HTML. Esta regra vale para <b>todos</b> os <code class="i">h1</code> da página.</dd></div>
+    <div><dt><code>{ }</code></dt><dd>As <b>chaves</b> abrem e fecham a regra, como a abertura e o fechamento de uma tag.</dd></div>
+    <div class="key"><dt><code>color: blue;</code></dt><dd><b>Propriedade</b>, dois pontos <code class="i">:</code>, <b>valor</b>, e termina com ponto e vírgula <code class="i">;</code>. Aqui: “a cor da letra é azul”.</dd></div>
+  </dl>
+
+  <div class="type">
+    <p class="type-head"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/></svg>Digite no seu index.html (só o que está no head mudou):</p>
+    <script type="text/x-code" data-preview="Minha página">
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha página</title>
+    <style>
+        h1 {
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <h1>Olá, mundo!</h1>
+    <p>Esta é a minha primeira página de verdade.</p>
+</body>
+</html>
+    </script>
+  </div>
+
+  <div class="callout warn">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+    <div><p class="t">O CSS fala inglês</p>
+    <p><code class="i">color</code> quer dizer cor, <code class="i">blue</code> quer dizer azul. Se escrever <code class="i">cor: azul;</code>, não funciona. E se nada mudou, confira: faltou o <code class="i">;</code>? Faltou fechar a chave <code class="i">}</code>? Salvou (<kbd>Ctrl</kbd> + <kbd>S</kbd>) e recarregou (<kbd>Ctrl</kbd> + <kbd>R</kbd>)?</p></div>
+  </div>
+
+  <section class="challenge" aria-labelledby="c1">
+    <p class="challenge-head" id="c1">Desafio</p>
+    <ul class="todo" data-id="c1">
+      <li><label><input type="checkbox"><span>Coloque o <code class="i">&lt;style&gt;</code> no head da <b>sua</b> página da aula 1.</span></label></li>
+      <li><label><input type="checkbox"><span>Deixe o <code class="i">h1</code> azul. Depois troque por <code class="i">red</code> (vermelho) e por <code class="i">green</code> (verde).</span></label></li>
+      <li><label><input type="checkbox"><span>Crie uma segunda regra, para o <code class="i">p</code>, com <code class="i">color: purple;</code> (roxo).</span></label></li>
     </ul>
   </section>
+</div>
+</article>
+
+<!-- =================================================================== -->
+<article class="lesson" id="css-2" data-aula="2" data-short="Cores">
+<div class="sheet">
+  <p class="kicker">Aula 2 · Lição 2</p>
+  <h2 tabindex="-1">Cores</h2>
+  <p class="lead">Duas propriedades mudam cores: <code class="i">color</code> muda a cor da <b>letra</b>, e <code class="i">background-color</code> muda a cor do <b>fundo</b>.</p>
+
+  <h3><span class="badge">1</span>Cores pelo nome (em inglês)</h3>
+  <div class="swatches" id="swatches"></div>
+
+  <h3><span class="badge">2</span>Cores pelo código</h3>
+  <p>Os nomes são poucos. Para ter <b>qualquer</b> cor, usamos um código que começa com <code class="i">#</code> e tem 6 letras ou números, como <code class="i">#1C6EA4</code>. Você não precisa decorar: copie de uma paleta.</p>
+  <div class="palette" id="palette"></div>
+  <p class="copied" id="copiedColor" role="status" aria-live="polite"></p>
+  <div class="callout tip">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg>
+    <div><p class="t">O vscode.dev mostra a cor</p>
+    <p>Ao lado de cada cor escrita no CSS aparece um <b>quadradinho</b> colorido. Passe o mouse em cima dele para abrir um seletor de cores e escolher com o mouse.</p></div>
   </div>
+
+  <h3><span class="badge">3</span>Emmet para cores</h3>
+  <div class="emmet">
+    <p class="emmet-head">Atalho Emmet (dentro das chaves)</p>
+    <div class="emmet-body">
+      <div class="emmet-row"><span class="lbl">Digite</span><span class="abbr">c</span><span class="arrow">+</span><kbd>Tab</kbd><span class="arrow">→</span><span class="lbl">vira:</span></div>
+      <script type="text/x-code" data-lang="css">
+color: #000;
+      </script>
+      <div class="emmet-row" style="margin-top:18px"><span class="lbl">Digite</span><span class="abbr">bgc</span><span class="arrow">+</span><kbd>Tab</kbd><span class="arrow">→</span><span class="lbl">vira:</span></div>
+      <script type="text/x-code" data-lang="css">
+background-color: #fff;
+      </script>
+      <p class="why-title">Por que vira isso?</p>
+      <ul class="breakdown">
+        <li><code>c</code><span>é o apelido de <b>c</b>olor. O Emmet escreve a propriedade inteira, os dois pontos, um valor de exemplo e o <code class="i">;</code>. <code class="i">#000</code> é preto: troque pela cor que quiser.</span></li>
+        <li><code>bgc</code><span>são as primeiras letras de <b>b</b>ack<b>g</b>round-<b>c</b>olor (cor de fundo). <code class="i">#fff</code> é branco.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <h3><span class="badge">4</span>Pintar o fundo da página</h3>
+  <p>Lembra que o <code class="i">body</code> é o corpo da página, onde fica todo o conteúdo? Se o CSS pintar o fundo do body, a página inteira muda de cor.</p>
+  <div class="type">
+    <script type="text/x-code" data-lang="css" data-preview="Cores" data-html="&lt;h1&gt;Olá, mundo!&lt;/h1&gt;&lt;p&gt;Esta é a minha página, agora com cores.&lt;/p&gt;">
+body {
+    background-color: #FFF4E0;
+}
+h1 {
+    color: #1C6EA4;
+}
+p {
+    color: #17293A;
+}
+    </script>
+  </div>
+  <div class="callout warn">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+    <div><p class="t">Quem pinta é o CSS</p>
+    <p>O <code class="i">body</code> continua sendo a <b>estrutura</b> (HTML). A cor de fundo é do <b>CSS</b>. A regra só está dizendo: “pinte o fundo do corpo”.</p>
+    <p>Cuidado com letra clara em fundo claro: fica difícil de ler. Use letra escura em fundo claro, ou letra clara em fundo escuro.</p></div>
+  </div>
+
+  <section class="challenge" aria-labelledby="c2">
+    <p class="challenge-head" id="c2">Desafio</p>
+    <ul class="todo" data-id="c2">
+      <li><label><input type="checkbox"><span>Mude o fundo do <code class="i">body</code> com <code class="i">bgc</code> + <kbd>Tab</kbd>.</span></label></li>
+      <li><label><input type="checkbox"><span>Mude a cor do <code class="i">h1</code> com um código da paleta.</span></label></li>
+      <li><label><input type="checkbox"><span>Dê uma cor de fundo só para os <code class="i">h2</code>.</span></label></li>
+      <li><label><input type="checkbox"><span>Abra a página e confira: dá para ler tudo bem?</span></label></li>
+    </ul>
+  </section>
+</div>
+</article>
+
+<!-- =================================================================== -->
+<article class="lesson" id="css-3" data-aula="2" data-short="Letras">
+<div class="sheet">
+  <p class="kicker">Aula 2 · Lição 3</p>
+  <h2 tabindex="-1">Letras</h2>
+  <p class="lead">Com CSS você escolhe o <b>tamanho</b>, o <b>tipo</b> de letra, o <b>negrito</b> e o <b>alinhamento</b>.</p>
+
+  <h3><span class="badge">1</span>Tamanho: font-size</h3>
+  <div class="emmet">
+    <p class="emmet-head">Atalho Emmet</p>
+    <div class="emmet-body">
+      <div class="emmet-row"><span class="lbl">Digite</span><span class="abbr">fz24</span><span class="arrow">+</span><kbd>Tab</kbd><span class="arrow">→</span><span class="lbl">vira:</span></div>
+      <script type="text/x-code" data-lang="css">
+font-size: 24px;
+      </script>
+      <p class="why-title">Por que vira isso?</p>
+      <ul class="breakdown">
+        <li><code>fz</code><span>é o apelido de <b>f</b>ont-si<b>z</b>e (tamanho da letra).</span></li>
+        <li><code>24</code><span>é o tamanho. O Emmet coloca <code class="i">px</code> sozinho.</span></li>
+        <li><code>px</code><span><b>pixels</b>: os pontinhos da tela. A letra normal tem uns <code class="i">16px</code>. Quanto maior o número, maior a letra.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <h3><span class="badge">2</span>Tipo de letra: font-family</h3>
+  <p>Cada computador tem fontes diferentes. Por isso, escrevemos uma <b>lista</b>: se o computador não tiver a primeira, usa a próxima. No fim, colocamos sempre uma <b>família</b>, que todo computador tem:</p>
+  <div class="fonts">
+    <div><code class="i">sans-serif</code><span style="font-family:sans-serif">Letra sem pezinho</span></div>
+    <div><code class="i">serif</code><span style="font-family:serif">Letra com pezinho</span></div>
+    <div><code class="i">monospace</code><span style="font-family:monospace">Letra de máquina</span></div>
+  </div>
+  <div class="emmet">
+    <p class="emmet-head">Atalho Emmet</p>
+    <div class="emmet-body">
+      <div class="emmet-row"><span class="lbl">Digite</span><span class="abbr">ff</span><span class="arrow">+</span><kbd>Tab</kbd><span class="arrow">→</span><span class="lbl">vira:</span></div>
+      <script type="text/x-code" data-lang="css" data-cursor="13">
+font-family: ;
+      </script>
+      <ul class="breakdown" style="margin-top:14px">
+        <li><code>ff</code><span><b>f</b>ont-<b>f</b>amily. O cursor fica antes do <code class="i">;</code>: escreva, por exemplo, <code class="i">Arial, sans-serif</code>.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <h3><span class="badge">3</span>Negrito e alinhamento</h3>
+  <div class="emmet">
+    <p class="emmet-head">Atalhos Emmet</p>
+    <div class="emmet-body">
+      <div class="emmet-row"><span class="lbl">Digite</span><span class="abbr">fw:b</span><span class="arrow">+</span><kbd>Tab</kbd><span class="arrow">→</span><span class="lbl">vira:</span></div>
+      <script type="text/x-code" data-lang="css">
+font-weight: bold;
+      </script>
+      <div class="emmet-row" style="margin-top:18px"><span class="lbl">Digite</span><span class="abbr">ta:c</span><span class="arrow">+</span><kbd>Tab</kbd><span class="arrow">→</span><span class="lbl">vira:</span></div>
+      <script type="text/x-code" data-lang="css">
+text-align: center;
+      </script>
+      <p class="why-title">Por que vira isso?</p>
+      <ul class="breakdown">
+        <li><code>fw</code><span><b>f</b>ont-<b>w</b>eight: o “peso” da letra.</span></li>
+        <li><code>:b</code><span>os dois pontos escolhem o valor: <code class="i">b</code> = <b>bold</b> (negrito).</span></li>
+        <li><code>ta</code><span><b>t</b>ext-<b>a</b>lign: o alinhamento do texto.</span></li>
+        <li><code>:c</code><span><b>center</b> (centro). Também existe <code class="i">ta:l</code> (<b>left</b>, esquerda) e <code class="i">ta:r</code> (<b>right</b>, direita).</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="type">
+    <p class="type-head"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/></svg>Tudo junto:</p>
+    <script type="text/x-code" data-lang="css" data-preview="Letras" data-html="&lt;h1&gt;Ana Souza&lt;/h1&gt;&lt;p&gt;Eu moro em Fortaleza e estou aprendendo a fazer sites.&lt;/p&gt;">
+body {
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+}
+h1 {
+    font-size: 48px;
+    text-align: center;
+}
+    </script>
+  </div>
+  <div class="callout tip">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg>
+    <div><p class="t">Regra no body vale para tudo</p>
+    <p>A fonte que você coloca no <code class="i">body</code> passa para tudo o que está <b>dentro</b> dele: títulos, textos, listas. Isso se chama <b>herança</b>. Depois, é só mudar o que precisar em cada tag.</p></div>
+  </div>
+
+  <section class="challenge" aria-labelledby="c3">
+    <p class="challenge-head" id="c3">Desafio</p>
+    <ul class="todo" data-id="c3">
+      <li><label><input type="checkbox"><span>Escolha uma fonte para o <code class="i">body</code> inteiro (com a família no fim).</span></label></li>
+      <li><label><input type="checkbox"><span>Centralize o <code class="i">h1</code> com <code class="i">ta:c</code>.</span></label></li>
+      <li><label><input type="checkbox"><span>Deixe o texto dos <code class="i">p</code> maior com <code class="i">fz</code>.</span></label></li>
+      <li><label><input type="checkbox"><span>Deixe os itens da lista (<code class="i">li</code>) em negrito.</span></label></li>
+    </ul>
+  </section>
+</div>
+</article>
+
+<!-- =================================================================== -->
+<article class="lesson" id="css-4" data-aula="2" data-short="Espaços e bordas">
+<div class="sheet">
+  <p class="kicker">Aula 2 · Lição 4</p>
+  <h2 tabindex="-1">Espaços e bordas</h2>
+  <p class="lead">Para o CSS, <b>todo elemento é uma caixa</b>. Um parágrafo, um título, uma imagem: todos são caixas. E toda caixa tem camadas.</p>
+
+  <div class="boxmodel" aria-label="Desenho da caixa: margin por fora, depois border, depois padding, e o conteúdo no meio">
+    <div class="bm bm-margin"><span class="bm-l">margin: espaço de fora</span>
+      <div class="bm bm-border"><span class="bm-l">border: a borda</span>
+        <div class="bm bm-padding"><span class="bm-l">padding: espaço de dentro</span>
+          <div class="bm bm-content">o conteúdo (o texto)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3><span class="badge">1</span>Emmet para espaços e bordas</h3>
+  <div class="emmet">
+    <p class="emmet-head">Atalhos Emmet</p>
+    <div class="emmet-body">
+      <div class="emmet-row"><span class="lbl">Digite</span><span class="abbr">p20</span><span class="arrow">+</span><kbd>Tab</kbd><span class="arrow">→</span><span class="lbl">vira:</span></div>
+      <script type="text/x-code" data-lang="css">
+padding: 20px;
+      </script>
+      <div class="emmet-row" style="margin-top:18px"><span class="lbl">Digite</span><span class="abbr">m20</span><span class="arrow">+</span><kbd>Tab</kbd><span class="arrow">→</span><span class="lbl">vira:</span></div>
+      <script type="text/x-code" data-lang="css">
+margin: 20px;
+      </script>
+      <div class="emmet-row" style="margin-top:18px"><span class="lbl">Digite</span><span class="abbr">bd+</span><span class="arrow">+</span><kbd>Tab</kbd><span class="arrow">→</span><span class="lbl">vira:</span></div>
+      <script type="text/x-code" data-lang="css">
+border: 1px solid #000;
+      </script>
+      <div class="emmet-row" style="margin-top:18px"><span class="lbl">Digite</span><span class="abbr">bdrs</span><span class="arrow">+</span><kbd>Tab</kbd><span class="arrow">→</span><span class="lbl">vira:</span></div>
+      <script type="text/x-code" data-lang="css" data-cursor="15">
+border-radius: ;
+      </script>
+      <p class="why-title">Por que vira isso?</p>
+      <ul class="breakdown">
+        <li><code>p20</code><span><b>p</b>adding de 20px: espaço <b>de dentro</b>, entre o texto e a borda.</span></li>
+        <li><code>m20</code><span><b>m</b>argin de 20px: espaço <b>de fora</b>, entre esta caixa e as outras.</span></li>
+        <li><code>bd+</code><span><b>b</b>or<b>d</b>er com valores prontos: <code class="i">1px</code> de grossura, <code class="i">solid</code> (linha contínua) e cor <code class="i">#000</code> (preto).</span></li>
+        <li><code>bdrs</code><span><b>b</b>or<b>d</b>er-<b>r</b>adiu<b>s</b>: arredonda os cantos. Escreva, por exemplo, <code class="i">12px</code>.</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout warn">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+    <div><p class="t">O mesmo “p”, dois significados</p>
+    <p>No HTML, <code class="i">p</code> + <kbd>Tab</kbd> cria um parágrafo. Dentro do <code class="i">&lt;style&gt;</code>, <code class="i">p20</code> + <kbd>Tab</kbd> vira <b>padding</b>. O Emmet sabe onde o cursor está e escolhe certo.</p></div>
+  </div>
+
+  <h3><span class="badge">2</span>Centralizar a página</h3>
+  <p>Numa tela grande, o texto fica esticado de um lado ao outro. Duas linhas no <code class="i">body</code> resolvem:</p>
+  <dl class="parts">
+    <div><dt><code>max-width: 700px;</code></dt><dd>A página pode ter <b>no máximo</b> 700px de largura.</dd></div>
+    <div class="key"><dt><code>margin: 0 auto;</code></dt><dd>Nenhum espaço em cima e embaixo (<code class="i">0</code>). Dos lados, <code class="i">auto</code>: o navegador divide o espaço que sobra <b>igual</b> dos dois lados. Resultado: a página fica no meio.</dd></div>
+  </dl>
+
+  <h3><span class="badge">3</span>Imagem redonda</h3>
+  <p><code class="i">width</code> (<code class="i">w150</code> + <kbd>Tab</kbd>) muda a largura. E <code class="i">border-radius: 50%;</code> arredonda tanto que uma imagem quadrada vira um <b>círculo</b>.</p>
+
+  <div class="type">
+    <p class="type-head"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/></svg>Tudo junto:</p>
+    <script type="text/x-code" data-lang="css" data-preview="Espaços" data-html="&lt;h1&gt;Ana Souza&lt;/h1&gt;&lt;img src=&quot;FIG:flor&quot; alt=&quot;Uma flor rosa&quot;&gt;&lt;p&gt;Eu moro em Fortaleza e estou aprendendo a fazer sites.&lt;/p&gt;">
+body {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+h1 {
+    border: 3px solid #1C6EA4;
+    border-radius: 12px;
+    padding: 10px;
+}
+img {
+    width: 150px;
+    border-radius: 50%;
+}
+    </script>
+  </div>
+
+  <section class="challenge" aria-labelledby="c4">
+    <p class="challenge-head" id="c4">Desafio</p>
+    <ul class="todo" data-id="c4">
+      <li><label><input type="checkbox"><span>Centralize a sua página com <code class="i">max-width</code> e <code class="i">margin: 0 auto;</code>.</span></label></li>
+      <li><label><input type="checkbox"><span>Coloque uma borda arredondada no <code class="i">h1</code>, com <code class="i">padding</code> por dentro.</span></label></li>
+      <li><label><input type="checkbox"><span>Deixe a sua imagem redonda.</span></label></li>
+      <li><label><input type="checkbox"><span>Teste: mude o <code class="i">padding</code> do h1 para <code class="i">40px</code>. O que acontece?</span></label></li>
+    </ul>
+  </section>
+</div>
+</article>
+
+<!-- =================================================================== -->
+<article class="lesson" id="css-5" data-aula="2" data-short="Classes">
+<div class="sheet">
+  <p class="kicker">Aula 2 · Lição 5</p>
+  <h2 tabindex="-1">Classes: estilo só para alguns</h2>
+  <p class="lead">A regra <code class="i">p { color: red; }</code> pinta <b>todos</b> os parágrafos. E se você quiser destacar <b>só um</b>? Para isso existe a <b>classe</b>.</p>
+
+  <h3><span class="badge">1</span>Duas partes: uma no HTML, outra no CSS</h3>
+  <dl class="parts">
+    <div><dt><code>class="destaque"</code></dt><dd>No <b>HTML</b>: um atributo que dá um <b>nome</b> para o elemento. Você inventa o nome.</dd></div>
+    <div class="key"><dt><code>.destaque { }</code></dt><dd>No <b>CSS</b>: o <b>ponto</b> antes do nome quer dizer “os elementos com esta classe”.</dd></div>
+  </dl>
+
+  <div class="emmet">
+    <p class="emmet-head">Atalho Emmet (no HTML, dentro do body)</p>
+    <div class="emmet-body">
+      <div class="emmet-row"><span class="lbl">Digite</span><span class="abbr">p.destaque</span><span class="arrow">+</span><kbd>Tab</kbd><span class="arrow">→</span><span class="lbl">vira:</span></div>
+      <script type="text/x-code" data-cursor="20">
+<p class="destaque"></p>
+      </script>
+      <p class="why-title">Por que vira isso?</p>
+      <ul class="breakdown">
+        <li><code>p</code><span>cria o parágrafo.</span></li>
+        <li><code>.</code><span>no Emmet, o ponto quer dizer <b>classe</b>, igual ao CSS. Por isso o Emmet escreve o atributo <code class="i">class</code>.</span></li>
+        <li><code>destaque</code><span>é o nome da classe, que vai entre as aspas.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="type">
+    <p class="type-head"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/></svg>No HTML (dentro do body):</p>
+    <script type="text/x-code">
+<p>Eu moro em Fortaleza.</p>
+<p class="destaque">Meu sonho é trabalhar com tecnologia.</p>
+<p>Eu gosto de forró.</p>
+    </script>
+  </div>
+  <div class="type">
+    <p class="type-head"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/></svg>No CSS (dentro do style):</p>
+    <script type="text/x-code" data-lang="css" data-preview="Classes" data-html="&lt;p&gt;Eu moro em Fortaleza.&lt;/p&gt;&lt;p class=&quot;destaque&quot;&gt;Meu sonho é trabalhar com tecnologia.&lt;/p&gt;&lt;p&gt;Eu gosto de forró.&lt;/p&gt;">
+body {
+    font-family: Arial, sans-serif;
+}
+.destaque {
+    background-color: #FFF1DE;
+    border-left: 6px solid #E58A2E;
+    padding: 10px;
+    font-weight: bold;
+}
+    </script>
+  </div>
+
+  <div class="callout tip">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg>
+    <div><p class="t">Como dar nome a uma classe</p>
+    <p>Use letras minúsculas, <b>sem espaço e sem acento</b>. Para juntar palavras, use hífen: <code class="i">cor-favorita</code>, <code class="i">foto-perfil</code>. A mesma classe pode ser usada em <b>vários</b> elementos, até de tags diferentes.</p></div>
+  </div>
+
+  <section class="challenge" aria-labelledby="c5">
+    <p class="challenge-head" id="c5">Desafio</p>
+    <ul class="todo" data-id="c5">
+      <li><label><input type="checkbox"><span>Crie uma classe e use em <b>um</b> parágrafo da sua página.</span></label></li>
+      <li><label><input type="checkbox"><span>Na sua lista de hobbies, marque o seu favorito com <code class="i">li.favorito</code> e dê uma cor só para ele.</span></label></li>
+      <li><label><input type="checkbox"><span>Use a mesma classe em <b>dois</b> elementos diferentes e veja os dois mudarem juntos.</span></label></li>
+    </ul>
+  </section>
+</div>
+</article>
+
+<!-- =================================================================== -->
+<article class="lesson" id="css-6" data-aula="2" data-short="Juntar tudo">
+<div class="sheet">
+  <p class="kicker">Aula 2 · Lição 6</p>
+  <h2 tabindex="-1">Juntar tudo: a sua página com estilo</h2>
+  <p class="lead">Pegue a sua “página sobre mim” da aula 1 e deixe ela com a <b>sua cara</b>.</p>
+
+  <section class="challenge" aria-labelledby="c6">
+    <p class="challenge-head" id="c6">A sua página precisa ter</p>
+    <ul class="todo" data-id="c6">
+      <li><label><input type="checkbox"><span>Um <code class="i">&lt;style&gt;</code> no head.</span></label></li>
+      <li><label><input type="checkbox"><span>Uma cor de fundo no <code class="i">body</code> e uma fonte para a página inteira.</span></label></li>
+      <li><label><input type="checkbox"><span>A página centralizada (<code class="i">max-width</code> + <code class="i">margin: 0 auto;</code>).</span></label></li>
+      <li><label><input type="checkbox"><span>O <code class="i">h1</code> com cor e tamanho escolhidos por você.</span></label></li>
+      <li><label><input type="checkbox"><span>A imagem com cantos arredondados (ou redonda).</span></label></li>
+      <li><label><input type="checkbox"><span>Pelo menos <b>uma classe</b>.</span></label></li>
+      <li><label><input type="checkbox"><span>Tudo fácil de ler: letra escura em fundo claro (ou o contrário).</span></label></li>
+    </ul>
+  </section>
+
+  <h3><span class="badge">1</span>Um exemplo para se guiar</h3>
+  <p>Não copie igual: escolha as <b>suas</b> cores e o <b>seu</b> jeito.</p>
+  <div class="type">
+    <script type="text/x-code" data-preview="Página da Ana" data-tall>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página da Ana</title>
+    <style>
+        body {
+            background-color: #FFF4E0;
+            color: #17293A;
+            font-family: Arial, sans-serif;
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #1C6EA4;
+            font-size: 44px;
+            text-align: center;
+        }
+        h2 {
+            color: #E58A2E;
+            border-bottom: 3px solid #E58A2E;
+        }
+        img {
+            display: block;
+            width: 140px;
+            margin: 0 auto;
+            border-radius: 50%;
+        }
+        .favorito {
+            font-weight: bold;
+            color: #2E9E6B;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ana Souza</h1>
+    <img src="(cole aqui o endereço da imagem)" alt="Um sol amarelo">
+    <p>Eu moro em Fortaleza e estou aprendendo a fazer sites.</p>
+
+    <h2>Meus hobbies</h2>
+    <ul>
+        <li class="favorito">Ouvir forró</li>
+        <li>Cozinhar</li>
+        <li>Ir à praia</li>
+    </ul>
+
+    <h2>Um lugar que eu gosto</h2>
+    <p><a href="https://pt.wikipedia.org/wiki/Fortaleza" target="_blank">Conheça Fortaleza</a></p>
+</body>
+</html>
+    </script>
+  </div>
+  <div class="callout tip">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg>
+    <div><p class="t">Uma novidade no exemplo</p>
+    <p>No <code class="i">img</code> há <code class="i">display: block;</code>. A imagem normalmente fica “na linha”, como uma palavra. Com <code class="i">display: block</code>, ela vira uma caixa inteira, e aí o <code class="i">margin: 0 auto;</code> consegue colocar ela no meio.</p></div>
+  </div>
+
+  <h3><span class="badge">2</span>Resumo do CSS que você já sabe</h3>
+  <div class="table-wrap">
+    <table class="summary">
+      <thead><tr><th scope="col">Propriedade</th><th scope="col">Para que serve</th><th scope="col">Emmet</th></tr></thead>
+      <tbody>
+        <tr><td><code class="i">color</code></td><td>Cor da letra.</td><td><code class="i">c</code></td></tr>
+        <tr><td><code class="i">background-color</code></td><td>Cor do fundo.</td><td><code class="i">bgc</code></td></tr>
+        <tr><td><code class="i">font-size</code></td><td>Tamanho da letra.</td><td><code class="i">fz24</code></td></tr>
+        <tr><td><code class="i">font-family</code></td><td>Tipo de letra.</td><td><code class="i">ff</code></td></tr>
+        <tr><td><code class="i">font-weight</code></td><td>Negrito.</td><td><code class="i">fw:b</code></td></tr>
+        <tr><td><code class="i">text-align</code></td><td>Alinhamento do texto.</td><td><code class="i">ta:c</code></td></tr>
+        <tr><td><code class="i">padding</code></td><td>Espaço de dentro.</td><td><code class="i">p20</code></td></tr>
+        <tr><td><code class="i">margin</code></td><td>Espaço de fora.</td><td><code class="i">m20</code></td></tr>
+        <tr><td><code class="i">border</code></td><td>Borda.</td><td><code class="i">bd+</code></td></tr>
+        <tr><td><code class="i">border-radius</code></td><td>Cantos arredondados.</td><td><code class="i">bdrs</code></td></tr>
+        <tr><td><code class="i">width</code></td><td>Largura.</td><td><code class="i">w150</code></td></tr>
+        <tr><td><code class="i">.nome</code></td><td>Seletor de classe.</td><td><code class="i">p.nome</code> (no HTML)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3><span class="badge">3</span>Atualizar a página publicada</h3>
+  <p>Se você publicou a página na aula 1, dá para atualizar o mesmo endereço:</p>
+  <ol class="howto">
+    <li><strong>Abra o seu repositório</strong><p>Em <code class="i">github.com</code>, entre no repositório <b>minha-pagina</b> e clique no arquivo <code class="i">index.html</code>.</p></li>
+    <li><strong>Clique no lápis</strong><p>O ícone de lápis (<i>Edit this file</i>), no canto de cima do código.</p></li>
+    <li><strong>Troque o código</strong><p>Clique no código do GitHub, aperte <kbd>Ctrl</kbd> + <kbd>A</kbd> e <kbd>Delete</kbd>. No vscode.dev, <kbd>Ctrl</kbd> + <kbd>A</kbd> e <kbd>Ctrl</kbd> + <kbd>C</kbd>. Volte no GitHub e <kbd>Ctrl</kbd> + <kbd>V</kbd>.</p></li>
+    <li><strong>Salve</strong><p>Clique em <b>Commit changes…</b> e em <b>Commit changes</b> de novo. Em 1 ou 2 minutos, o seu endereço mostra a página nova.</p></li>
+  </ol>
 </div>
 </article>
 
@@ -985,10 +1519,11 @@ background-color: #fff;
 
 <script>
 /* =====================================================================
-   LIÇÃO 7 (CSS) — deixe "false" até o professor começar CSS com a turma.
-   Para liberar: troque para  true  e salve o arquivo.
+   CONFIGURAÇÃO DO PROFESSOR
+   AULA_2_LIBERADA: troque para  false  para esconder a Aula 2 (CSS)
+   até o dia dela. Salve o arquivo e publique de novo.
    ===================================================================== */
-const HABILITAR_CSS = false;
+const AULA_2_LIBERADA = true;
 
 /* ---------- Figuras (SVG embutidas; viram endereço data:) ---------- */
 const FIGURAS = {
@@ -1007,12 +1542,25 @@ const FIGURAS = {
 };
 const dataURI = k => 'data:image/svg+xml,' + FIGURAS[k].svg.replace(/%/g,'%25').replace(/#/g,'%23').replace(/</g,'%3C').replace(/>/g,'%3E');
 
+/* Cores da lição de CSS */
+const CORES_NOME = [
+  ['red','vermelho','#FF0000'],['blue','azul','#0000FF'],['green','verde','#008000'],['yellow','amarelo','#FFFF00'],
+  ['orange','laranja','#FFA500'],['purple','roxo','#800080'],['pink','rosa','#FFC0CB'],['brown','marrom','#A52A2A'],
+  ['black','preto','#000000'],['white','branco','#FFFFFF'],['gray','cinza','#808080'],['navy','azul-marinho','#000080']
+];
+const PALETA = [
+  ['#1C6EA4','Azul Vida Videira'],['#E58A2E','Laranja Vida Videira'],['#2E9E6B','Verde'],['#17293A','Azul-noite (bom para letra)'],
+  ['#FFF4E0','Creme (bom para fundo)'],['#EEF3F8','Cinza-claro (bom para fundo)'],['#E0475F','Vermelho-coração'],['#6B4FB8','Roxo']
+];
+
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 const guardar = (k, v) => { try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} };
 const ler = (k, padrao) => { try{ const v = JSON.parse(localStorage.getItem(k)); return v == null ? padrao : v; }catch(e){ return padrao; } };
+const ICO_CHECK = '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>';
+const ICO_LOCK = '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>';
 
-/* ---------- Colorir código ---------- */
+/* ---------- Colorir código (HTML e CSS) ---------- */
 function colorirTag(tag){
   if(tag.startsWith('<!--')) return `<span class="cm">${esc(tag)}</span>`;
   const m = tag.match(/^<(\/?)([^\s>\/]+)([\s\S]*?)(\/?)>$/);
@@ -1026,6 +1574,26 @@ function colorirTag(tag){
   });
   return `<span class="tg">&lt;${m[1]}${esc(m[2])}</span>${attrs}<span class="tg">${m[4]}&gt;</span>`;
 }
+function colorirDeclaracoes(b){
+  const re = /([a-zA-Z-]+)(\s*:\s*)([^;]*)(;?)/g;
+  let out = '', ultimo = 0, m;
+  while((m = re.exec(b))){
+    out += esc(b.slice(ultimo, m.index));
+    out += `<span class="pr">${esc(m[1])}</span><span class="pu">${esc(m[2])}</span><span class="av">${esc(m[3])}</span><span class="pu">${m[4]}</span>`;
+    ultimo = re.lastIndex;
+  }
+  return out + esc(b.slice(ultimo));
+}
+function colorirCSS(src){
+  let out = '', buf = '', dentro = false, viuChave = false;
+  for(const ch of src){
+    if(ch === '{' && !dentro){ out += `<span class="se">${esc(buf)}</span><span class="pu">{</span>`; buf = ''; dentro = true; viuChave = true; }
+    else if(ch === '}' && dentro){ out += colorirDeclaracoes(buf) + '<span class="pu">}</span>'; buf = ''; dentro = false; }
+    else buf += ch;
+  }
+  // trecho solto, como "color: #000;" (sem seletor)
+  return out + ((dentro || (!viuChave && buf.includes(':'))) ? colorirDeclaracoes(buf) : `<span class="se">${esc(buf)}</span>`);
+}
 function colorir(src){
   const re = /<!--[\s\S]*?-->|<\/?[a-zA-Z!][^>]*>/g;
   let out = '', ultimo = 0, m;
@@ -1033,6 +1601,11 @@ function colorir(src){
     if(m.index > ultimo) out += `<span class="tx">${esc(src.slice(ultimo, m.index))}</span>`;
     out += colorirTag(m[0]);
     ultimo = re.lastIndex;
+    if(/^<style[\s>]/i.test(m[0])){
+      // o que está dentro do <style> é CSS
+      const fim = src.indexOf('</style>', ultimo);
+      if(fim !== -1){ out += colorirCSS(src.slice(ultimo, fim)); ultimo = re.lastIndex = fim; }
+    }
   }
   if(ultimo < src.length) out += `<span class="tx">${esc(src.slice(ultimo))}</span>`;
   return out;
@@ -1042,26 +1615,74 @@ function tirarRecuo(txt){
   const min = Math.min(...linhas.filter(l => l.trim()).map(l => l.match(/^ */)[0].length));
   return linhas.map(l => l.slice(min)).join('\n');
 }
+
+/* ---------- Resultado ao vivo (iframe) ---------- */
+function montarDocumento(src, s){
+  let doc = s.dataset.lang === 'css'
+    ? `<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><style>${src}</style></head><body>${s.dataset.html || ''}</body></html>`
+    : (/^\s*<!DOCTYPE/i.test(src) ? src : `<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"></head><body>${src}</body></html>`);
+  doc = doc.replace(/FIG:(\w+)/g, (m, k) => FIGURAS[k] ? dataURI(k) : m)
+           .replace(/\(cole aqui o endereço da imagem\)/g, dataURI('sol'))
+           .replace(/<a /g, '<a target="_blank" rel="noopener noreferrer" ');
+  return doc;
+}
+function ajustarAltura(fr){
+  try{
+    const d = fr.contentDocument; if(!d || !d.documentElement) return;
+    // altura do conteúdo (não da janela do iframe), para não crescer a cada medida
+    const h = Math.ceil(d.documentElement.getBoundingClientRect().height);
+    if(h > 0) fr.style.height = Math.max(h, 60) + 'px';
+  }catch(e){}
+}
+function criarResultado(src, s){
+  const box = document.createElement('div');
+  box.className = 'result';
+  box.innerHTML = `<div class="result-bar"><div class="lights" aria-hidden="true"><span></span><span></span><span></span></div><span class="addr">${esc(s.dataset.preview || 'Resultado')}</span></div>`;
+  const fr = document.createElement('iframe');
+  fr.className = 'live';
+  fr.title = 'Resultado: ' + (s.dataset.preview || 'página');
+  fr.srcdoc = montarDocumento(src, s);
+  fr.addEventListener('load', () => ajustarAltura(fr));
+  box.appendChild(fr);
+  const cap = document.createElement('p');
+  cap.className = 'result-cap';
+  cap.textContent = 'Resultado de verdade: é assim que o navegador mostra este código.';
+  box.appendChild(cap);
+  return box;
+}
+
 document.querySelectorAll('script[type="text/x-code"]').forEach(s => {
   const src = tirarRecuo(s.textContent);
+  const pinta = s.dataset.lang === 'css' ? colorirCSS : colorir;
   const pre = document.createElement('pre');
   pre.className = 'code';
   const cursor = s.dataset.cursor;
   if(cursor != null){
     // mostra onde o cursor fica depois do Tab
     const i = +cursor, MARCA = '';
-    pre.innerHTML = colorir(src.slice(0, i) + MARCA + src.slice(i)).replace(MARCA, '<span class="cursor" aria-hidden="true"></span>');
+    pre.innerHTML = pinta(src.slice(0, i) + MARCA + src.slice(i)).replace(MARCA, '<span class="cursor" aria-hidden="true"></span>');
     pre.setAttribute('aria-label', src + ' (o cursor fica na posição marcada)');
   } else {
-    pre.innerHTML = colorir(src);
+    pre.innerHTML = pinta(src);
   }
+  const depois = s.dataset.preview != null ? criarResultado(src, s) : null;
   s.replaceWith(pre);
+  if(depois) pre.after(depois);
 });
 
 /* ---------- Figuras nos resultados ---------- */
 document.querySelectorAll('img[data-fig]').forEach(img => { img.src = dataURI(img.dataset.fig); });
 
-/* ---------- Galeria com "Copiar endereço" ---------- */
+/* ---------- Copiar (endereço de imagem, código de cor) ---------- */
+async function copiar(txt, botao){
+  try{ await navigator.clipboard.writeText(txt); return true; }catch(err){}
+  // plano B: mostra o texto selecionado para Ctrl+C
+  let ta = botao.parentNode.querySelector('textarea');
+  if(!ta){ ta = document.createElement('textarea'); ta.className = 'fallback'; ta.readOnly = true; botao.parentNode.appendChild(ta); }
+  ta.value = txt; ta.focus(); ta.select();
+  try{ return document.execCommand('copy'); }catch(e){ return false; }
+}
+
 (function(){
   const g = $('gallery'); if(!g) return;
   g.innerHTML = Object.keys(FIGURAS).map(k => `
@@ -1071,28 +1692,36 @@ document.querySelectorAll('img[data-fig]').forEach(img => { img.src = dataURI(im
       <span class="alt">alt sugerido: “${esc(FIGURAS[k].alt)}”</span>
       <button class="btn btn-primary btn-sm" type="button" data-k="${k}">Copiar endereço</button>
     </div>`).join('');
-  const aviso = $('copied');
-  function copiarReserva(txt, botao){
-    // plano B: mostra o endereço selecionado para Ctrl+C
-    let ta = botao.parentNode.querySelector('textarea');
-    if(!ta){ ta = document.createElement('textarea'); ta.className = 'fallback'; ta.readOnly = true; botao.parentNode.appendChild(ta); }
-    ta.value = txt; ta.focus(); ta.select();
-    let ok = false;
-    try{ ok = document.execCommand('copy'); }catch(e){}
-    return ok;
-  }
   g.addEventListener('click', async e => {
     const b = e.target.closest('button[data-k]'); if(!b) return;
-    const k = b.dataset.k, txt = dataURI(k);
-    let ok = false;
-    try{ await navigator.clipboard.writeText(txt); ok = true; }catch(err){ ok = copiarReserva(txt, b); }
+    const k = b.dataset.k, ok = await copiar(dataURI(k), b);
     g.querySelectorAll('button[data-k]').forEach(x => x.textContent = 'Copiar endereço');
     if(ok){
       b.textContent = 'Copiado!';
-      aviso.textContent = `Endereço da figura “${FIGURAS[k].nome}” copiado! No vscode.dev, clique entre as aspas do src="" e aperte Ctrl + V.`;
+      $('copied').textContent = `Endereço da figura “${FIGURAS[k].nome}” copiado! No vscode.dev, clique entre as aspas do src="" e aperte Ctrl + V.`;
     } else {
-      aviso.textContent = 'O endereço está marcado na caixinha embaixo da figura. Aperte Ctrl + C para copiar.';
+      $('copied').textContent = 'O endereço está marcado na caixinha embaixo da figura. Aperte Ctrl + C para copiar.';
     }
+  });
+})();
+
+(function(){
+  const sw = $('swatches');
+  if(sw) sw.innerHTML = CORES_NOME.map(([en, pt, hex]) => `
+    <div class="sw"><span class="sw-cor" style="background:${hex}"></span><code class="i">${en}</code><span>${pt}</span></div>`).join('');
+  const pal = $('palette'); if(!pal) return;
+  pal.innerHTML = PALETA.map(([hex, nome]) => `
+    <div class="pal">
+      <span class="sw-cor" style="background:${hex}"></span>
+      <span class="pal-txt"><code class="i">${hex}</code><span>${esc(nome)}</span></span>
+      <button class="btn btn-ghost btn-sm" type="button" data-cor="${hex}">Copiar</button>
+    </div>`).join('');
+  pal.addEventListener('click', async e => {
+    const b = e.target.closest('button[data-cor]'); if(!b) return;
+    const ok = await copiar(b.dataset.cor, b);
+    pal.querySelectorAll('button[data-cor]').forEach(x => x.textContent = 'Copiar');
+    if(ok){ b.textContent = 'Copiado!'; $('copiedColor').textContent = `Cor ${b.dataset.cor} copiada! No CSS, apague o valor antigo e aperte Ctrl + V.`; }
+    else $('copiedColor').textContent = 'O código está marcado na caixinha. Aperte Ctrl + C para copiar.';
   });
 })();
 
@@ -1107,25 +1736,28 @@ document.querySelectorAll('.todo[data-id]').forEach(ul => {
   });
 });
 
-/* ---------- Lições e navegação ---------- */
+/* ---------- Aulas, lições e navegação ---------- */
+const todas = [...document.querySelectorAll('.lesson')];
+// com a Aula 2 liberada, some a página "em breve"; sem ela, só a página "em breve" aparece
+todas.forEach(el => {
+  const fora = el.dataset.aula === '2' && (AULA_2_LIBERADA ? el.hasAttribute('data-lockpage') : !el.hasAttribute('data-lockpage'));
+  if(fora) el.remove();
+});
 const licoes = [...document.querySelectorAll('.lesson')];
-const bloqueada = el => el.dataset.locked === 'css' && !HABILITAR_CSS;
+const aulaDe = el => el.dataset.aula;
 let feitas = ler('sementes-av-feitas', {});
 
-licoes.forEach(el => {
-  const trava = bloqueada(el);
-  el.querySelector('.locked-view') && (el.querySelector('.locked-view').hidden = !trava);
-  el.querySelector('.open-view') && (el.querySelector('.open-view').hidden = trava);
-  if(trava) return;
+licoes.forEach((el, i) => {
+  if(el.hasAttribute('data-lockpage')) return;
   // rodapé de cada lição
-  const i = licoes.indexOf(el);
   const foot = document.createElement('div');
   foot.className = 'foot';
   const ant = licoes[i - 1], prox = licoes[i + 1];
+  const trocaAula = prox && aulaDe(prox) !== aulaDe(el);
   foot.innerHTML = `
-    ${ant ? `<a class="btn btn-ghost" href="#${ant.id}"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>Anterior</a>` : ''}
+    ${ant ? `<a class="btn btn-ghost" href="#${ant.id}"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>${aulaDe(ant) !== aulaDe(el) ? 'Voltar para a Aula ' + aulaDe(ant) : 'Anterior'}</a>` : ''}
     <button class="btn btn-done" type="button" data-done="${el.id}" aria-pressed="false"></button>
-    ${prox ? `<a class="btn btn-primary next" href="#${prox.id}">${bloqueada(prox) ? 'Próximo passo' : 'Próxima lição'}<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></a>` : ''}`;
+    ${prox ? `<a class="btn btn-primary next" href="#${prox.id}">${trocaAula ? 'Ir para a Aula ' + aulaDe(prox) : 'Próxima lição'}<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></a>` : ''}`;
   el.querySelector('.sheet').appendChild(foot);
 });
 
@@ -1133,9 +1765,7 @@ function pintarFeita(){
   document.querySelectorAll('[data-done]').forEach(b => {
     const f = !!feitas[b.dataset.done];
     b.setAttribute('aria-pressed', String(f));
-    b.innerHTML = f
-      ? '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Lição concluída'
-      : 'Marcar como concluída';
+    b.innerHTML = f ? ICO_CHECK + 'Lição concluída' : 'Marcar como concluída';
   });
   montarMenu();
 }
@@ -1147,14 +1777,17 @@ document.addEventListener('click', e => {
 
 function montarMenu(){
   const atual = document.querySelector('.lesson.is-active');
-  $('menu').innerHTML = licoes.map((el, i) => {
-    const trava = bloqueada(el);
+  const aula = atual ? aulaDe(atual) : '1';
+  document.querySelectorAll('[data-tab]').forEach(t => t.setAttribute('aria-pressed', String(t.dataset.tab === aula)));
+  const lista = licoes.filter(el => aulaDe(el) === aula);
+  const base = aula === '1' ? 0 : 1;
+  $('menu').innerHTML = lista.map((el, i) => {
+    const trava = el.hasAttribute('data-lockpage');
+    const n = i + base;
     const cls = [trava ? 'is-locked' : '', feitas[el.id] ? 'is-done' : ''].join(' ');
-    const num = trava
-      ? '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>'
-      : (feitas[el.id] ? '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>' : i);
+    const num = trava ? ICO_LOCK : (feitas[el.id] ? ICO_CHECK : n);
     return `<li><button class="lesson-btn ${cls}" type="button" data-go="${el.id}" ${el === atual ? 'aria-current="page"' : ''}
-      aria-label="${i === 0 ? 'Começar' : 'Lição ' + i}: ${esc(el.dataset.short)}${trava ? ' (bloqueada)' : ''}${feitas[el.id] ? ' (concluída)' : ''}">
+      aria-label="${n === 0 ? 'Começar' : 'Lição ' + n}: ${esc(el.dataset.short)}${trava ? ' (bloqueada)' : ''}${feitas[el.id] ? ' (concluída)' : ''}">
       <span class="num">${num}</span><span>${esc(el.dataset.short)}</span></button></li>`;
   }).join('');
 }
@@ -1162,19 +1795,30 @@ $('menu').addEventListener('click', e => {
   const b = e.target.closest('[data-go]'); if(!b) return;
   location.hash = b.dataset.go;
 });
+document.querySelectorAll('[data-tab]').forEach(t => {
+  if(t.dataset.tab === '2' && !AULA_2_LIBERADA) t.insertAdjacentHTML('beforeend', ICO_LOCK);
+  t.addEventListener('click', () => {
+    const ultima = ler('sementes-av-ultima-aula' + t.dataset.tab, '');
+    const alvo = licoes.find(l => l.id === ultima && aulaDe(l) === t.dataset.tab) || licoes.find(l => aulaDe(l) === t.dataset.tab);
+    if(alvo) location.hash = alvo.id;
+  });
+});
 
 function mostrar(id, focar){
   const alvo = licoes.find(l => l.id === id) || licoes[0];
   licoes.forEach(l => l.classList.toggle('is-active', l === alvo));
   guardar('sementes-av-ultima', alvo.id);
+  guardar('sementes-av-ultima-aula' + aulaDe(alvo), alvo.id);
   montarMenu();
+  alvo.querySelectorAll('iframe.live').forEach(ajustarAltura);
   if(focar){
     window.scrollTo({top:0});
-    const h = [...alvo.querySelectorAll('h2')].find(x => !x.closest('[hidden]'));
+    const h = alvo.querySelector('h2');
     if(h) h.focus({preventScroll:true});
   }
 }
 window.addEventListener('hashchange', () => mostrar(location.hash.slice(1), true));
+window.addEventListener('resize', () => document.querySelectorAll('.lesson.is-active iframe.live').forEach(ajustarAltura));
 pintarFeita();
 mostrar(location.hash.slice(1) || ler('sementes-av-ultima', 'licao-0'), false);
 
