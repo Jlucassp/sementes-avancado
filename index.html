@@ -241,6 +241,9 @@ main{max-width:1100px; margin:0 auto; padding:6px 20px 60px}
 footer.note{max-width:1100px; margin:0 auto; padding:0 20px 40px; color:var(--ink-soft); font-size:.9rem; text-align:center}
 
 
+.unlock-msg:empty{display:none}
+.unlock-msg{display:flex; gap:12px; align-items:flex-start; margin:22px 0 0; padding:14px 18px; border-radius:16px; background:var(--success-soft); font-size:1.1rem; max-width:none!important}
+.unlock-msg svg{color:var(--success); margin-top:4px}
 /* ============ Abas das aulas ============ */
 .aula-tabs{max-width:1100px; margin:0 auto; padding:6px 20px 0; display:flex; gap:10px; flex-wrap:wrap}
 @media (max-width:480px){ .aula-tabs{padding-left:16px; padding-right:16px} }
@@ -956,17 +959,17 @@ iframe.live{display:block; width:100%; min-height:60px; border:0; background:#FF
 </article>
 
 <!-- =================================================================== -->
-<!-- AULA 2 — CSS. Para esconder até o dia da aula: no script lá embaixo,
-     troque  AULA_2_LIBERADA = true  por  false. -->
-<article class="lesson" id="aula-2-bloqueada" data-aula="2" data-short="Em breve" data-lockpage>
+<!-- AULA 2 — CSS. Abre sozinha quando o aluno conclui a lição 6 da Aula 1.
+     Para abrir para todos: no script lá embaixo, AULA_2_PARA_TODOS = true. -->
+<article class="lesson" id="aula-2-bloqueada" data-aula="2" data-short="Termine a Aula 1" data-lockpage>
 <div class="sheet">
   <div class="locked">
     <div class="lock"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
     <p class="kicker">Aula 2</p>
     <h2 tabindex="-1">CSS: a aparência da página</h2>
-    <p class="lead">Esta aula abre quando o professor liberar.</p>
-    <p>Até lá, continue caprichando no <b>HTML</b>: melhore a sua página sobre mim, coloque mais uma lista, mais um link, mais uma imagem.</p>
-    <p><a class="btn btn-ghost" href="#licao-6">Voltar para a Aula 1</a></p>
+    <p class="lead">Esta aula abre quando você terminar a Aula 1.</p>
+    <p>Na <b>lição 6 (Juntar tudo)</b>, monte a sua página sobre mim e toque em <b>Marcar como concluída</b>. Pronto: a Aula 2 abre na hora.</p>
+    <p><a class="btn btn-primary" href="#licao-6">Ir para a lição 6</a></p>
   </div>
 </div>
 </article>
@@ -1520,10 +1523,11 @@ body {
 <script>
 /* =====================================================================
    CONFIGURAÇÃO DO PROFESSOR
-   AULA_2_LIBERADA: troque para  false  para esconder a Aula 2 (CSS)
-   até o dia dela. Salve o arquivo e publique de novo.
+   AULA_2_PARA_TODOS: com  false , a Aula 2 (CSS) abre sozinha para cada
+   aluno quando ele marca a lição 6 da Aula 1 ("Juntar tudo") como
+   concluída. Com  true , fica aberta para todos.
    ===================================================================== */
-const AULA_2_LIBERADA = false;
+const AULA_2_PARA_TODOS = false;
 
 /* ---------- Figuras (SVG embutidas; viram endereço data:) ---------- */
 const FIGURAS = {
@@ -1737,22 +1741,20 @@ document.querySelectorAll('.todo[data-id]').forEach(ul => {
 });
 
 /* ---------- Aulas, lições e navegação ---------- */
-const todas = [...document.querySelectorAll('.lesson')];
-// com a Aula 2 liberada, some a página "em breve"; sem ela, só a página "em breve" aparece
-todas.forEach(el => {
-  const fora = el.dataset.aula === '2' && (AULA_2_LIBERADA ? el.hasAttribute('data-lockpage') : !el.hasAttribute('data-lockpage'));
-  if(fora) el.remove();
-});
 const licoes = [...document.querySelectorAll('.lesson')];
 const aulaDe = el => el.dataset.aula;
+const paginaTrava = $('aula-2-bloqueada');
+const trilha = licoes.filter(el => el !== paginaTrava);   // ordem de Anterior / Próxima
 let feitas = ler('sementes-av-feitas', {});
+// Aula 1 concluída = lição 6 ("Juntar tudo") marcada como concluída neste computador
+const aula2Aberta = () => AULA_2_PARA_TODOS || !!feitas['licao-6'];
+const visiveis = () => licoes.filter(el => aulaDe(el) !== '2' || (aula2Aberta() ? el !== paginaTrava : el === paginaTrava));
 
-licoes.forEach((el, i) => {
-  if(el.hasAttribute('data-lockpage')) return;
+trilha.forEach((el, i) => {
   // rodapé de cada lição
   const foot = document.createElement('div');
   foot.className = 'foot';
-  const ant = licoes[i - 1], prox = licoes[i + 1];
+  const ant = trilha[i - 1], prox = trilha[i + 1];
   const trocaAula = prox && aulaDe(prox) !== aulaDe(el);
   foot.innerHTML = `
     ${ant ? `<a class="btn btn-ghost" href="#${ant.id}"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>${aulaDe(ant) !== aulaDe(el) ? 'Voltar para a Aula ' + aulaDe(ant) : 'Anterior'}</a>` : ''}
@@ -1760,6 +1762,10 @@ licoes.forEach((el, i) => {
     ${prox ? `<a class="btn btn-primary next" href="#${prox.id}">${trocaAula ? 'Ir para a Aula ' + aulaDe(prox) : 'Próxima lição'}<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></a>` : ''}`;
   el.querySelector('.sheet').appendChild(foot);
 });
+// aviso que aparece na lição 6 quando a Aula 2 abre
+const avisoAula2 = document.createElement('p');
+avisoAula2.className = 'unlock-msg'; avisoAula2.setAttribute('role', 'status');
+$('licao-6').querySelector('.foot').before(avisoAula2);
 
 function pintarFeita(){
   document.querySelectorAll('[data-done]').forEach(b => {
@@ -1767,6 +1773,8 @@ function pintarFeita(){
     b.setAttribute('aria-pressed', String(f));
     b.innerHTML = f ? ICO_CHECK + 'Lição concluída' : 'Marcar como concluída';
   });
+  avisoAula2.innerHTML = (!AULA_2_PARA_TODOS && feitas['licao-6'])
+    ? ICO_CHECK + '<span>Parabéns! Você terminou a Aula 1. <b>A Aula 2 (CSS) está aberta.</b></span>' : '';
   montarMenu();
 }
 document.addEventListener('click', e => {
@@ -1778,11 +1786,16 @@ document.addEventListener('click', e => {
 function montarMenu(){
   const atual = document.querySelector('.lesson.is-active');
   const aula = atual ? aulaDe(atual) : '1';
-  document.querySelectorAll('[data-tab]').forEach(t => t.setAttribute('aria-pressed', String(t.dataset.tab === aula)));
-  const lista = licoes.filter(el => aulaDe(el) === aula);
+  document.querySelectorAll('[data-tab]').forEach(t => {
+    t.setAttribute('aria-pressed', String(t.dataset.tab === aula));
+    const trava = t.dataset.tab === '2' && !aula2Aberta();
+    t.innerHTML = `Aula ${t.dataset.tab} <small>${t.dataset.tab === '1' ? 'HTML' : 'CSS'}</small>${trava ? ICO_LOCK : ''}`;
+    t.setAttribute('aria-label', `Aula ${t.dataset.tab}${trava ? ' (abre quando você terminar a Aula 1)' : ''}`);
+  });
+  const lista = visiveis().filter(el => aulaDe(el) === aula);
   const base = aula === '1' ? 0 : 1;
   $('menu').innerHTML = lista.map((el, i) => {
-    const trava = el.hasAttribute('data-lockpage');
+    const trava = el === paginaTrava;
     const n = i + base;
     const cls = [trava ? 'is-locked' : '', feitas[el.id] ? 'is-done' : ''].join(' ');
     const num = trava ? ICO_LOCK : (feitas[el.id] ? ICO_CHECK : n);
@@ -1796,19 +1809,23 @@ $('menu').addEventListener('click', e => {
   location.hash = b.dataset.go;
 });
 document.querySelectorAll('[data-tab]').forEach(t => {
-  if(t.dataset.tab === '2' && !AULA_2_LIBERADA) t.insertAdjacentHTML('beforeend', ICO_LOCK);
   t.addEventListener('click', () => {
     const ultima = ler('sementes-av-ultima-aula' + t.dataset.tab, '');
-    const alvo = licoes.find(l => l.id === ultima && aulaDe(l) === t.dataset.tab) || licoes.find(l => aulaDe(l) === t.dataset.tab);
+    const opcoes = visiveis().filter(l => aulaDe(l) === t.dataset.tab);
+    const alvo = opcoes.find(l => l.id === ultima) || opcoes[0];
     if(alvo) location.hash = alvo.id;
   });
 });
 
 function mostrar(id, focar){
-  const alvo = licoes.find(l => l.id === id) || licoes[0];
+  let alvo = licoes.find(l => l.id === id) || licoes[0];
+  // Aula 2 fechada: qualquer lição dela mostra a página do cadeado (e vice-versa)
+  if(aulaDe(alvo) === '2') alvo = aula2Aberta() ? (alvo === paginaTrava ? $('css-1') : alvo) : paginaTrava;
   licoes.forEach(l => l.classList.toggle('is-active', l === alvo));
-  guardar('sementes-av-ultima', alvo.id);
-  guardar('sementes-av-ultima-aula' + aulaDe(alvo), alvo.id);
+  if(alvo !== paginaTrava){
+    guardar('sementes-av-ultima', alvo.id);
+    guardar('sementes-av-ultima-aula' + aulaDe(alvo), alvo.id);
+  }
   montarMenu();
   alvo.querySelectorAll('iframe.live').forEach(ajustarAltura);
   if(focar){
