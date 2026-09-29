@@ -323,6 +323,7 @@ iframe.live{display:block; width:100%; min-height:60px; border:0; background:#FF
   <button class="aula-tab" type="button" data-tab="1" aria-pressed="true">Aula 1 <small>HTML</small></button>
   <button class="aula-tab" type="button" data-tab="2" aria-pressed="false">Aula 2 <small>CSS</small></button>
   <button class="aula-tab" type="button" data-tab="3" aria-pressed="false">Aula 3 <small>Layout</small></button>
+  <button class="aula-tab" type="button" data-tab="4" aria-pressed="false">Aula 4 <small>Formulários</small></button>
 </div>
 <nav class="lessons" aria-label="Lições da aula"><ol id="menu"></ol></nav>
 
@@ -2074,6 +2075,437 @@ footer{text-align:center;color:#56697C;border-top:2px solid #E58A2E;margin-top:3
 </div>
 </article>
 
+<!-- =================================================================== -->
+<!-- AULA 4 — FORMULÁRIOS. Abre sozinha quando o aluno conclui a lição 5 da Aula 3. -->
+<article class="lesson" id="aula-4-bloqueada" data-aula="4" data-short="Termine a Aula 3" data-lockpage>
+<div class="sheet">
+  <div class="locked">
+    <div class="lock"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+    <p class="kicker">Aula 4</p>
+    <h2 tabindex="-1">Formulários</h2>
+    <p class="lead">Esta aula abre quando você terminar a Aula 3.</p>
+    <p>Na <b>lição 5 da Aula 3 (Juntar tudo)</b>, organize o seu site e toque em <b>Marcar como concluída</b>. Pronto: a Aula 4 abre na hora.</p>
+    <p><a class="btn btn-primary" href="#lay-5">Ir para a lição 5 da Aula 3</a></p>
+  </div>
+</div>
+</article>
+
+<!-- =================================================================== -->
+<article class="lesson" id="frm-1" data-aula="4" data-short="O formulário">
+<div class="sheet">
+  <p class="kicker">Aula 4 · Lição 1</p>
+  <h2 tabindex="-1">O formulário</h2>
+  <p class="lead">O <b>formulário</b> é a parte do site onde a pessoa <b>escreve</b> e <b>envia</b> informações: um cadastro, uma mensagem de contato, uma pesquisa.</p>
+
+  <dl class="parts">
+    <div><dt><code>form</code></dt><dd>A caixa que guarda todos os campos do formulário.</dd></div>
+    <div><dt><code>label</code></dt><dd>O <b>nome</b> do campo, que aparece na tela: “Seu nome”, “Seu e-mail”…</dd></div>
+    <div class="key"><dt><code>input</code></dt><dd>O <b>campo</b> onde a pessoa escreve. Ele <b>não fecha</b>, igual ao <code class="i">img</code>.</dd></div>
+  </dl>
+
+  <h3><span class="badge">1</span>Emmet para formulário</h3>
+  <div class="emmet">
+    <p class="emmet-head">Atalhos Emmet (dentro do body)</p>
+    <div class="emmet-body">
+      <div class="emmet-row"><span class="lbl">Digite</span><span class="abbr">form</span><span class="arrow">+</span><kbd>Tab</kbd><span class="arrow">→</span><span class="lbl">vira:</span></div>
+      <script type="text/x-code">
+<form action=""></form>
+      </script>
+      <div class="emmet-row" style="margin-top:18px"><span class="lbl">Digite</span><span class="abbr">label</span><span class="arrow">+</span><kbd>Tab</kbd><span class="arrow">→</span><span class="lbl">vira:</span></div>
+      <script type="text/x-code">
+<label for=""></label>
+      </script>
+      <div class="emmet-row" style="margin-top:18px"><span class="lbl">Digite</span><span class="abbr">inp</span><span class="arrow">+</span><kbd>Tab</kbd><span class="arrow">→</span><span class="lbl">vira:</span></div>
+      <script type="text/x-code">
+<input type="text" name="" id="">
+      </script>
+      <p class="why-title">Por que vira isso?</p>
+      <ul class="breakdown">
+        <li><code>action</code><span>diz <b>para onde</b> o formulário envia os dados. Por enquanto, deixe vazio.</span></li>
+        <li><code>for</code><span>no label, liga o nome ao campo: escreva aqui o <b>id</b> do input.</span></li>
+        <li><code>type</code><span>o <b>tipo</b> do campo. <code class="i">text</code> é texto comum.</span></li>
+        <li><code>name</code><span>o <b>nome do dado</b> quando o formulário for enviado (ex.: <code class="i">nome</code>).</span></li>
+        <li><code>id</code><span>um nome <b>único</b> para o campo, o mesmo que vai no <code class="i">for</code> do label.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <h3><span class="badge">2</span>O label e o input, ligados</h3>
+  <div class="type">
+    <p class="type-head"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/></svg>Digite dentro do body:</p>
+    <script type="text/x-code" data-preview="Formulário">
+<form action="">
+    <label for="nome">Seu nome:</label>
+    <input type="text" name="nome" id="nome" placeholder="Ex.: Ana Souza">
+</form>
+    </script>
+  </div>
+  <p>No resultado acima, clique na palavra <b>“Seu nome:”</b>: o cursor vai sozinho para o campo. É isso que o <code class="i">for="nome"</code> + <code class="i">id="nome"</code> fazem.</p>
+  <dl class="parts">
+    <div class="key"><dt><code>placeholder</code></dt><dd>Uma <b>dica</b> cinza dentro do campo, que some quando a pessoa começa a escrever.</dd></div>
+  </dl>
+
+  <section class="challenge" aria-labelledby="f1">
+    <p class="challenge-head" id="f1">Desafio</p>
+    <ul class="todo" data-id="frm1">
+      <li><label><input type="checkbox"><span>Crie uma <code class="i">section id="contato"</code> na sua página, com um <code class="i">form</code> dentro.</span></label></li>
+      <li><label><input type="checkbox"><span>Coloque um campo “Seu nome”, com label ligado ao input.</span></label></li>
+      <li><label><input type="checkbox"><span>Teste: clique no label e veja o cursor ir para o campo.</span></label></li>
+    </ul>
+  </section>
+</div>
+</article>
+
+<!-- =================================================================== -->
+<article class="lesson" id="frm-2" data-aula="4" data-short="Tipos de campo">
+<div class="sheet">
+  <p class="kicker">Aula 4 · Lição 2</p>
+  <h2 tabindex="-1">Tipos de campo</h2>
+  <p class="lead">Mudando o <code class="i">type</code> do input, o navegador muda o campo sozinho: mostra um calendário para datas, só aceita números, confere o e-mail…</p>
+
+  <div class="type">
+    <script type="text/x-code" data-preview="Tipos de campo">
+<form action="">
+    <p><label for="email">E-mail:</label>
+    <input type="email" name="email" id="email"></p>
+
+    <p><label for="idade">Idade:</label>
+    <input type="number" name="idade" id="idade"></p>
+
+    <p><label for="nasc">Nascimento:</label>
+    <input type="date" name="nasc" id="nasc"></p>
+
+    <p><label for="senha">Senha:</label>
+    <input type="password" name="senha" id="senha"></p>
+</form>
+    </script>
+  </div>
+  <dl class="parts">
+    <div><dt><code>email</code></dt><dd>E-mail. No celular, o teclado já mostra o <b>@</b>.</dd></div>
+    <div><dt><code>number</code></dt><dd>Só números, com setinhas para aumentar e diminuir.</dd></div>
+    <div><dt><code>date</code></dt><dd>Data, com um <b>calendário</b> para escolher.</dd></div>
+    <div><dt><code>password</code></dt><dd>Senha: mostra bolinhas no lugar das letras.</dd></div>
+  </dl>
+  <div class="emmet">
+    <p class="emmet-head">Atalho Emmet</p>
+    <div class="emmet-body">
+      <div class="emmet-row"><span class="lbl">Digite</span><span class="abbr">input:email</span><span class="arrow">+</span><kbd>Tab</kbd><span class="arrow">→</span><span class="lbl">vira:</span></div>
+      <script type="text/x-code">
+<input type="email" name="" id="">
+      </script>
+      <ul class="breakdown" style="margin-top:14px">
+        <li><code>:email</code><span>depois dos dois pontos vem o <b>tipo</b>. Funciona com os outros também: <code class="i">input:date</code>, <code class="i">input:password</code>…</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <h3><span class="badge">1</span>Texto grande, escolhas e caixinhas</h3>
+  <div class="type">
+    <script type="text/x-code" data-preview="Mais campos">
+<form action="">
+    <p><label for="msg">Mensagem:</label><br>
+    <textarea name="msg" id="msg" rows="4"></textarea></p>
+
+    <p><label for="bairro">Bairro:</label>
+    <select name="bairro" id="bairro">
+        <option value="centro">Centro</option>
+        <option value="messejana">Messejana</option>
+        <option value="outro">Outro</option>
+    </select></p>
+
+    <p>Turno:
+    <input type="radio" name="turno" id="manha" value="manha"><label for="manha">Manhã</label>
+    <input type="radio" name="turno" id="noite" value="noite"><label for="noite">Noite</label></p>
+
+    <p><input type="checkbox" name="novidades" id="novidades">
+    <label for="novidades">Quero receber novidades</label></p>
+</form>
+    </script>
+  </div>
+  <dl class="parts">
+    <div><dt><code>textarea</code></dt><dd>Campo de texto <b>grande</b>, para mensagens. Esse <b>fecha</b>: <code class="i">&lt;/textarea&gt;</code>. O <code class="i">rows</code> diz quantas linhas aparecem.</dd></div>
+    <div><dt><code>select</code> + <code>option</code></dt><dd>Uma lista para <b>escolher</b>. Cada opção é um <code class="i">option</code>. Emmet: <code class="i">select&gt;option*3</code>.</dd></div>
+    <div class="key"><dt><code>radio</code></dt><dd>Bolinhas: dá para marcar <b>só uma</b>. Para isso, todas precisam ter o <b>mesmo</b> <code class="i">name</code>.</dd></div>
+    <div><dt><code>checkbox</code></dt><dd>Caixinha de marcar: sim ou não.</dd></div>
+    <div><dt><code>br</code></dt><dd>Uma <b>quebra de linha</b>: o que vem depois começa na linha de baixo. Não fecha.</dd></div>
+  </dl>
+
+  <section class="challenge" aria-labelledby="f2">
+    <p class="challenge-head" id="f2">Desafio</p>
+    <ul class="todo" data-id="frm2">
+      <li><label><input type="checkbox"><span>Coloque um campo de e-mail no seu formulário.</span></label></li>
+      <li><label><input type="checkbox"><span>Coloque um <code class="i">textarea</code> para a mensagem.</span></label></li>
+      <li><label><input type="checkbox"><span>Coloque um <code class="i">select</code> com 3 opções.</span></label></li>
+      <li><label><input type="checkbox"><span>Teste: no resultado acima, tente marcar as duas bolinhas do “Turno”. Por que não dá?</span></label></li>
+    </ul>
+  </section>
+</div>
+</article>
+
+<!-- =================================================================== -->
+<article class="lesson" id="frm-3" data-aula="4" data-short="Botão e obrigatório">
+<div class="sheet">
+  <p class="kicker">Aula 4 · Lição 3</p>
+  <h2 tabindex="-1">O botão e os campos obrigatórios</h2>
+  <p class="lead">Todo formulário precisa de um <b>botão</b> para enviar. E alguns campos não podem ficar vazios.</p>
+
+  <div class="emmet">
+    <p class="emmet-head">Atalho Emmet</p>
+    <div class="emmet-body">
+      <div class="emmet-row"><span class="lbl">Digite</span><span class="abbr">btn:s</span><span class="arrow">+</span><kbd>Tab</kbd><span class="arrow">→</span><span class="lbl">vira:</span></div>
+      <script type="text/x-code" data-cursor="22">
+<button type="submit"></button>
+      </script>
+      <ul class="breakdown" style="margin-top:14px">
+        <li><code>btn</code><span>apelido de <b>button</b> (botão). Ele fecha: o texto do botão vai no meio.</span></li>
+        <li><code>:s</code><span><b>s</b>ubmit: “enviar”. Este botão envia o formulário.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <h3><span class="badge">1</span>required: obrigatório</h3>
+  <p>O atributo <code class="i">required</code> diz que o campo é <b>obrigatório</b>. Ele não tem valor: é só escrever a palavra.</p>
+  <div class="type">
+    <script type="text/x-code" data-preview="Teste o envio">
+<form action="">
+    <p><label for="nome">Seu nome:</label>
+    <input type="text" name="nome" id="nome" required></p>
+
+    <p><label for="email">Seu e-mail:</label>
+    <input type="email" name="email" id="email" required></p>
+
+    <button type="submit">Enviar</button>
+</form>
+    </script>
+  </div>
+  <p>Teste no resultado: clique em <b>Enviar</b> com tudo vazio. Depois, escreva um e-mail sem <b>@</b>. O navegador avisa sozinho, sem você programar nada.</p>
+
+  <div class="callout warn">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+    <div><p class="t">E para onde vai a mensagem?</p>
+    <p>Para <b>receber</b> os dados de verdade, o site precisa de um <b>servidor</b> ou de um serviço que guarde as mensagens. Isso é um próximo passo. Por enquanto, o seu formulário fica pronto e bonito, mas não envia para lugar nenhum. Nos resultados desta apostila, o envio é só de teste.</p></div>
+  </div>
+
+  <section class="challenge" aria-labelledby="f3">
+    <p class="challenge-head" id="f3">Desafio</p>
+    <ul class="todo" data-id="frm3">
+      <li><label><input type="checkbox"><span>Coloque um botão “Enviar” no seu formulário.</span></label></li>
+      <li><label><input type="checkbox"><span>Deixe o nome e o e-mail obrigatórios com <code class="i">required</code>.</span></label></li>
+      <li><label><input type="checkbox"><span>Teste na sua página: tente enviar vazio e veja o aviso.</span></label></li>
+    </ul>
+  </section>
+</div>
+</article>
+
+<!-- =================================================================== -->
+<article class="lesson" id="frm-4" data-aula="4" data-short="Formulário com estilo">
+<div class="sheet">
+  <p class="kicker">Aula 4 · Lição 4</p>
+  <h2 tabindex="-1">Formulário com estilo</h2>
+  <p class="lead">Sem CSS, o formulário fica apertado e pequeno. Com poucas regras, ele fica fácil de usar, até no celular.</p>
+
+  <div class="type">
+    <script type="text/x-code" data-lang="css" data-preview="Formulário com estilo" data-html="&lt;form action=&quot;&quot;&gt;&lt;label for=&quot;nome&quot;&gt;Seu nome&lt;/label&gt;&lt;input type=&quot;text&quot; id=&quot;nome&quot; name=&quot;nome&quot; required&gt;&lt;label for=&quot;email&quot;&gt;Seu e-mail&lt;/label&gt;&lt;input type=&quot;email&quot; id=&quot;email&quot; name=&quot;email&quot; required&gt;&lt;label for=&quot;msg&quot;&gt;Mensagem&lt;/label&gt;&lt;textarea id=&quot;msg&quot; name=&quot;msg&quot; rows=&quot;3&quot;&gt;&lt;/textarea&gt;&lt;button type=&quot;submit&quot;&gt;Enviar&lt;/button&gt;&lt;/form&gt;">
+body {
+    font-family: Arial, sans-serif;
+}
+label {
+    display: block;
+    font-weight: bold;
+    margin-top: 12px;
+}
+input, textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #D6E0EB;
+    border-radius: 8px;
+}
+input:focus, textarea:focus {
+    border-color: #1C6EA4;
+}
+button {
+    margin-top: 16px;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #FFFFFF;
+    background-color: #1C6EA4;
+    border: none;
+    border-radius: 8px;
+}
+button:hover {
+    background-color: #14547E;
+}
+    </script>
+  </div>
+  <dl class="parts">
+    <div class="key"><dt><code>input, textarea</code></dt><dd>A <b>vírgula</b> junta seletores: a mesma regra vale para os dois.</dd></div>
+    <div><dt><code>display: block;</code></dt><dd>No label: o nome fica <b>em cima</b> do campo, numa linha só dele.</dd></div>
+    <div><dt><code>width: 100%;</code></dt><dd>O campo ocupa <b>toda</b> a largura. Emmet: <code class="i">w100p</code> (o <code class="i">p</code> vira %).</dd></div>
+    <div><dt><code>box-sizing: border-box;</code></dt><dd>Faz o padding e a borda caberem <b>dentro</b> dos 100%. Sem isso, o campo passa um pouco da borda da página.</dd></div>
+    <div class="key"><dt><code>:focus</code></dt><dd>Como o <code class="i">:hover</code>, mas vale quando o campo está <b>selecionado</b> (com o cursor dentro).</dd></div>
+    <div><dt><code>border: none;</code></dt><dd>Tira a borda do botão.</dd></div>
+  </dl>
+
+  <section class="challenge" aria-labelledby="f4">
+    <p class="challenge-head" id="f4">Desafio</p>
+    <ul class="todo" data-id="frm4">
+      <li><label><input type="checkbox"><span>Deixe os labels em cima dos campos, em negrito.</span></label></li>
+      <li><label><input type="checkbox"><span>Faça os campos ocuparem a largura toda, com cantos arredondados.</span></label></li>
+      <li><label><input type="checkbox"><span>Mude a borda do campo quando ele estiver selecionado (<code class="i">:focus</code>).</span></label></li>
+      <li><label><input type="checkbox"><span>Deixe o botão com as cores do seu site.</span></label></li>
+    </ul>
+  </section>
+</div>
+</article>
+
+<!-- =================================================================== -->
+<article class="lesson" id="frm-5" data-aula="4" data-short="Juntar tudo">
+<div class="sheet">
+  <p class="kicker">Aula 4 · Lição 5</p>
+  <h2 tabindex="-1">Juntar tudo: “Fale comigo”</h2>
+  <p class="lead">Coloque na parte de contato do seu site um formulário completo e bonito.</p>
+
+  <section class="challenge" aria-labelledby="f5">
+    <p class="challenge-head" id="f5">O seu formulário precisa ter</p>
+    <ul class="todo" data-id="frm5">
+      <li><label><input type="checkbox"><span>Nome e e-mail, obrigatórios.</span></label></li>
+      <li><label><input type="checkbox"><span>Uma lista de escolha (<code class="i">select</code>).</span></label></li>
+      <li><label><input type="checkbox"><span>Uma mensagem (<code class="i">textarea</code>).</span></label></li>
+      <li><label><input type="checkbox"><span>Uma caixinha de marcar (<code class="i">checkbox</code>).</span></label></li>
+      <li><label><input type="checkbox"><span>Um botão “Enviar”.</span></label></li>
+      <li><label><input type="checkbox"><span>Todos os campos com label ligado (<code class="i">for</code> = <code class="i">id</code>).</span></label></li>
+      <li><label><input type="checkbox"><span>O CSS do formulário no <code class="i">style.css</code>.</span></label></li>
+    </ul>
+  </section>
+
+  <h3><span class="badge">1</span>Um exemplo para se guiar</h3>
+  <div class="type">
+    <p class="type-head"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/></svg>index.html (a section de contato):</p>
+    <script type="text/x-code">
+<section id="contato">
+    <h2>Fale comigo</h2>
+    <form action="">
+        <label for="nome">Seu nome</label>
+        <input type="text" name="nome" id="nome" required>
+
+        <label for="email">Seu e-mail</label>
+        <input type="email" name="email" id="email" required>
+
+        <label for="assunto">Assunto</label>
+        <select name="assunto" id="assunto">
+            <option value="oi">Só dar um oi</option>
+            <option value="site">Quero um site</option>
+            <option value="outro">Outro assunto</option>
+        </select>
+
+        <label for="msg">Mensagem</label>
+        <textarea name="msg" id="msg" rows="4"></textarea>
+
+        <p><input type="checkbox" name="novidades" id="novidades">
+        <label for="novidades" class="inline">Quero receber novidades</label></p>
+
+        <button type="submit">Enviar</button>
+    </form>
+</section>
+    </script>
+  </div>
+  <div class="type">
+    <p class="type-head"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/></svg>style.css (acrescente no fim):</p>
+    <script type="text/x-code" data-lang="css">
+form {
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    padding: 20px;
+}
+label {
+    display: block;
+    font-weight: bold;
+    margin-top: 12px;
+}
+label.inline {
+    display: inline;
+}
+input[type="text"], input[type="email"], select, textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #D6E0EB;
+    border-radius: 8px;
+}
+button {
+    margin-top: 12px;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #FFFFFF;
+    background-color: #1C6EA4;
+    border: none;
+    border-radius: 8px;
+}
+button:hover {
+    background-color: #14547E;
+}
+    </script>
+  </div>
+  <div class="callout tip">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg>
+    <div><p class="t">Duas novidades no CSS</p>
+    <p><code class="i">label.inline</code> quer dizer “os label que têm a classe inline”: assim o label da caixinha fica <b>ao lado</b> dela, e não em cima.</p>
+    <p><code class="i">input[type="text"]</code> escolhe só os input do tipo texto. Assim a caixinha (checkbox) não fica com 100% de largura.</p></div>
+  </div>
+  <script type="text/x-preview" data-preview="Fale comigo">
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<style>
+body{background-color:#FFF4E0;color:#17293A;font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:20px}
+h2{color:#E58A2E}
+form{background-color:#FFFFFF;border-radius:12px;padding:20px}
+label{display:block;font-weight:bold;margin-top:12px}
+label.inline{display:inline}
+input[type="text"],input[type="email"],select,textarea{width:100%;box-sizing:border-box;padding:10px;font-size:16px;border:2px solid #D6E0EB;border-radius:8px}
+button{margin-top:12px;padding:12px 24px;font-size:16px;font-weight:bold;color:#FFFFFF;background-color:#1C6EA4;border:none;border-radius:8px}
+button:hover{background-color:#14547E}
+</style>
+</head>
+<body>
+<section id="contato"><h2>Fale comigo</h2>
+<form action="">
+<label for="nome">Seu nome</label><input type="text" name="nome" id="nome" required>
+<label for="email">Seu e-mail</label><input type="email" name="email" id="email" required>
+<label for="assunto">Assunto</label><select name="assunto" id="assunto"><option value="oi">Só dar um oi</option><option value="site">Quero um site</option><option value="outro">Outro assunto</option></select>
+<label for="msg">Mensagem</label><textarea name="msg" id="msg" rows="4"></textarea>
+<p><input type="checkbox" name="novidades" id="novidades"> <label for="novidades" class="inline">Quero receber novidades</label></p>
+<button type="submit">Enviar</button>
+</form></section>
+</body>
+</html>
+  </script>
+
+  <h3><span class="badge">2</span>Resumo da Aula 4</h3>
+  <div class="table-wrap">
+    <table class="summary">
+      <thead><tr><th scope="col">O quê</th><th scope="col">Para que serve</th><th scope="col">Emmet</th></tr></thead>
+      <tbody>
+        <tr><td><code class="i">form</code></td><td>A caixa do formulário.</td><td><code class="i">form</code></td></tr>
+        <tr><td><code class="i">label</code> + <code class="i">for</code></td><td>O nome do campo, ligado ao id do campo.</td><td><code class="i">label</code></td></tr>
+        <tr><td><code class="i">input</code> + <code class="i">type</code></td><td>Campo: text, email, number, date, password, radio, checkbox.</td><td><code class="i">inp</code> <code class="i">input:email</code></td></tr>
+        <tr><td><code class="i">textarea</code></td><td>Texto grande.</td><td>—</td></tr>
+        <tr><td><code class="i">select</code> + <code class="i">option</code></td><td>Lista de escolha.</td><td><code class="i">select&gt;option*3</code></td></tr>
+        <tr><td><code class="i">button</code></td><td>Botão de enviar.</td><td><code class="i">btn:s</code></td></tr>
+        <tr><td><code class="i">required</code></td><td>Campo obrigatório.</td><td>—</td></tr>
+        <tr><td><code class="i">:focus</code></td><td>Quando o campo está selecionado.</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</article>
+
 </main>
 
 <footer class="note">Projeto Sementes do Futuro · Instituto Vida Videira · Fortaleza-CE</footer>
@@ -2083,7 +2515,8 @@ footer{text-align:center;color:#56697C;border-top:2px solid #E58A2E;margin-top:3
    CONFIGURAÇÃO DO PROFESSOR
    AULAS_ABERTAS_PARA_TODOS: com  false , cada aula abre sozinha para o
    aluno quando ele marca a última lição da aula anterior como concluída
-   (Aula 2: lição 6 da Aula 1; Aula 3: lição 6 da Aula 2).
+   (Aula 2: lição 6 da Aula 1; Aula 3: lição 6 da Aula 2;
+   Aula 4: lição 5 da Aula 3).
    Com  true , todas as aulas ficam abertas para todos.
    ===================================================================== */
 const AULAS_ABERTAS_PARA_TODOS = false;
@@ -2180,6 +2613,12 @@ function tirarRecuo(txt){
 }
 
 /* ---------- Resultado ao vivo (iframe) ---------- */
+// script colocado nos resultados com formulário: o envio vira só um aviso
+const ENVIO_DE_TESTE = '<scr' + 'ipt>document.addEventListener("submit",function(e){e.preventDefault();'
+  + 'var m=document.createElement("p");m.textContent="Enviado! (É só um teste: para receber de verdade, o site precisa de um servidor.)";'
+  + 'm.style.cssText="background:#E1F4EB;color:#17293A;padding:10px;border-radius:8px;font-family:Arial,sans-serif";'
+  + 'var v=e.target.nextElementSibling;if(v&&v.dataset.teste)v.remove();m.dataset.teste=1;e.target.after(m);'
+  + 'if(window.frameElement)window.frameElement.style.height=Math.ceil(document.documentElement.getBoundingClientRect().height)+"px";});</scr' + 'ipt>';
 function montarDocumento(src, s){
   let doc = s.dataset.lang === 'css'
     ? `<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><style>${src}</style></head><body>${s.dataset.html || ''}</body></html>`
@@ -2187,6 +2626,7 @@ function montarDocumento(src, s){
   doc = doc.replace(/FIG:(\w+)/g, (m, k) => FIGURAS[k] ? dataURI(k) : m)
            .replace(/\(cole aqui o endereço da imagem\)/g, dataURI('sol'))
            .replace(/<a href="http/g, '<a target="_blank" rel="noopener noreferrer" href="http');
+  if(/<form/i.test(doc)) doc = doc.replace(/<\/body>/i, ENVIO_DE_TESTE + '</body>');
   return doc;
 }
 function ajustarAltura(fr){
@@ -2308,9 +2748,9 @@ const licoes = [...document.querySelectorAll('.lesson')];
 const aulaDe = el => el.dataset.aula;
 const ehTrava = el => el.hasAttribute('data-lockpage');
 const trilha = licoes.filter(el => !ehTrava(el));   // ordem de Anterior / Próxima
-const NOMES_AULA = {1:'HTML', 2:'CSS', 3:'Layout'};
+const NOMES_AULA = {1:'HTML', 2:'CSS', 3:'Layout', 4:'Formulários'};
 // Cada aula abre quando o aluno marca a última lição da aula anterior como concluída (neste computador)
-const REQUISITO = {2:'licao-6', 3:'css-6'};
+const REQUISITO = {2:'licao-6', 3:'css-6', 4:'lay-5'};
 let feitas = ler('sementes-av-feitas', {});
 const aulaAberta = n => n == 1 || AULAS_ABERTAS_PARA_TODOS || !!feitas[REQUISITO[n]];
 const visiveis = () => licoes.filter(el => aulaAberta(aulaDe(el)) ? !ehTrava(el) : ehTrava(el));
