@@ -244,6 +244,17 @@ footer.note{max-width:1100px; margin:0 auto; padding:0 20px 40px; color:var(--in
 .unlock-msg:empty{display:none}
 .unlock-msg{display:flex; gap:12px; align-items:flex-start; margin:22px 0 0; padding:14px 18px; border-radius:16px; background:var(--success-soft); font-size:1.1rem; max-width:none!important}
 .unlock-msg svg{color:var(--success); margin-top:4px}
+/* Desenho das partes da página */
+.layout-diagram{margin:18px 0; display:flex; flex-direction:column; gap:10px}
+.ld{border-radius:12px; padding:12px 14px; font-weight:700; border:3px solid var(--line)}
+.ld code{font-family:var(--font-mono); font-weight:600; margin-right:8px; padding:1px 8px; border-radius:6px; background:var(--code-bg); color:var(--code-txt)}
+.ld-header{background:var(--primary-soft); border-color:var(--primary)}
+.ld-nav{margin-top:10px; background:var(--surface)}
+.ld-main{background:var(--surface)}
+.ld-row{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
+.ld-section{flex:1 1 180px; background:var(--success-soft); border-color:var(--success)}
+.ld-footer{background:var(--accent-soft); border-color:var(--accent)}
+
 /* ============ Abas das aulas ============ */
 .aula-tabs{max-width:1100px; margin:0 auto; padding:6px 20px 0; display:flex; gap:10px; flex-wrap:wrap}
 @media (max-width:480px){ .aula-tabs{padding-left:16px; padding-right:16px} }
@@ -311,6 +322,7 @@ iframe.live{display:block; width:100%; min-height:60px; border:0; background:#FF
 <div class="aula-tabs" role="group" aria-label="Escolha a aula">
   <button class="aula-tab" type="button" data-tab="1" aria-pressed="true">Aula 1 <small>HTML</small></button>
   <button class="aula-tab" type="button" data-tab="2" aria-pressed="false">Aula 2 <small>CSS</small></button>
+  <button class="aula-tab" type="button" data-tab="3" aria-pressed="false">Aula 3 <small>Layout</small></button>
 </div>
 <nav class="lessons" aria-label="Lições da aula"><ol id="menu"></ol></nav>
 
@@ -960,7 +972,7 @@ iframe.live{display:block; width:100%; min-height:60px; border:0; background:#FF
 
 <!-- =================================================================== -->
 <!-- AULA 2 — CSS. Abre sozinha quando o aluno conclui a lição 6 da Aula 1.
-     Para abrir para todos: no script lá embaixo, AULA_2_PARA_TODOS = true. -->
+     Para abrir para todos: no script lá embaixo, AULAS_ABERTAS_PARA_TODOS = true. -->
 <article class="lesson" id="aula-2-bloqueada" data-aula="2" data-short="Termine a Aula 1" data-lockpage>
 <div class="sheet">
   <div class="locked">
@@ -1516,6 +1528,552 @@ body {
 </div>
 </article>
 
+<!-- =================================================================== -->
+<!-- AULA 3 — LAYOUT. Abre sozinha quando o aluno conclui a lição 6 da Aula 2. -->
+<article class="lesson" id="aula-3-bloqueada" data-aula="3" data-short="Termine a Aula 2" data-lockpage>
+<div class="sheet">
+  <div class="locked">
+    <div class="lock"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+    <p class="kicker">Aula 3</p>
+    <h2 tabindex="-1">Organizar a página</h2>
+    <p class="lead">Esta aula abre quando você terminar a Aula 2.</p>
+    <p>Na <b>lição 6 da Aula 2 (Juntar tudo)</b>, deixe a sua página com estilo e toque em <b>Marcar como concluída</b>. Pronto: a Aula 3 abre na hora.</p>
+    <p><a class="btn btn-primary" href="#css-6">Ir para a lição 6 da Aula 2</a></p>
+  </div>
+</div>
+</article>
+
+<!-- =================================================================== -->
+<article class="lesson" id="lay-1" data-aula="3" data-short="Partes da página">
+<div class="sheet">
+  <p class="kicker">Aula 3 · Lição 1</p>
+  <h2 tabindex="-1">As partes da página</h2>
+  <p class="lead">Até agora, tudo ficava solto dentro do body. Os sites de verdade dividem o body em <b>partes</b>, como uma casa tem cômodos.</p>
+
+  <div class="layout-diagram" aria-label="Desenho: header em cima, nav embaixo dele, main no meio com duas sections, footer embaixo">
+    <div class="ld ld-header"><code>header</code> cabeçalho: o nome do site<div class="ld ld-nav"><code>nav</code> menu de links</div></div>
+    <div class="ld ld-main"><code>main</code> o conteúdo principal
+      <div class="ld-row"><div class="ld ld-section"><code>section</code> uma parte</div><div class="ld ld-section"><code>section</code> outra parte</div></div>
+    </div>
+    <div class="ld ld-footer"><code>footer</code> rodapé: contato, créditos</div>
+  </div>
+
+  <dl class="parts">
+    <div><dt><code>header</code></dt><dd><b>Cabeçalho</b>: a parte de cima, com o nome do site (o h1) e, muitas vezes, o menu.</dd></div>
+    <div><dt><code>nav</code></dt><dd><b>Navegação</b>: o menu com links para as partes do site.</dd></div>
+    <div class="key"><dt><code>main</code></dt><dd>O conteúdo <b>principal</b> da página. Só existe <b>um</b> por página.</dd></div>
+    <div><dt><code>section</code></dt><dd>Uma <b>seção</b>: uma parte com um tema, que normalmente começa com um h2.</dd></div>
+    <div><dt><code>footer</code></dt><dd><b>Rodapé</b>: a parte de baixo, com contato e créditos.</dd></div>
+  </dl>
+
+  <div class="emmet">
+    <p class="emmet-head">Atalho Emmet (dentro do body)</p>
+    <div class="emmet-body">
+      <div class="emmet-row"><span class="lbl">Digite</span><span class="abbr">header+main+footer</span><span class="arrow">+</span><kbd>Tab</kbd><span class="arrow">→</span><span class="lbl">vira:</span></div>
+      <script type="text/x-code">
+<header></header>
+<main></main>
+<footer></footer>
+      </script>
+      <p class="why-title">Por que vira isso?</p>
+      <ul class="breakdown">
+        <li><code>+</code><span>quer dizer “<b>e depois</b>”, como você viu no <code class="i">h2+p</code>. As três partes ficam uma embaixo da outra, no mesmo nível.</span></li>
+      </ul>
+      <p>Aperte <kbd>Tab</kbd> para pular de uma parte para a outra e aperte <kbd>Enter</kbd> para abrir espaço dentro de cada uma.</p>
+    </div>
+  </div>
+
+  <div class="type">
+    <p class="type-head"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/></svg>O body organizado:</p>
+    <script type="text/x-code" data-preview="Página organizada">
+<body>
+    <header>
+        <h1>Ana Souza</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Sobre mim</h2>
+            <p>Eu moro em Fortaleza e estou aprendendo a fazer sites.</p>
+        </section>
+        <section>
+            <h2>Meus hobbies</h2>
+            <p>Ouvir forró, cozinhar e ir à praia.</p>
+        </section>
+    </main>
+    <footer>
+        <p>Feito por Ana no Projeto Sementes do Futuro.</p>
+    </footer>
+</body>
+    </script>
+  </div>
+  <div class="callout tip">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg>
+    <div><p class="t">Não mudou nada na tela?</p>
+    <p>É isso mesmo! Essas tags não mudam a aparência sozinhas. Elas dão <b>significado</b>: o Google e os programas que leem a tela para pessoas cegas entendem o que é cada parte. E o CSS consegue escolher cada parte, como você vai ver nas próximas lições.</p>
+    <p>E o <code class="i">div</code>? É uma caixa <b>sem significado</b>, só para agrupar coisas. Use quando nenhuma dessas tags servir.</p></div>
+  </div>
+
+  <section class="challenge" aria-labelledby="l1">
+    <p class="challenge-head" id="l1">Desafio</p>
+    <ul class="todo" data-id="lay1">
+      <li><label><input type="checkbox"><span>Coloque o h1 da sua página dentro de um <code class="i">header</code>.</span></label></li>
+      <li><label><input type="checkbox"><span>Coloque o resto do conteúdo dentro de um <code class="i">main</code>, com uma <code class="i">section</code> para cada h2.</span></label></li>
+      <li><label><input type="checkbox"><span>Crie um <code class="i">footer</code> com o seu nome e o ano.</span></label></li>
+      <li><label><input type="checkbox"><span>Confira o recuo: cada parte <b>dentro</b> da outra, bem organizada.</span></label></li>
+    </ul>
+  </section>
+</div>
+</article>
+
+<!-- =================================================================== -->
+<article class="lesson" id="lay-2" data-aula="3" data-short="Arquivo de CSS">
+<div class="sheet">
+  <p class="kicker">Aula 3 · Lição 2</p>
+  <h2 tabindex="-1">O CSS em um arquivo separado</h2>
+  <p class="lead">Até agora, o CSS ficava no <code class="i">&lt;style&gt;</code>, dentro do HTML. Os sites de verdade guardam o CSS em um <b>arquivo só dele</b>: o <code class="i">style.css</code>.</p>
+  <ul class="plain">
+    <li>O HTML fica mais <b>limpo</b>: só a estrutura.</li>
+    <li>Um site com <b>várias páginas</b> usa o mesmo arquivo de CSS. Você muda uma vez e todas as páginas mudam.</li>
+  </ul>
+
+  <h3><span class="badge">1</span>Passo a passo</h3>
+  <ol class="howto">
+    <li><strong>Crie o arquivo</strong><p>No vscode.dev, passe o mouse na pasta <b>MEU-SITE</b>, clique em <i>New File…</i> e escreva <code class="i">style.css</code>. Igual você fez com o <code class="i">index.html</code>.</p></li>
+    <li><strong>Mude o CSS de lugar</strong><p>No <code class="i">index.html</code>, selecione as regras que estão <b>dentro</b> do <code class="i">&lt;style&gt;</code> e aperte <kbd>Ctrl</kbd> + <kbd>X</kbd> (recortar). No <code class="i">style.css</code>, aperte <kbd>Ctrl</kbd> + <kbd>V</kbd>. Não leve as tags <code class="i">&lt;style&gt;</code> e <code class="i">&lt;/style&gt;</code>: o arquivo .css tem só as regras.</p></li>
+    <li><strong>Apague o style vazio</strong><p>No <code class="i">index.html</code>, apague o <code class="i">&lt;style&gt;&lt;/style&gt;</code> que sobrou.</p></li>
+    <li><strong>Ligue os dois arquivos</strong><p>No head do <code class="i">index.html</code>, no lugar do style, use o Emmet abaixo. Salve os <b>dois</b> arquivos.</p></li>
+  </ol>
+
+  <div class="emmet">
+    <p class="emmet-head">Atalho Emmet (no head)</p>
+    <div class="emmet-body">
+      <div class="emmet-row"><span class="lbl">Digite</span><span class="abbr">link:css</span><span class="arrow">+</span><kbd>Tab</kbd><span class="arrow">→</span><span class="lbl">vira:</span></div>
+      <script type="text/x-code">
+<link rel="stylesheet" href="style.css">
+      </script>
+      <p class="why-title">Por que vira isso?</p>
+      <ul class="breakdown">
+        <li><code>link</code><span>a tag que <b>liga</b> a página a outro arquivo. Não confunda com o <code class="i">a</code>: o link não aparece na tela. Ele também não fecha, igual ao <code class="i">img</code>.</span></li>
+        <li><code>:css</code><span>a variação para CSS: o Emmet já escreve os atributos certos.</span></li>
+        <li><code>rel</code><span>diz <b>o que</b> é o arquivo: <code class="i">stylesheet</code> quer dizer “folha de estilo”, ou seja, CSS.</span></li>
+        <li><code>href</code><span>o <b>endereço</b> do arquivo, igual ao href do link. O Emmet já sugere <code class="i">style.css</code>.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="type">
+    <p class="type-head"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/></svg>index.html (o head):</p>
+    <script type="text/x-code">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página da Ana</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+    </script>
+  </div>
+  <div class="type">
+    <p class="type-head"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/></svg>style.css (só as regras, sem a tag style):</p>
+    <script type="text/x-code" data-lang="css">
+body {
+    background-color: #FFF4E0;
+    font-family: Arial, sans-serif;
+}
+h1 {
+    color: #1C6EA4;
+}
+    </script>
+  </div>
+
+  <div class="callout warn">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+    <div><p class="t">O CSS sumiu da página?</p>
+    <p>Confira: o nome no <code class="i">href</code> é <b>igual</b> ao nome do arquivo (<code class="i">style.css</code>, tudo minúsculo)? Os dois arquivos estão na <b>mesma pasta</b>? Você salvou os <b>dois</b>?</p></div>
+  </div>
+
+  <section class="challenge" aria-labelledby="l2">
+    <p class="challenge-head" id="l2">Desafio</p>
+    <ul class="todo" data-id="lay2">
+      <li><label><input type="checkbox"><span>Crie o <code class="i">style.css</code> e mude todo o CSS da sua página para ele.</span></label></li>
+      <li><label><input type="checkbox"><span>Ligue com <code class="i">link:css</code> e confira: a página continua igual?</span></label></li>
+      <li><label><input type="checkbox"><span>Teste: mude uma cor no <code class="i">style.css</code>, salve e recarregue a página.</span></label></li>
+    </ul>
+  </section>
+</div>
+</article>
+
+<!-- =================================================================== -->
+<article class="lesson" id="lay-3" data-aula="3" data-short="Lado a lado">
+<div class="sheet">
+  <p class="kicker">Aula 3 · Lição 3</p>
+  <h2 tabindex="-1">Lado a lado: flexbox</h2>
+  <p class="lead">Normalmente, as caixas ficam <b>uma embaixo da outra</b>. Com <code class="i">display: flex</code>, elas ficam <b>lado a lado</b>.</p>
+
+  <h3><span class="badge">1</span>A caixa de fora e as caixas de dentro</h3>
+  <p>O flex vai na caixa <b>de fora</b> (a que guarda as outras). Aí as caixas <b>de dentro</b> se arrumam lado a lado. Vamos fazer três cartões:</p>
+  <div class="emmet">
+    <p class="emmet-head">Atalho Emmet (no HTML)</p>
+    <div class="emmet-body">
+      <div class="emmet-row"><span class="lbl">Digite</span><span class="abbr">section.cartoes&gt;div.cartao*3</span><span class="arrow">+</span><kbd>Tab</kbd><span class="arrow">→</span><span class="lbl">vira:</span></div>
+      <script type="text/x-code">
+<section class="cartoes">
+    <div class="cartao"></div>
+    <div class="cartao"></div>
+    <div class="cartao"></div>
+</section>
+      </script>
+      <p class="why-title">Por que vira isso? Tudo o que você já sabe, junto:</p>
+      <ul class="breakdown">
+        <li><code>section.cartoes</code><span>uma section com a classe <code class="i">cartoes</code>. É a caixa <b>de fora</b>.</span></li>
+        <li><code>&gt;</code><span><b>dentro de</b>.</span></li>
+        <li><code>div.cartao</code><span>um div (caixa sem significado) com a classe <code class="i">cartao</code>.</span></li>
+        <li><code>*3</code><span><b>três vezes</b>.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <h3><span class="badge">2</span>O CSS do flex</h3>
+  <div class="emmet">
+    <p class="emmet-head">Atalhos Emmet (no CSS)</p>
+    <div class="emmet-body">
+      <div class="emmet-row"><span class="lbl">Digite</span><span class="abbr">d:f</span><span class="arrow">+</span><kbd>Tab</kbd><span class="arrow">→</span><span class="lbl">vira:</span></div>
+      <script type="text/x-code" data-lang="css">
+display: flex;
+      </script>
+      <div class="emmet-row" style="margin-top:18px"><span class="lbl">Digite</span><span class="abbr">fxw:w</span><span class="arrow">+</span><kbd>Tab</kbd><span class="arrow">→</span><span class="lbl">vira:</span></div>
+      <script type="text/x-code" data-lang="css">
+flex-wrap: wrap;
+      </script>
+      <p class="why-title">Por que vira isso?</p>
+      <ul class="breakdown">
+        <li><code>d:f</code><span><b>d</b>isplay: <b>f</b>lex. Na caixa de fora: “arrume quem está dentro lado a lado”.</span></li>
+        <li><code>fxw:w</code><span><b>f</b>le<b>x</b>-<b>w</b>rap: <b>w</b>rap. Se não couber (no celular, por exemplo), as caixas <b>descem</b> para a linha de baixo.</span></li>
+      </ul>
+    </div>
+  </div>
+  <dl class="parts">
+    <div class="key"><dt><code>gap: 16px;</code></dt><dd>O <b>espaço entre</b> as caixas de dentro. Este você digita inteiro.</dd></div>
+    <div><dt><code>flex: 1;</code></dt><dd>Vai nas caixas <b>de dentro</b>: todas dividem o espaço em partes <b>iguais</b>.</dd></div>
+  </dl>
+
+  <div class="type">
+    <p class="type-head"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/></svg>Tudo junto:</p>
+    <script type="text/x-code" data-lang="css" data-preview="Cartões" data-html="&lt;h2&gt;Meus hobbies&lt;/h2&gt;&lt;section class=&quot;cartoes&quot;&gt;&lt;div class=&quot;cartao&quot;&gt;&lt;h3&gt;Forró&lt;/h3&gt;&lt;p&gt;Danço todo sábado.&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;cartao&quot;&gt;&lt;h3&gt;Cozinhar&lt;/h3&gt;&lt;p&gt;Meu cuscuz é famoso.&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;cartao&quot;&gt;&lt;h3&gt;Praia&lt;/h3&gt;&lt;p&gt;Iracema, sempre.&lt;/p&gt;&lt;/div&gt;&lt;/section&gt;">
+body {
+    font-family: Arial, sans-serif;
+}
+.cartoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+.cartao {
+    flex: 1;
+    min-width: 140px;
+    background-color: #E3EFF8;
+    border-radius: 12px;
+    padding: 16px;
+}
+    </script>
+  </div>
+  <div class="callout tip">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg>
+    <div><p class="t">E o min-width?</p>
+    <p><code class="i">min-width: 140px;</code> diz que o cartão tem <b>no mínimo</b> 140px. Numa tela pequena, se não couber, o <code class="i">flex-wrap</code> joga o cartão para baixo.</p></div>
+  </div>
+
+  <section class="challenge" aria-labelledby="l3">
+    <p class="challenge-head" id="l3">Desafio</p>
+    <ul class="todo" data-id="lay3">
+      <li><label><input type="checkbox"><span>Na sua página, crie três cartões com os seus hobbies, lado a lado.</span></label></li>
+      <li><label><input type="checkbox"><span>Dê cor de fundo, cantos arredondados e padding aos cartões.</span></label></li>
+      <li><label><input type="checkbox"><span>Teste: apague o <code class="i">display: flex;</code>, salve e veja o que acontece. (Depois, coloque de volta!)</span></label></li>
+    </ul>
+  </section>
+</div>
+</article>
+
+<!-- =================================================================== -->
+<article class="lesson" id="lay-4" data-aula="3" data-short="Menu">
+<div class="sheet">
+  <p class="kicker">Aula 3 · Lição 4</p>
+  <h2 tabindex="-1">Um menu de verdade</h2>
+  <p class="lead">Quase todo site tem um <b>menu</b> em cima. Ele é feito com o que você já sabe: um <code class="i">nav</code>, uma lista e links.</p>
+
+  <div class="emmet">
+    <p class="emmet-head">Atalho Emmet (dentro do header)</p>
+    <div class="emmet-body">
+      <div class="emmet-row"><span class="lbl">Digite</span><span class="abbr">nav&gt;ul&gt;li*3&gt;a</span><span class="arrow">+</span><kbd>Tab</kbd><span class="arrow">→</span><span class="lbl">vira:</span></div>
+      <script type="text/x-code">
+<nav>
+    <ul>
+        <li><a href=""></a></li>
+        <li><a href=""></a></li>
+        <li><a href=""></a></li>
+    </ul>
+</nav>
+      </script>
+      <p class="why-title">Por que vira isso?</p>
+      <ul class="breakdown">
+        <li><code>nav&gt;ul</code><span>uma lista <b>dentro</b> do nav.</span></li>
+        <li><code>&gt;li*3</code><span>três itens <b>dentro</b> da lista.</span></li>
+        <li><code>&gt;a</code><span>um link <b>dentro</b> de cada item. Como o <code class="i">*3</code> veio antes, cada um dos três itens ganha o seu link.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <h3><span class="badge">1</span>Links para as partes da mesma página</h3>
+  <p>O link pode levar para uma <b>parte da própria página</b>. Dê um <code class="i">id</code> (um nome único) para a parte e use <code class="i">#</code> no href:</p>
+  <div class="type">
+    <script type="text/x-code">
+<a href="#hobbies">Hobbies</a>
+...
+<section id="hobbies">
+    <h2>Meus hobbies</h2>
+</section>
+    </script>
+  </div>
+  <dl class="parts">
+    <div class="key"><dt><code>id="hobbies"</code></dt><dd>Um nome para a parte. Diferente da classe, o id é <b>único</b>: só um elemento da página pode ter aquele id.</dd></div>
+    <div><dt><code>href="#hobbies"</code></dt><dd>O <code class="i">#</code> quer dizer: “vá para a parte com este id”.</dd></div>
+  </dl>
+
+  <h3><span class="badge">2</span>O CSS do menu</h3>
+  <div class="type">
+    <script type="text/x-code" data-lang="css" data-preview="Menu" data-html="&lt;header&gt;&lt;h1&gt;Ana Souza&lt;/h1&gt;&lt;nav&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;#sobre&quot;&gt;Sobre mim&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;#hobbies&quot;&gt;Hobbies&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;#contato&quot;&gt;Contato&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/nav&gt;&lt;/header&gt;">
+body {
+    font-family: Arial, sans-serif;
+}
+nav {
+    background-color: #1C6EA4;
+    border-radius: 12px;
+    padding: 8px;
+}
+nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+nav a {
+    display: block;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 16px;
+    border-radius: 8px;
+}
+nav a:hover {
+    background-color: #14547E;
+}
+    </script>
+  </div>
+  <p>Passe o mouse em cima dos botões do resultado: eles mudam de cor.</p>
+  <dl class="parts">
+    <div class="key"><dt><code>nav a</code></dt><dd>Dois nomes separados por espaço: “os <code class="i">a</code> que estão <b>dentro</b> do <code class="i">nav</code>”. Os outros links da página não mudam.</dd></div>
+    <div><dt><code>list-style: none;</code></dt><dd>Tira as <b>bolinhas</b> da lista. Emmet: <code class="i">lis:n</code>.</dd></div>
+    <div><dt><code>text-decoration: none;</code></dt><dd>Tira o <b>sublinhado</b> do link. Emmet: <code class="i">td:n</code>.</dd></div>
+    <div class="key"><dt><code>a:hover</code></dt><dd>O <code class="i">:hover</code> quer dizer “<b>quando o mouse passa em cima</b>”. A regra só vale nesse momento.</dd></div>
+  </dl>
+
+  <section class="challenge" aria-labelledby="l4">
+    <p class="challenge-head" id="l4">Desafio</p>
+    <ul class="todo" data-id="lay4">
+      <li><label><input type="checkbox"><span>Crie um menu no header da sua página com <code class="i">nav&gt;ul&gt;li*3&gt;a</code>.</span></label></li>
+      <li><label><input type="checkbox"><span>Dê um <code class="i">id</code> para cada section e ligue cada link do menu a uma delas.</span></label></li>
+      <li><label><input type="checkbox"><span>Deixe o menu lado a lado, sem bolinhas e sem sublinhado.</span></label></li>
+      <li><label><input type="checkbox"><span>Mude a cor dos links quando o mouse passar em cima (<code class="i">:hover</code>).</span></label></li>
+    </ul>
+  </section>
+</div>
+</article>
+
+<!-- =================================================================== -->
+<article class="lesson" id="lay-5" data-aula="3" data-short="Juntar tudo">
+<div class="sheet">
+  <p class="kicker">Aula 3 · Lição 5</p>
+  <h2 tabindex="-1">Juntar tudo: um site organizado</h2>
+  <p class="lead">Agora a sua página tem cara de site de verdade: cabeçalho com menu, conteúdo em cartões e rodapé.</p>
+
+  <section class="challenge" aria-labelledby="l5">
+    <p class="challenge-head" id="l5">A sua página precisa ter</p>
+    <ul class="todo" data-id="lay5">
+      <li><label><input type="checkbox"><span><code class="i">header</code> com o h1 e um menu (<code class="i">nav</code>).</span></label></li>
+      <li><label><input type="checkbox"><span><code class="i">main</code> com pelo menos duas <code class="i">section</code>, cada uma com um <code class="i">id</code>.</span></label></li>
+      <li><label><input type="checkbox"><span>Os links do menu levando para as sections.</span></label></li>
+      <li><label><input type="checkbox"><span>Cartões lado a lado com flexbox.</span></label></li>
+      <li><label><input type="checkbox"><span>Um <code class="i">footer</code> no fim.</span></label></li>
+      <li><label><input type="checkbox"><span>Todo o CSS no <code class="i">style.css</code>.</span></label></li>
+    </ul>
+  </section>
+
+  <h3><span class="badge">1</span>Um exemplo para se guiar</h3>
+  <div class="type">
+    <p class="type-head"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/></svg>index.html (o body):</p>
+    <script type="text/x-code">
+<body>
+    <header>
+        <h1>Ana Souza</h1>
+        <nav>
+            <ul>
+                <li><a href="#sobre">Sobre mim</a></li>
+                <li><a href="#hobbies">Hobbies</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="sobre">
+            <h2>Sobre mim</h2>
+            <img src="(cole aqui o endereço da imagem)" alt="Um sol amarelo">
+            <p>Eu moro em Fortaleza e estou aprendendo a fazer sites.</p>
+        </section>
+        <section id="hobbies">
+            <h2>Meus hobbies</h2>
+            <div class="cartoes">
+                <div class="cartao"><h3>Forró</h3><p>Danço todo sábado.</p></div>
+                <div class="cartao"><h3>Cozinhar</h3><p>Meu cuscuz é famoso.</p></div>
+                <div class="cartao"><h3>Praia</h3><p>Iracema, sempre.</p></div>
+            </div>
+        </section>
+        <section id="contato">
+            <h2>Contato</h2>
+            <p><a href="https://pt.wikipedia.org/wiki/Fortaleza" target="_blank">Conheça a minha cidade</a></p>
+        </section>
+    </main>
+    <footer>
+        <p>Feito por Ana no Projeto Sementes do Futuro.</p>
+    </footer>
+</body>
+    </script>
+  </div>
+  <div class="type">
+    <p class="type-head"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/></svg>style.css:</p>
+    <script type="text/x-code" data-lang="css">
+body {
+    background-color: #FFF4E0;
+    color: #17293A;
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+header {
+    text-align: center;
+}
+h1 {
+    color: #1C6EA4;
+}
+nav {
+    background-color: #1C6EA4;
+    border-radius: 12px;
+    padding: 8px;
+}
+nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+nav a {
+    display: block;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 16px;
+    border-radius: 8px;
+}
+nav a:hover {
+    background-color: #14547E;
+}
+img {
+    width: 120px;
+    border-radius: 50%;
+}
+.cartoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+.cartao {
+    flex: 1;
+    min-width: 140px;
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    padding: 16px;
+}
+footer {
+    text-align: center;
+    color: #56697C;
+    border-top: 2px solid #E58A2E;
+    margin-top: 30px;
+}
+    </script>
+  </div>
+  <script type="text/x-preview" data-preview="Página da Ana">
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<style>
+body{background-color:#FFF4E0;color:#17293A;font-family:Arial,sans-serif;max-width:800px;margin:0 auto;padding:20px}
+header{text-align:center}
+h1{color:#1C6EA4}
+nav{background-color:#1C6EA4;border-radius:12px;padding:8px}
+nav ul{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;list-style:none;margin:0;padding:0}
+nav a{display:block;color:#FFFFFF;text-decoration:none;font-weight:bold;padding:10px 16px;border-radius:8px}
+nav a:hover{background-color:#14547E}
+img{width:120px;border-radius:50%}
+.cartoes{display:flex;flex-wrap:wrap;gap:16px}
+.cartao{flex:1;min-width:140px;background-color:#FFFFFF;border-radius:12px;padding:16px}
+footer{text-align:center;color:#56697C;border-top:2px solid #E58A2E;margin-top:30px}
+</style>
+</head>
+<body>
+<header><h1>Ana Souza</h1><nav><ul><li><a href="#sobre">Sobre mim</a></li><li><a href="#hobbies">Hobbies</a></li><li><a href="#contato">Contato</a></li></ul></nav></header>
+<main>
+<section id="sobre"><h2>Sobre mim</h2><img src="FIG:sol" alt="Um sol amarelo"><p>Eu moro em Fortaleza e estou aprendendo a fazer sites.</p></section>
+<section id="hobbies"><h2>Meus hobbies</h2><div class="cartoes"><div class="cartao"><h3>Forró</h3><p>Danço todo sábado.</p></div><div class="cartao"><h3>Cozinhar</h3><p>Meu cuscuz é famoso.</p></div><div class="cartao"><h3>Praia</h3><p>Iracema, sempre.</p></div></div></section>
+<section id="contato"><h2>Contato</h2><p><a href="https://pt.wikipedia.org/wiki/Fortaleza">Conheça a minha cidade</a></p></section>
+</main>
+<footer><p>Feito por Ana no Projeto Sementes do Futuro.</p></footer>
+</body>
+</html>
+  </script>
+
+  <h3><span class="badge">2</span>Publicar com o style.css</h3>
+  <p>Agora o site tem <b>dois arquivos</b>. No GitHub, os dois precisam estar no repositório:</p>
+  <ol class="howto">
+    <li><strong>Atualize o index.html</strong><p>Como na Aula 2: abra o <code class="i">index.html</code> no GitHub, clique no lápis, troque o código e clique em <b>Commit changes</b>.</p></li>
+    <li><strong>Crie o style.css</strong><p>Na página do repositório, clique em <b>Add file → Create new file</b>. Nome: <code class="i">style.css</code>. Copie o CSS do vscode.dev (<kbd>Ctrl</kbd> + <kbd>A</kbd>, <kbd>Ctrl</kbd> + <kbd>C</kbd>), cole e clique em <b>Commit changes</b>.</p></li>
+    <li><strong>Confira</strong><p>Em 1 ou 2 minutos, abra o seu endereço e recarregue. Se a página aparecer sem cores, confira o nome do arquivo: tem que ser <code class="i">style.css</code>, igual ao <code class="i">href</code>.</p></li>
+  </ol>
+
+  <h3><span class="badge">3</span>Resumo da Aula 3</h3>
+  <div class="table-wrap">
+    <table class="summary">
+      <thead><tr><th scope="col">O quê</th><th scope="col">Para que serve</th><th scope="col">Emmet</th></tr></thead>
+      <tbody>
+        <tr><td><code class="i">header</code> <code class="i">main</code> <code class="i">footer</code></td><td>As partes da página.</td><td><code class="i">header+main+footer</code></td></tr>
+        <tr><td><code class="i">section</code> <code class="i">div</code></td><td>Uma parte com tema / uma caixa para agrupar.</td><td><code class="i">div.cartao*3</code></td></tr>
+        <tr><td><code class="i">link</code></td><td>Liga o HTML ao arquivo de CSS.</td><td><code class="i">link:css</code></td></tr>
+        <tr><td><code class="i">display: flex</code></td><td>Lado a lado (vai na caixa de fora).</td><td><code class="i">d:f</code></td></tr>
+        <tr><td><code class="i">flex-wrap: wrap</code></td><td>Desce se não couber.</td><td><code class="i">fxw:w</code></td></tr>
+        <tr><td><code class="i">nav</code> + lista + links</td><td>O menu.</td><td><code class="i">nav&gt;ul&gt;li*3&gt;a</code></td></tr>
+        <tr><td><code class="i">id</code> e <code class="i">href="#…"</code></td><td>Link para uma parte da página.</td><td>—</td></tr>
+        <tr><td><code class="i">nav a</code></td><td>Os links que estão dentro do nav.</td><td>—</td></tr>
+        <tr><td><code class="i">:hover</code></td><td>Quando o mouse passa em cima.</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</article>
+
 </main>
 
 <footer class="note">Projeto Sementes do Futuro · Instituto Vida Videira · Fortaleza-CE</footer>
@@ -1523,11 +2081,12 @@ body {
 <script>
 /* =====================================================================
    CONFIGURAÇÃO DO PROFESSOR
-   AULA_2_PARA_TODOS: com  false , a Aula 2 (CSS) abre sozinha para cada
-   aluno quando ele marca a lição 6 da Aula 1 ("Juntar tudo") como
-   concluída. Com  true , fica aberta para todos.
+   AULAS_ABERTAS_PARA_TODOS: com  false , cada aula abre sozinha para o
+   aluno quando ele marca a última lição da aula anterior como concluída
+   (Aula 2: lição 6 da Aula 1; Aula 3: lição 6 da Aula 2).
+   Com  true , todas as aulas ficam abertas para todos.
    ===================================================================== */
-const AULA_2_PARA_TODOS = false;
+const AULAS_ABERTAS_PARA_TODOS = false;
 
 /* ---------- Figuras (SVG embutidas; viram endereço data:) ---------- */
 const FIGURAS = {
@@ -1627,7 +2186,7 @@ function montarDocumento(src, s){
     : (/^\s*<!DOCTYPE/i.test(src) ? src : `<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"></head><body>${src}</body></html>`);
   doc = doc.replace(/FIG:(\w+)/g, (m, k) => FIGURAS[k] ? dataURI(k) : m)
            .replace(/\(cole aqui o endereço da imagem\)/g, dataURI('sol'))
-           .replace(/<a /g, '<a target="_blank" rel="noopener noreferrer" ');
+           .replace(/<a href="http/g, '<a target="_blank" rel="noopener noreferrer" href="http');
   return doc;
 }
 function ajustarAltura(fr){
@@ -1672,6 +2231,10 @@ document.querySelectorAll('script[type="text/x-code"]').forEach(s => {
   const depois = s.dataset.preview != null ? criarResultado(src, s) : null;
   s.replaceWith(pre);
   if(depois) pre.after(depois);
+});
+
+document.querySelectorAll('script[type="text/x-preview"]').forEach(s => {
+  s.replaceWith(criarResultado(tirarRecuo(s.textContent), s));
 });
 
 /* ---------- Figuras nos resultados ---------- */
@@ -1743,12 +2306,14 @@ document.querySelectorAll('.todo[data-id]').forEach(ul => {
 /* ---------- Aulas, lições e navegação ---------- */
 const licoes = [...document.querySelectorAll('.lesson')];
 const aulaDe = el => el.dataset.aula;
-const paginaTrava = $('aula-2-bloqueada');
-const trilha = licoes.filter(el => el !== paginaTrava);   // ordem de Anterior / Próxima
+const ehTrava = el => el.hasAttribute('data-lockpage');
+const trilha = licoes.filter(el => !ehTrava(el));   // ordem de Anterior / Próxima
+const NOMES_AULA = {1:'HTML', 2:'CSS', 3:'Layout'};
+// Cada aula abre quando o aluno marca a última lição da aula anterior como concluída (neste computador)
+const REQUISITO = {2:'licao-6', 3:'css-6'};
 let feitas = ler('sementes-av-feitas', {});
-// Aula 1 concluída = lição 6 ("Juntar tudo") marcada como concluída neste computador
-const aula2Aberta = () => AULA_2_PARA_TODOS || !!feitas['licao-6'];
-const visiveis = () => licoes.filter(el => aulaDe(el) !== '2' || (aula2Aberta() ? el !== paginaTrava : el === paginaTrava));
+const aulaAberta = n => n == 1 || AULAS_ABERTAS_PARA_TODOS || !!feitas[REQUISITO[n]];
+const visiveis = () => licoes.filter(el => aulaAberta(aulaDe(el)) ? !ehTrava(el) : ehTrava(el));
 
 trilha.forEach((el, i) => {
   // rodapé de cada lição
@@ -1762,10 +2327,13 @@ trilha.forEach((el, i) => {
     ${prox ? `<a class="btn btn-primary next" href="#${prox.id}">${trocaAula ? 'Ir para a Aula ' + aulaDe(prox) : 'Próxima lição'}<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></a>` : ''}`;
   el.querySelector('.sheet').appendChild(foot);
 });
-// aviso que aparece na lição 6 quando a Aula 2 abre
-const avisoAula2 = document.createElement('p');
-avisoAula2.className = 'unlock-msg'; avisoAula2.setAttribute('role', 'status');
-$('licao-6').querySelector('.foot').before(avisoAula2);
+// aviso que aparece na última lição de cada aula quando a próxima abre
+const avisos = Object.entries(REQUISITO).map(([n, id]) => {
+  const p = document.createElement('p');
+  p.className = 'unlock-msg'; p.setAttribute('role', 'status');
+  const licao = $(id); if(licao) licao.querySelector('.foot').before(p);
+  return [n, id, p];
+});
 
 function pintarFeita(){
   document.querySelectorAll('[data-done]').forEach(b => {
@@ -1773,8 +2341,10 @@ function pintarFeita(){
     b.setAttribute('aria-pressed', String(f));
     b.innerHTML = f ? ICO_CHECK + 'Lição concluída' : 'Marcar como concluída';
   });
-  avisoAula2.innerHTML = (!AULA_2_PARA_TODOS && feitas['licao-6'])
-    ? ICO_CHECK + '<span>Parabéns! Você terminou a Aula 1. <b>A Aula 2 (CSS) está aberta.</b></span>' : '';
+  avisos.forEach(([n, id, p]) => {
+    p.innerHTML = (!AULAS_ABERTAS_PARA_TODOS && feitas[id])
+      ? ICO_CHECK + `<span>Parabéns! Você terminou a Aula ${n - 1}. <b>A Aula ${n} (${NOMES_AULA[n]}) está aberta.</b></span>` : '';
+  });
   montarMenu();
 }
 document.addEventListener('click', e => {
@@ -1787,15 +2357,15 @@ function montarMenu(){
   const atual = document.querySelector('.lesson.is-active');
   const aula = atual ? aulaDe(atual) : '1';
   document.querySelectorAll('[data-tab]').forEach(t => {
-    t.setAttribute('aria-pressed', String(t.dataset.tab === aula));
-    const trava = t.dataset.tab === '2' && !aula2Aberta();
-    t.innerHTML = `Aula ${t.dataset.tab} <small>${t.dataset.tab === '1' ? 'HTML' : 'CSS'}</small>${trava ? ICO_LOCK : ''}`;
-    t.setAttribute('aria-label', `Aula ${t.dataset.tab}${trava ? ' (abre quando você terminar a Aula 1)' : ''}`);
+    const n = t.dataset.tab, trava = !aulaAberta(n);
+    t.setAttribute('aria-pressed', String(n === aula));
+    t.innerHTML = `Aula ${n} <small>${NOMES_AULA[n]}</small>${trava ? ICO_LOCK : ''}`;
+    t.setAttribute('aria-label', `Aula ${n}, ${NOMES_AULA[n]}${trava ? ` (abre quando você terminar a Aula ${n - 1})` : ''}`);
   });
   const lista = visiveis().filter(el => aulaDe(el) === aula);
   const base = aula === '1' ? 0 : 1;
   $('menu').innerHTML = lista.map((el, i) => {
-    const trava = el === paginaTrava;
+    const trava = ehTrava(el);
     const n = i + base;
     const cls = [trava ? 'is-locked' : '', feitas[el.id] ? 'is-done' : ''].join(' ');
     const num = trava ? ICO_LOCK : (feitas[el.id] ? ICO_CHECK : n);
@@ -1819,10 +2389,12 @@ document.querySelectorAll('[data-tab]').forEach(t => {
 
 function mostrar(id, focar){
   let alvo = licoes.find(l => l.id === id) || licoes[0];
-  // Aula 2 fechada: qualquer lição dela mostra a página do cadeado (e vice-versa)
-  if(aulaDe(alvo) === '2') alvo = aula2Aberta() ? (alvo === paginaTrava ? $('css-1') : alvo) : paginaTrava;
+  // aula fechada: qualquer lição dela mostra a página do cadeado (e vice-versa)
+  const aula = aulaDe(alvo);
+  if(aulaAberta(aula) && ehTrava(alvo)) alvo = trilha.find(l => aulaDe(l) === aula);
+  else if(!aulaAberta(aula) && !ehTrava(alvo)) alvo = licoes.find(l => aulaDe(l) === aula && ehTrava(l));
   licoes.forEach(l => l.classList.toggle('is-active', l === alvo));
-  if(alvo !== paginaTrava){
+  if(!ehTrava(alvo)){
     guardar('sementes-av-ultima', alvo.id);
     guardar('sementes-av-ultima-aula' + aulaDe(alvo), alvo.id);
   }
